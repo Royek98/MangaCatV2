@@ -49,7 +49,7 @@ fun Success(
         modifier = modifier
     ) {
         items(mangaList.data.relationships) {
-            Text(text = it.id)
+            Text(text = "${it.id}:::${it.type.name}")
         }
     }
 }
