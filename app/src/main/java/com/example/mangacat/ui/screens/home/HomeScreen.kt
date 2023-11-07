@@ -1,8 +1,5 @@
 package com.example.mangacat.ui.screens.home
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -10,8 +7,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import com.example.mangacat.model.mangaList.MangaList
+import com.example.mangacat.model.response.Response
+import com.example.mangacat.model.cutomList.CustomListAttributes
+import com.example.mangacat.model.Relationships
 
 @Composable
 fun HomeScreen(
@@ -21,7 +19,7 @@ fun HomeScreen(
 ) {
     when (homeUiState) {
         is HomeUiState.Loading -> LoadingScreen()
-        is HomeUiState.Success -> Success(homeUiState.mangaList, modifier = modifier)
+        is HomeUiState.Success -> Success(homeUiState.mangaIdList, modifier = modifier)
 
         is HomeUiState.Error -> ErrorScreen(retryAction)
     }
@@ -42,13 +40,13 @@ fun ErrorScreen(
 
 @Composable
 fun Success(
-    mangaList: MangaList,
+    mangaIdList: Response<CustomListAttributes, Relationships>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
     ) {
-        items(mangaList.data.relationships) {
+        items(mangaIdList.data.relationships) {
             Text(text = "${it.id}:::${it.type.name}")
         }
     }
