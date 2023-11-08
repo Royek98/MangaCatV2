@@ -7,21 +7,22 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.mangacat.model.response.Response
-import com.example.mangacat.model.cutomList.CustomListAttributes
-import com.example.mangacat.model.Relationships
+import com.example.mangacat.data.dto.Relationships
+import com.example.mangacat.data.dto.cutomList.CustomListAttributes
+import com.example.mangacat.data.dto.response.Response
+import com.example.mangacat.data.network.Resource
 
 @Composable
 fun HomeScreen(
-    homeUiState: HomeUiState,
+    homeUiState: Resource<Response<CustomListAttributes, Relationships>>,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     when (homeUiState) {
-        is HomeUiState.Loading -> LoadingScreen()
-        is HomeUiState.Success -> Success(homeUiState.mangaIdList, modifier = modifier)
+        is Resource.Loading -> LoadingScreen()
+        is Resource.Success -> Success(homeUiState.data, modifier = modifier)
 
-        is HomeUiState.Error -> ErrorScreen(retryAction)
+        is Resource.Error -> ErrorScreen(retryAction)
     }
 }
 

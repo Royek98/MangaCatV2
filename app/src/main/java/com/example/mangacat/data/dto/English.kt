@@ -1,4 +1,4 @@
-package com.example.mangacat.model
+package com.example.mangacat.data.dto
 
 import kotlinx.serialization.Serializable
 

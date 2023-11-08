@@ -1,4 +1,4 @@
-package com.example.mangacat.model.tag.enums
+package com.example.mangacat.data.dto.tag.enums
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

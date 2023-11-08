@@ -1,7 +1,7 @@
 package com.example.mangacat.di
 
-import com.example.mangacat.repository.MangaDexRepository
-import com.example.mangacat.repository.MangaDexRepositoryImpl
+import com.example.mangacat.data.repository.MangaDexRepositoryImpl
+import com.example.mangacat.domain.repository.MangaDexRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -11,6 +11,6 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 interface RepositoryModules {
     @Binds
-    fun provideMangaDexRepositoryImpl(repository: MangaDexRepositoryImpl): MangaDexRepository
+    fun bindMangaDexRepositoryImpl(repository: MangaDexRepositoryImpl): MangaDexRepository
 
 }

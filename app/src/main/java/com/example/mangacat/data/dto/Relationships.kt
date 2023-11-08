@@ -1,6 +1,6 @@
-package com.example.mangacat.model
+package com.example.mangacat.data.dto
 
-import com.example.mangacat.model.response.enums.Type
+import com.example.mangacat.data.dto.response.enums.Type
 import kotlinx.serialization.Serializable
 
 @Serializable

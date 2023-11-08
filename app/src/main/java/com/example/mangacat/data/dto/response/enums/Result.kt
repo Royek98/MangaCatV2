@@ -1,4 +1,4 @@
-package com.example.mangacat.model.response.enums
+package com.example.mangacat.data.dto.response.enums
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

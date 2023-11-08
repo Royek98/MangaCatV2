@@ -1,7 +1,7 @@
-package com.example.mangacat.model.tag
+package com.example.mangacat.data.dto.tag
 
-import com.example.mangacat.model.English
-import com.example.mangacat.model.tag.enums.TagGroup
+import com.example.mangacat.data.dto.English
+import com.example.mangacat.data.dto.tag.enums.TagGroup
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

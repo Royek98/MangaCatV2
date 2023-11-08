@@ -6,28 +6,29 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mangacat.model.response.Response
-import com.example.mangacat.model.response.enums.Type
-import com.example.mangacat.model.cutomList.CustomListAttributes
-import com.example.mangacat.model.Relationships
-import com.example.mangacat.repository.MangaDexRepository
+import com.example.mangacat.data.dto.response.Response
+import com.example.mangacat.data.dto.response.enums.Type
+import com.example.mangacat.data.dto.cutomList.CustomListAttributes
+import com.example.mangacat.data.dto.Relationships
+import com.example.mangacat.data.network.Resource
+import com.example.mangacat.domain.repository.MangaDexRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
 
-sealed interface HomeUiState {
-    data class Success(val mangaIdList: Response<CustomListAttributes, Relationships>) : HomeUiState
-    object Error : HomeUiState
-    object Loading : HomeUiState
-}
+//sealed interface HomeUiState {
+//    data class Success(val mangaIdList: Response<CustomListAttributes, Relationships>) : HomeUiState
+//    object Error : HomeUiState
+//    object Loading : HomeUiState
+//}
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val mangaDexRepository: MangaDexRepository,
 ): ViewModel() {
 
-    var homeUiState: HomeUiState by mutableStateOf(HomeUiState.Loading)
+    var homeUiState: Resource<Response<CustomListAttributes, Relationships>> by mutableStateOf(Resource.Loading)
         private set
 
     init {
@@ -36,7 +37,7 @@ class HomeViewModel @Inject constructor(
 
     fun getSeasonalManga() {
         viewModelScope.launch {
-            homeUiState = HomeUiState.Loading
+            homeUiState = Resource.Loading
 
             homeUiState = try {
                 val ids = mangaDexRepository.getSeasonalMangaIds()
@@ -49,9 +50,9 @@ class HomeViewModel @Inject constructor(
                 val test = mangaDexRepository.getMangaById()
                 Log.d("test", "getSeasonalManga: $test")
 
-                HomeUiState.Success(ids)
+                Resource.Success(ids)
             } catch (e: IOException) {
-                HomeUiState.Error
+                Resource.Error
             }
         }
     }

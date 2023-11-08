@@ -1,6 +1,6 @@
-package com.example.mangacat.model.response
+package com.example.mangacat.data.dto.response
 
-import com.example.mangacat.model.response.enums.Result
+import com.example.mangacat.data.dto.response.enums.Result
 import kotlinx.serialization.Serializable
 
 @Serializable

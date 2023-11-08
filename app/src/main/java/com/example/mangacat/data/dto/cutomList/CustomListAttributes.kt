@@ -1,4 +1,4 @@
-package com.example.mangacat.model.cutomList
+package com.example.mangacat.data.dto.cutomList
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
