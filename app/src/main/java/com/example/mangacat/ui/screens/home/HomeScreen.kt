@@ -9,12 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.mangacat.data.dto.Relationships
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
-import com.example.mangacat.data.dto.response.Response
+import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.data.network.Resource
+import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 
 @Composable
 fun HomeScreen(
-    homeUiState: Resource<Response<CustomListAttributes, Relationships>>,
+    homeUiState: Resource<List<HomeSeasonalMangaItem>>,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -41,14 +42,14 @@ fun ErrorScreen(
 
 @Composable
 fun Success(
-    mangaIdList: Response<CustomListAttributes, Relationships>,
+    mangaIdList: List<HomeSeasonalMangaItem>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
     ) {
-        items(mangaIdList.data.relationships) {
-            Text(text = "${it.id}:::${it.type.name}")
+        items(mangaIdList) {
+            Text(text = "${it.id}:::${it.cover}:::${it.tags}")
         }
     }
 }

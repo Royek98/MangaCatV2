@@ -25,4 +25,7 @@ enum class Type {
 
     @SerialName("cover_art")
     COVER_ART,
+
+    @SerialName("creator")
+    CREATOR
 }

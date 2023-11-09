@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class English(
-    val en: String
+    val en: String? = null,
 )

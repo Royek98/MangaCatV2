@@ -6,14 +6,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mangacat.data.dto.response.Response
+import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.data.dto.response.enums.Type
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.Relationships
+import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.network.Resource
+import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 import com.example.mangacat.domain.repository.MangaDexRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 import java.io.IOException
 import javax.inject.Inject
 
@@ -26,9 +29,11 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val mangaDexRepository: MangaDexRepository,
-): ViewModel() {
+) : ViewModel() {
 
-    var homeUiState: Resource<Response<CustomListAttributes, Relationships>> by mutableStateOf(Resource.Loading)
+    var homeUiState: Resource<List<HomeSeasonalMangaItem>> by mutableStateOf(
+        Resource.Loading
+    )
         private set
 
     init {
@@ -42,15 +47,35 @@ class HomeViewModel @Inject constructor(
             homeUiState = try {
                 val ids = mangaDexRepository.getSeasonalMangaIds()
 
-                val getIdLimit10 = ids.data.relationships.filter {
-                    it.type == Type.MANGA
-                }.subList(0, 10)
-                Log.d("test", "getSeasonalManga: $getIdLimit10")
+                val listOfRelationships = ids.data.relationships
+                val listOfIds = listOfRelationships.map { it.id }
+                Log.d("test", "getSeasonalManga: $listOfIds")
+                val test = mangaDexRepository.getMangaListByIds(
+                    10,
+                    0,
+                    listOf(""),
+                    listOf(
+                        ContentRating.SAFE,
+                        ContentRating.SUGGESTIVE,
+                        ContentRating.EROTICA,
 
-                val test = mangaDexRepository.getMangaById()
-                Log.d("test", "getSeasonalManga: $test")
+                        ),
+                    listOfIds
+                )
 
-                Resource.Success(ids)
+                val finalList = test.data.map { it ->
+                    HomeSeasonalMangaItem(
+                        id = it.id,
+                        cover = "",
+                        tags = listOf(it.attributes.publicationDemographic!!.name, it.attributes.contentRating.name, it.attributes.tags[0].attributes.name.en)
+                    )
+                }
+
+
+
+                Log.d("test", "getSeasonalManga: $finalList")
+
+                Resource.Success(finalList)
             } catch (e: IOException) {
                 Resource.Error
             }

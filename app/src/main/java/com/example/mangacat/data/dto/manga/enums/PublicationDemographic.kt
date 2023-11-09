@@ -15,5 +15,9 @@ enum class PublicationDemographic {
     JOSEI,
 
     @SerialName("seinen")
-    SEINEN
+    SEINEN,
+
+    @SerialName("none")
+    NONE
+
 }

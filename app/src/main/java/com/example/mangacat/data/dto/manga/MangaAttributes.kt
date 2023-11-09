@@ -15,9 +15,9 @@ import kotlinx.serialization.Serializable
 data class MangaAttributes(
     val title: English,
     val description: English,
-    val publicationDemographic: PublicationDemographic,
+    val publicationDemographic: PublicationDemographic? = null,
     val contentRating: ContentRating,
     val status: Status,
-    val year: Int,
+    val year: Int? = null,
     val tags: List<Data<TagAttributes, Relationships>>
 )
