@@ -31,7 +31,7 @@ class HomeViewModel @Inject constructor(
     private val mangaDexRepository: MangaDexRepository,
 ) : ViewModel() {
 
-    var homeUiState: Resource<List<HomeSeasonalMangaItem>> by mutableStateOf(
+    var homeUiState: Resource<List<String>> by mutableStateOf(
         Resource.Loading
     )
         private set
@@ -46,10 +46,10 @@ class HomeViewModel @Inject constructor(
 
             homeUiState = try {
                 val ids = mangaDexRepository.getSeasonalMangaIds()
+                Log.d("test", "getSeasonalManga: $ids")
 
                 val listOfRelationships = ids.data.relationships
                 val listOfIds = listOfRelationships.map { it.id }
-                Log.d("test", "getSeasonalManga: $listOfIds")
                 val test = mangaDexRepository.getMangaListByIds(
                     10,
                     0,
@@ -63,19 +63,19 @@ class HomeViewModel @Inject constructor(
                     listOfIds
                 )
 
-                val finalList = test.data.map { it ->
-                    HomeSeasonalMangaItem(
-                        id = it.id,
-                        cover = "",
-                        tags = listOf(it.attributes.publicationDemographic!!.name, it.attributes.contentRating.name, it.attributes.tags[0].attributes.name.en)
-                    )
-                }
+//                val finalList = test.data.map { it ->
+//                    HomeSeasonalMangaItem(
+//                        id = it.id,
+//                        cover = "",
+//                        tags = listOf(it.attributes.publicationDemographic!!.name, it.attributes.contentRating.name, it.attributes.tags[0].attributes.name.en)
+//                    )
+//                }
 
 
 
-                Log.d("test", "getSeasonalManga: $finalList")
+                Log.d("test", "getSeasonalManga: $listOfIds")
 
-                Resource.Success(finalList)
+                Resource.Success(listOfIds)
             } catch (e: IOException) {
                 Resource.Error
             }

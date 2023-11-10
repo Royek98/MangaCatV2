@@ -1,8 +1,8 @@
 package com.example.mangacat.di
 
-import com.example.mangacat.data.network.MangaDexApiService
-import com.example.mangacat.data.repository.FakeRepositoryImpl
 //import com.example.mangacat.data.repository.MangaDexRepositoryImpl
+import com.example.mangacat.data.network.MangaDexApiService
+import com.example.mangacat.data.repository.MangaDexRepositoryImpl
 import com.example.mangacat.utils.AppConstants
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -23,7 +23,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideMangaDexRepository(service: MangaDexApiService) = FakeRepositoryImpl(service)
+    fun provideMangaDexRepository(service: MangaDexApiService) = MangaDexRepositoryImpl(service)
 
     private val json = Json {
         ignoreUnknownKeys = true

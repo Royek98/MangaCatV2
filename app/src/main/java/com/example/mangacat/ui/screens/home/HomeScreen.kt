@@ -15,7 +15,7 @@ import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 
 @Composable
 fun HomeScreen(
-    homeUiState: Resource<List<HomeSeasonalMangaItem>>,
+    homeUiState: Resource<List<String>>,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -42,14 +42,14 @@ fun ErrorScreen(
 
 @Composable
 fun Success(
-    mangaIdList: List<HomeSeasonalMangaItem>,
+    mangaIdList: List<String>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
     ) {
         items(mangaIdList) {
-            Text(text = "${it.id}:::${it.cover}:::${it.tags}")
+//            Text(text = "${it.id}:::${it.cover}:::${it.tags}")
         }
     }
 }
