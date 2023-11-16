@@ -1,12 +1,11 @@
 package com.example.mangacat.data.repository
 
 import com.example.mangacat.data.dto.DefaultRelationships
-import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
-import com.example.mangacat.data.dto.Relationships
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.dto.response.CollectionResponse
+import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.data.network.MangaDexApiService
 import com.example.mangacat.domain.repository.MangaDexRepository
 import javax.inject.Inject

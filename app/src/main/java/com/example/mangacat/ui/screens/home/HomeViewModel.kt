@@ -6,17 +6,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mangacat.data.dto.response.EntityResponse
-import com.example.mangacat.data.dto.response.enums.Type
-import com.example.mangacat.data.dto.cutomList.CustomListAttributes
-import com.example.mangacat.data.dto.Relationships
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.network.Resource
-import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 import com.example.mangacat.domain.repository.MangaDexRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
 import java.io.IOException
 import javax.inject.Inject
 
