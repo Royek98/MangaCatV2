@@ -1,5 +1,6 @@
 package com.example.mangacat.data.repository
 
+import com.example.mangacat.data.dto.DefaultRelationships
 import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
@@ -15,14 +16,14 @@ import javax.inject.Singleton
 class MangaDexRepositoryImpl @Inject constructor(
     private val service: MangaDexApiService
 ) : MangaDexRepository {
-    override suspend fun getSeasonalMangaIds(): EntityResponse<CustomListAttributes, Relationships> = service.getSeasonalMangaIds()
+    override suspend fun getSeasonalMangaIds(): EntityResponse<CustomListAttributes, List<DefaultRelationships>> = service.getSeasonalMangaIds()
     override suspend fun getMangaListByIds(
         limit: Int,
         offset: Int,
         includes: List<String>,
         contentRating: List<ContentRating>,
         ids: List<String>
-    ): CollectionResponse<MangaAttributes, Relationships> {
+    ): CollectionResponse<MangaAttributes> {
         return service.getMangaListByIds(limit, offset, includes, contentRating, ids)
     }
 }

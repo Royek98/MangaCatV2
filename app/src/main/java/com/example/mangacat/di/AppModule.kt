@@ -1,6 +1,8 @@
 package com.example.mangacat.di
 
 //import com.example.mangacat.data.repository.MangaDexRepositoryImpl
+import com.example.mangacat.data.dto.Includes
+import com.example.mangacat.data.dto.IncludesPolymorphicSerializer
 import com.example.mangacat.data.network.MangaDexApiService
 import com.example.mangacat.data.repository.MangaDexRepositoryImpl
 import com.example.mangacat.utils.AppConstants
@@ -11,6 +13,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -25,8 +28,13 @@ class AppModule {
     @Provides
     fun provideMangaDexRepository(service: MangaDexApiService) = MangaDexRepositoryImpl(service)
 
+    val module = SerializersModule {
+        polymorphicDefaultDeserializer(Includes::class ) { IncludesPolymorphicSerializer }
+    }
+
     private val json = Json {
         ignoreUnknownKeys = true
+        serializersModule = module
     }
 
     @Singleton

@@ -53,7 +53,7 @@ class HomeViewModel @Inject constructor(
                 val test = mangaDexRepository.getMangaListByIds(
                     10,
                     0,
-                    listOf(""),
+                    listOf("cover_art", "author"),
                     listOf(
                         ContentRating.SAFE,
                         ContentRating.SUGGESTIVE,
@@ -62,16 +62,6 @@ class HomeViewModel @Inject constructor(
                         ),
                     listOfIds
                 )
-
-//                val finalList = test.data.map { it ->
-//                    HomeSeasonalMangaItem(
-//                        id = it.id,
-//                        cover = "",
-//                        tags = listOf(it.attributes.publicationDemographic!!.name, it.attributes.contentRating.name, it.attributes.tags[0].attributes.name.en)
-//                    )
-//                }
-
-
 
                 Log.d("test", "getSeasonalManga: $listOfIds")
 

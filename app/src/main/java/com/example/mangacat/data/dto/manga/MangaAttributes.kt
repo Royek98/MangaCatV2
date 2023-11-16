@@ -1,5 +1,6 @@
 package com.example.mangacat.data.dto.manga
 
+import com.example.mangacat.data.dto.DefaultRelationships
 import com.example.mangacat.data.dto.English
 import com.example.mangacat.data.dto.response.Data
 import com.example.mangacat.data.dto.manga.enums.ContentRating
@@ -19,5 +20,5 @@ data class MangaAttributes(
     val contentRating: ContentRating,
     val status: Status,
     val year: Int? = null,
-    val tags: List<Data<TagAttributes, Relationships>>
+//    val tags: List<Data<TagAttributes, DefaultRelationships>>
 )

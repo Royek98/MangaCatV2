@@ -1,5 +1,6 @@
 package com.example.mangacat.data.network
 
+import com.example.mangacat.data.dto.DefaultRelationships
 import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
@@ -18,7 +19,7 @@ interface MangaDexApiService {
 //    suspend fun getSeasonalManga(): Response<Attributes, Relationships>
 
     @GET("list/${AppConstants.seasonal_id}")
-    suspend fun getSeasonalMangaIds(): EntityResponse<CustomListAttributes, Relationships>
+    suspend fun getSeasonalMangaIds(): EntityResponse<CustomListAttributes, List<DefaultRelationships>>
 
 
     // https://api.mangadex.org/manga?limit=32&offset=32&includes[]=cover_art&includes[]=artist&includes[]=author&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&ids[]=98ca8bd8-c834-4627-ac64-4b765be22464&ids[]
@@ -31,5 +32,5 @@ interface MangaDexApiService {
         @Query("contentRating[]") contentRating: List<ContentRating>,
         @Query("ids[]") ids: List<String>,
         @Query("order[latestUploadedChapter]") latestUploadedChapter: String = "desc"
-    ): CollectionResponse<MangaAttributes, Relationships>
+    ): CollectionResponse<MangaAttributes>
 }
