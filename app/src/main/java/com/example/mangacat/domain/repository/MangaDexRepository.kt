@@ -1,7 +1,6 @@
 package com.example.mangacat.domain.repository
 
 import com.example.mangacat.data.dto.DefaultRelationships
-import com.example.mangacat.data.dto.Relationships
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating

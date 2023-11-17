@@ -7,11 +7,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.mangacat.data.dto.Relationships
-import com.example.mangacat.data.dto.cutomList.CustomListAttributes
-import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.data.network.Resource
-import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 
 @Composable
 fun HomeScreen(

@@ -15,11 +15,18 @@ data class Data<ATTRIBUTES, RELATIONSHIPS>(
 
 
 @Serializable
-data class DataType2<ATTRIBUTES>(
+data class DataIncludes<ATTRIBUTES>(
     val id: String,
     val type: Type,
     val attributes: ATTRIBUTES,
     @Serializable(with = IncludesResponseSerializer::class)
     val relationships: List<Includes>? = null
+)
+
+@Serializable
+data class DataWithoutRelationships<ATTRIBUTES>(
+    val id: String,
+    val type: Type,
+    val attributes: ATTRIBUTES,
 )
 

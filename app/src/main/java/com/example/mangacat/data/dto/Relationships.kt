@@ -1,5 +1,7 @@
 package com.example.mangacat.data.dto
 
+import android.util.Log
+import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.dto.response.enums.Type
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
@@ -13,66 +15,69 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.put
 
-
-@Serializable
-data class DefaultRelationships(
-    val id: String,
-    val type: Type
-)
-
 @Serializable
 abstract class Includes {
-    abstract val id: String?
-    abstract val type: String?
+    abstract val id: String
+    abstract val type: Type
 }
 
 @Serializable
-data class Author(
-    val name: String,
-    val imageUrl: String?,
-    val biography: English?,
-    val twitter: String?,
-    val pixiv: String?,
-    val melonBook: String?,
-    val fanBox: String?,
-    val nicoVideo: String?,
-    val skeb: String?,
-    val fantia: String?,
-    val tumblr: String?,
-    val youtube: String?,
-    val weibo: String?,
-    val naver: String?,
-    val website: String?,
-    val version: Int?,
-    val createdAt: String?,
-    val updatedAt: String?, override val id: String? = null, override val type: String? = null
+data class DefaultRelationships(
+    override val id: String,
+    override val type: Type
 ) : Includes()
 
 @Serializable
-data class CoverArt(
-    val description: String? = null, val fileName: String? = null,
-    override val id: String? = null,
-    override val type: String? = null
+data class AuthorIncludes(
+    val name: String? = null,
+    override val id: String,
+    override val type: Type
 ) : Includes()
+
+@Serializable
+data class CoverArtIncludes(
+    val fileName: String? = null,
+    override val id: String,
+    override val type: Type
+) : Includes()
+
+@Serializable
+data class MangaIncludes(
+    val related: String? = null,
+    val title: English,
+    val contentRating: ContentRating? = null,
+    override val id: String,
+    override val type: Type
+) : Includes()
+
 
 object IncludesResponseSerializer :
     JsonTransformingSerializer<List<Includes>>(ListSerializer(Includes.serializer())) {
     override fun transformDeserialize(element: JsonElement): JsonElement {
         val attributes: MutableList<JsonElement> = element.jsonArray.map {
-            it.jsonObject["attributes"] ?: buildJsonObject { put("attributes", "") }
+            it.jsonObject["attributes"] ?: buildJsonObject { put("attributes", false) }
         }.toMutableList()
+
+        attributes.forEach {
+            val aa = it.jsonObject
+            Log.d("TAG", "transformDeserialize: $aa")
+        }
 
         val ids = element.jsonArray.map { it.jsonObject["id"]!! }
         val types = element.jsonArray.map { it.jsonObject["type"]!! }
 
-
         for (i in attributes.indices) {
             attributes[i] = buildJsonObject {
-                attributes[i].jsonObject.forEach {
-                    put(it.key, it.value)
-                }
                 put("id", ids[i])
                 put("type", types[i])
+                if (!attributes[i].jsonObject.containsKey("attributes")) {
+                    put("attributes", true)
+                    attributes[i].jsonObject.forEach {
+                        put(it.key, it.value)
+                    }
+                } else {
+                    put("attributes", false)
+                }
             }
 
         }
@@ -84,9 +89,38 @@ object IncludesResponseSerializer :
 
 object IncludesPolymorphicSerializer :
     JsonContentPolymorphicSerializer<Includes>(Includes::class) {
-    override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Includes> =
-        when (element.jsonObject.getValue("type").toString().filterNot { it == '"' }) {
-            Type.AUTHOR.name.lowercase() -> Author.serializer()
-            else -> CoverArt.serializer()
+    override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Includes> {
+        if (element.jsonObject.getValue("attributes").toString().toBoolean()) {
+            when (val type =
+                element.jsonObject.getValue("type").toString().filterNot { it == '"' }) {
+                Type.AUTHOR.name.lowercase(), Type.ARTIST.name.lowercase() -> return AuthorIncludes.serializer()
+                Type.COVER_ART.name.lowercase() -> return CoverArtIncludes.serializer()
+                Type.MANGA.name.lowercase() -> return MangaIncludes.serializer()
+                else -> throw Exception(
+                    "Includes type error. Type: $type not found for id ${
+                        element.jsonObject.getValue(
+                            "id"
+                        )
+                    }"
+                )
+            }
         }
+        return DefaultRelationships.serializer()
+    }
+    // element.jsonObject.getValue("attributes").toString().toBoolean()
+
+//    when (element.jsonObject.getValue("type").toString().filterNot { it == '"' }) {
+//        Type.AUTHOR.name.lowercase(), Type.ARTIST.name.lowercase() -> AuthorIncludes.serializer()
+//        Type.COVER_ART.name.lowercase() -> CoverArtIncludes.serializer()
+//        Type.MANGA.name.lowercase() -> MangaIncludes.serializer()
+//        else -> DefaultIncludes.serializer()
+//    }
+
+//        when (val aa = element.jsonObject) {
+//            when(aa.jsonObject.getValue("attributes").toString().toBoolean()) {
+//                true -> Log.d("TAG", "selectDeserializer: ")
+//                else -> Log.d("TAG", "selectDeserializer: ")
+//            }
+//        }
+
 }

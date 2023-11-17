@@ -14,12 +14,6 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
 
-//sealed interface HomeUiState {
-//    data class Success(val mangaIdList: Response<CustomListAttributes, Relationships>) : HomeUiState
-//    object Error : HomeUiState
-//    object Loading : HomeUiState
-//}
-
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val mangaDexRepository: MangaDexRepository,
