@@ -41,7 +41,7 @@ class GetSeasonalUseCase @Inject constructor(
             result.add(
                 HomeSeasonalMangaItem(
                     manga.id,
-                    findFileNameOfCover(manga.relationships)!!,
+                    findFileNameOfCover(manga.relationships!!),
                     setTags(manga.attributes.publicationDemographic, manga.attributes.contentRating, manga.attributes.tags)
                 )
             )
@@ -49,7 +49,7 @@ class GetSeasonalUseCase @Inject constructor(
         return result
     }
 
-    private fun findFileNameOfCover(relationships: List<Includes>?): String? {
+    private fun findFileNameOfCover(relationships: List<Includes>): String {
         val coverAttributes= relationships?.find { Type.COVER_ART == it.type } as CoverArtIncludes
         return coverAttributes.fileName
     }

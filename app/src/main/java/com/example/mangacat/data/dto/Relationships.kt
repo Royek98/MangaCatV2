@@ -19,10 +19,6 @@ import kotlinx.serialization.json.put
 abstract class Includes {
     abstract val id: String
     abstract val type: Type
-
-    fun getCoverArtFileName() {
-
-    }
 }
 
 @Serializable
@@ -33,14 +29,14 @@ data class DefaultRelationships(
 
 @Serializable
 data class AuthorIncludes(
-    val name: String? = null,
+    val name: String,
     override val id: String,
     override val type: Type
 ) : Includes()
 
 @Serializable
 data class CoverArtIncludes(
-    val fileName: String? = null,
+    val fileName: String,
     override val id: String,
     override val type: Type
 ) : Includes()
