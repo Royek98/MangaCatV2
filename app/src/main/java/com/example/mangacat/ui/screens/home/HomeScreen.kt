@@ -8,10 +8,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.mangacat.data.network.Resource
+import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 
 @Composable
 fun HomeScreen(
-    homeUiState: Resource<List<String>>,
+    homeUiState: Resource<List<HomeSeasonalMangaItem>>,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -38,7 +39,7 @@ fun ErrorScreen(
 
 @Composable
 fun Success(
-    mangaIdList: List<String>,
+    mangaIdList: List<HomeSeasonalMangaItem>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -46,6 +47,7 @@ fun Success(
     ) {
         items(mangaIdList) {
 //            Text(text = "${it.id}:::${it.cover}:::${it.tags}")
+            Text(text = "${it.id} :: ${it.cover} :: ${it.tags}")
         }
     }
 }

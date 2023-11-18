@@ -19,6 +19,10 @@ import kotlinx.serialization.json.put
 abstract class Includes {
     abstract val id: String
     abstract val type: Type
+
+    fun getCoverArtFileName() {
+
+    }
 }
 
 @Serializable

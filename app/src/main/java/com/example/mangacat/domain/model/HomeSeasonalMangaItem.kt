@@ -4,5 +4,6 @@ data class HomeSeasonalMangaItem(
     val id: String,
     val cover: String,
     // publicationDemographic ?: content rating, 2 tags
-    val tags: List<String?> = ArrayList(3)
+    val tags: List<String?> = List(3) { "" }
 )
+

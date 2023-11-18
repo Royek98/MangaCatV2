@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.network.Resource
+import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 import com.example.mangacat.domain.repository.MangaDexRepository
+import com.example.mangacat.domain.usecase.home.GetSeasonalUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -16,10 +18,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val mangaDexRepository: MangaDexRepository,
+    private val getSeasonalUseCase: GetSeasonalUseCase,
 ) : ViewModel() {
 
-    var homeUiState: Resource<List<String>> by mutableStateOf(
+    var homeUiState: Resource<List<HomeSeasonalMangaItem>> by mutableStateOf(
         Resource.Loading
     )
         private set
@@ -33,27 +35,9 @@ class HomeViewModel @Inject constructor(
             homeUiState = Resource.Loading
 
             homeUiState = try {
-                val ids = mangaDexRepository.getSeasonalMangaIds()
-                Log.d("test", "getSeasonalManga: $ids")
+                val result = getSeasonalUseCase()
 
-                val listOfRelationships = ids.data.relationships
-                val listOfIds = listOfRelationships.map { it.id }
-                val test = mangaDexRepository.getMangaListByIds(
-                    10,
-                    0,
-                    listOf("cover_art", "author"),
-                    listOf(
-                        ContentRating.SAFE,
-                        ContentRating.SUGGESTIVE,
-                        ContentRating.EROTICA,
-
-                        ),
-                    listOfIds
-                )
-
-                Log.d("test", "getSeasonalManga: $listOfIds")
-
-                Resource.Success(listOfIds)
+                Resource.Success(result)
             } catch (e: IOException) {
                 Resource.Error
             }
