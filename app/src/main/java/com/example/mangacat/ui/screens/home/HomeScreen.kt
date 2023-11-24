@@ -1,7 +1,8 @@
 package com.example.mangacat.ui.screens.home
 
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -9,16 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
+import com.example.mangacat.ui.screens.home.components.SeasonalPanel
 
 @Composable
 fun HomeScreen(
     homeUiState: Resource<List<HomeSeasonalMangaItem>>,
-    retryAction: () -> Unit,
-    modifier: Modifier = Modifier
+    retryAction: () -> Unit
 ) {
     when (homeUiState) {
         is Resource.Loading -> LoadingScreen()
-        is Resource.Success -> Success(homeUiState.data, modifier = modifier)
+        is Resource.Success -> Success(homeUiState.data)
 
         is Resource.Error -> ErrorScreen(retryAction)
     }
@@ -39,15 +40,15 @@ fun ErrorScreen(
 
 @Composable
 fun Success(
-    mangaIdList: List<HomeSeasonalMangaItem>,
-    modifier: Modifier = Modifier
+    mangaIdList: List<HomeSeasonalMangaItem>
 ) {
-    LazyColumn(
-        modifier = modifier
+    Column(
+        modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
-        items(mangaIdList) {
-//            Text(text = "${it.id}:::${it.cover}:::${it.tags}")
-            Text(text = "${it.id} :: ${it.cover} :: ${it.tags}")
+        SeasonalPanel(
+            mangaList = mangaIdList,
+        ) { mangaId ->
+//            navController.navigate("${MangaCatScreens.MangaDetails.name}/$mangaId")
         }
     }
 }
