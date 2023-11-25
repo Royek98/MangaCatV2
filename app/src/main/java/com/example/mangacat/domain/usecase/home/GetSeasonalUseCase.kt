@@ -50,7 +50,7 @@ class GetSeasonalUseCase @Inject constructor(
     }
 
     private fun findFileNameOfCover(relationships: List<Includes>): String {
-        val coverAttributes= relationships?.find { Type.COVER_ART == it.type } as CoverArtIncludes
+        val coverAttributes= relationships.find { Type.COVER_ART == it.type } as CoverArtIncludes
         return coverAttributes.fileName
     }
 

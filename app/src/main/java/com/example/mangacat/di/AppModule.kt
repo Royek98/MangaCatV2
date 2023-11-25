@@ -1,8 +1,9 @@
 package com.example.mangacat.di
 
-//import com.example.mangacat.data.repository.MangaDexRepositoryImpl
+import android.content.Context
 import com.example.mangacat.data.dto.Includes
 import com.example.mangacat.data.dto.IncludesPolymorphicSerializer
+import com.example.mangacat.data.fake.FakeRepositoryImpl
 import com.example.mangacat.data.network.MangaDexApiService
 import com.example.mangacat.data.repository.MangaDexRepositoryImpl
 import com.example.mangacat.utils.AppConstants
@@ -10,6 +11,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.json.Json
@@ -24,11 +26,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
+//    @Singleton
+//    @Provides
+//    fun provideMangaDexApiService(service: MangaDexApiService) = MangaDexRepositoryImpl(service)
+
     @Singleton
     @Provides
-    fun provideMangaDexRepository(service: MangaDexApiService) = MangaDexRepositoryImpl(service)
+    fun provideMangaDexFakeRepo(@ApplicationContext appContext: Context) = FakeRepositoryImpl(appContext)
 
-    val module = SerializersModule {
+
+
+    private val module = SerializersModule {
         polymorphicDefaultDeserializer(Includes::class ) { IncludesPolymorphicSerializer }
     }
 
