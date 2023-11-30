@@ -1,0 +1,2283 @@
+{
+  "result": "ok",
+  "response": "entity",
+  "data": {
+    "id": "c52b2ce3-7f95-469c-96b0-479524fb7a1a",
+    "type": "manga",
+    "attributes": {
+      "title": {
+        "en": "Jujutsu Kaisen"
+      },
+      "altTitles": [
+        {
+          "es": "Batalla de hechiceros"
+        },
+        {
+          "en": "Magic Martial Arts"
+        },
+        {
+          "ru": "Жүжүцү Кайсэн"
+        },
+        {
+          "ru": "Магическая битва"
+        },
+        {
+          "ja": "呪術廻戦"
+        },
+        {
+          "zh": "咒术回战"
+        },
+        {
+          "zh-hk": "咒術回戰"
+        },
+        {
+          "ko": "주술회전"
+        },
+        {
+          "uk": "Магічна Битва"
+        },
+        {
+          "en": "Magic Jujutsu"
+        },
+        {
+          "kk": "Сиқырлы шайқас"
+        },
+        {
+          "kk": "Алас талас"
+        },
+        {
+          "tr": "Büyülü Dövüş Sanatları"
+        },
+        {
+          "fr": "Jujutsu Kaisen"
+        },
+        {
+          "pt-br": "Jujutsu Kaisen - Batalha de Feiticeiros"
+        }
+      ],
+      "description": {
+        "en": "Yuuji is a genius at track and field. But he has zero interest running around in circles, he's happy as a clam in the Occult Research Club. Although he's only in the club for kicks, things get serious when a real spirit shows up at school! Life's about to get really strange in Sugisawa Town #3 High School!",
+        "fr": "Yuuji est un jeune étudiant qui excelle dans le sport, notamment dans l'athlétisme, mais qui a un immense poil dans la main. Du coup, au lieu de parfaire ses capacités physiques qui pourraient lui permettre de devenir le meilleur de l'établissement, il s'est inscrit au club de recherches occultes du lycée. Son petit train-train va changer du tout au tout lorsqu'un véritable esprit malfaiteur vient menacer son école…",
+        "ru": "Юдзи гений на поле! Вот только школьная активность его мало чем привлекает. Став частью клуба оккультных исследований он решает зажить тихой жизнью, но все меняется, когда в школе объявляются духи.",
+        "tr": "Yuuji bir atletizm dehasıdır ama koşuya hiç ilgisi yoktur. Bilinmezleri Araştırma Kulübünde çok mutludur. Her ne kadar kulüpte eğlencesine bulunsa bile, okulda gerçek bir ruh ortaya çıkınca işler ciddiye biner! Hayat, Sugisawa Şehrindeki 3 Numaralı Lisedeki çocuklar için tuhaflaşmaya başlamak üzere!",
+        "uk": "Ітадорі Юуджі - надзвичайно талановитий старшокласник із Сендаю. Утім, хоч він і вправний спортсмен, його не цікавлять спортивні клуби: він піклується про свого дідуся, що лежить у місцевій лікарні. Все змінюється, коли через жартівливий спіритичний сеанс на Юуджі та його друзів раптово нападають моторошні чудовиська, яких дивакуватий незнайомець, Фушіґуро Меґумі, чомусь називає прокляттями. Аби врятувати себе та друзів, Юуджі змушений ризикнути - і так випадково стати вмістилищем легендарного, наймогутнішого короля проклять. А потім на тобі - вирок: \"тебе мають стратити\". Ну і що робити? Тяжкий вибір, магічна школа, нові друзі й нові проблеми - так починається його шлях...",
+        "pt-br": "Itadori Yuuji, um estudante do colegial com uma capacidade física única, tem como rotina visitar seu avô que está hospitalizado. Porém, um dia, o selo de um \"objeto amaldiçoado\" escondido em sua escola é rompido, fazendo surgir criaturas assustadoras. Para salvar seus colegas ele parte em direção ao colégio, quando algo inesperado acontece...!"
+      },
+      "isLocked": false,
+      "links": {
+        "al": "101517",
+        "ap": "jujutsu-kaisen",
+        "bw": "series/163351",
+        "kt": "40815",
+        "mu": "147557",
+        "amz": "https://www.amazon.co.jp/dp/B07H3TPZR9",
+        "cdj": "https://www.cdjapan.co.jp/product/NEOBK-2655626",
+        "ebj": "https://ebookjapan.yahoo.co.jp/books/464912/",
+        "mal": "113138",
+        "raw": "https://shonenjumpplus.com/episode/10834108156650001170",
+        "engtl": "https://mangaplus.shueisha.co.jp/titles/100034"
+      },
+      "originalLanguage": "ja",
+      "lastVolume": "",
+      "lastChapter": "",
+      "publicationDemographic": "shounen",
+      "status": "ongoing",
+      "year": 2018,
+      "contentRating": "safe",
+      "tags": [
+        {
+          "id": "07251805-a27e-4d59-b488-f0bfbec15168",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Thriller"
+            },
+            "description": {},
+            "group": "genre",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "36fd93ea-e8b8-445e-b836-358f02b3d33d",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Monsters"
+            },
+            "description": {},
+            "group": "theme",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "391b0423-d847-456f-aff0-8b0cfc03066b",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Action"
+            },
+            "description": {},
+            "group": "genre",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "3bb26d85-09d5-4d2e-880c-c34b974339e9",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Ghosts"
+            },
+            "description": {},
+            "group": "theme",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "799c202e-7daa-44eb-9cf7-8a3c0441531e",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Martial Arts"
+            },
+            "description": {},
+            "group": "theme",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "a1f53773-c69a-4ce5-8cab-fffcd90b1565",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Magic"
+            },
+            "description": {},
+            "group": "theme",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "b29d6a3d-1569-4e7a-8caf-7557bc92cd5d",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Gore"
+            },
+            "description": {},
+            "group": "content",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "b9af3a63-f058-46de-a9a0-e0c13906197a",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Drama"
+            },
+            "description": {},
+            "group": "genre",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "caaa44eb-cd40-4177-b930-79d3ef2afe87",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "School Life"
+            },
+            "description": {},
+            "group": "theme",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "eabc5b4c-6aff-42f3-b657-3e90cbd00b75",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Supernatural"
+            },
+            "description": {},
+            "group": "theme",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "ee968100-4191-4968-93d3-f82d72be7e46",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Mystery"
+            },
+            "description": {},
+            "group": "genre",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "f8f62932-27da-4fe4-8ee1-6779a8c5edba",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Tragedy"
+            },
+            "description": {},
+            "group": "genre",
+            "version": 1
+          },
+          "relationships": []
+        }
+      ],
+      "state": "published",
+      "chapterNumbersResetOnNewVolume": false,
+      "createdAt": "2019-06-17T23:08:00+00:00",
+      "updatedAt": "2023-11-02T04:01:41+00:00",
+      "version": 70,
+      "availableTranslatedLanguages": [
+        "it",
+        "hu",
+        "pt-br",
+        "ru",
+        "en",
+        "es-la",
+        "ar",
+        "fr",
+        "vi",
+        "uk",
+        "he",
+        "id",
+        "zh-hk",
+        "es",
+        "de",
+        null,
+        "sr",
+        "mn",
+        "ms",
+        "tr"
+      ],
+      "latestUploadedChapter": "3b70ca70-c722-4b46-8548-d2113afe1658"
+    },
+    "relationships": [
+      {
+        "id": "94be1d47-54d0-42c6-b42b-439605e3793f",
+        "type": "author",
+        "attributes": {
+          "name": "Akutami Gege",
+          "imageUrl": null,
+          "biography": {
+            "en": "**Alt names**:\n芥見下々 "
+          },
+          "twitter": null,
+          "pixiv": null,
+          "melonBook": null,
+          "fanBox": null,
+          "booth": null,
+          "nicoVideo": null,
+          "skeb": null,
+          "fantia": null,
+          "tumblr": null,
+          "youtube": null,
+          "weibo": null,
+          "naver": null,
+          "website": null,
+          "createdAt": "2021-04-19T21:59:45+00:00",
+          "updatedAt": "2023-11-03T01:40:57+00:00",
+          "version": 2
+        }
+      },
+      {
+        "id": "94be1d47-54d0-42c6-b42b-439605e3793f",
+        "type": "artist",
+        "attributes": {
+          "name": "Akutami Gege",
+          "imageUrl": null,
+          "biography": {
+            "en": "**Alt names**:\n芥見下々 "
+          },
+          "twitter": null,
+          "pixiv": null,
+          "melonBook": null,
+          "fanBox": null,
+          "booth": null,
+          "nicoVideo": null,
+          "skeb": null,
+          "fantia": null,
+          "tumblr": null,
+          "youtube": null,
+          "weibo": null,
+          "naver": null,
+          "website": null,
+          "createdAt": "2021-04-19T21:59:45+00:00",
+          "updatedAt": "2023-11-03T01:40:57+00:00",
+          "version": 2
+        }
+      },
+      {
+        "id": "3469f637-2cbe-4fab-8cb1-04f55e0801c7",
+        "type": "cover_art",
+        "attributes": {
+          "description": "",
+          "volume": "24",
+          "fileName": "5e54c679-75d5-4645-b69e-eb46e66f3870.jpg",
+          "locale": "ja",
+          "createdAt": "2023-09-19T14:04:09+00:00",
+          "updatedAt": "2023-09-19T14:04:09+00:00",
+          "version": 1
+        }
+      },
+      {
+        "id": "0bf66865-4791-4119-866d-6cb7cc8dfd86",
+        "type": "manga",
+        "related": "same_franchise",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen Official Fan Book"
+          },
+          "altTitles": [
+            {
+              "en": "呪術廻戦 公式ファンブック"
+            }
+          ],
+          "description": {
+            "en": "Written and organized by Gege Akutami, this official fan book offers a unique never-before-seen glimpse into the Jujutsu Kaisen world! Delve into the personal details of over 70 characters through a generous array of 350+ questions, all answered by Gege himself! Fans can also look forward to extra background information, exclusive interviews, and even an art trade with Tite Kubo, the author of the hit series, \"BLEACH\"! This book is a must read for all Jujutsu Kaisen fans!"
+          },
+          "isLocked": false,
+          "links": {
+            "bw": "de3a7a9377-bb8e-4b34-a396-be29f7c8a932",
+            "amz": "https://www.amazon.co.jp/dp/4088826361/"
+          },
+          "originalLanguage": "ja",
+          "lastVolume": null,
+          "lastChapter": null,
+          "publicationDemographic": "shounen",
+          "status": "completed",
+          "year": null,
+          "contentRating": "safe",
+          "tags": [
+            {
+              "id": "33771934-028e-4cb3-8744-691e866a923e",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Historical"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "51d83883-4103-437c-b4b1-731cb73d786c",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Anthology"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "caaa44eb-cd40-4177-b930-79d3ef2afe87",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "School Life"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "eabc5b4c-6aff-42f3-b657-3e90cbd00b75",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Supernatural"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2021-03-05T09:20:43+00:00",
+          "updatedAt": "2021-03-05T09:20:43+00:00",
+          "version": 1,
+          "availableTranslatedLanguages": [],
+          "latestUploadedChapter": null
+        }
+      },
+      {
+        "id": "133cf996-d092-4629-a2e0-453b68d76e70",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen - Bondage and Interrogation Play with the 7/3 Jujutsu Sorcerer (Doujinshi)"
+          },
+          "altTitles": [
+            {
+              "ja": "73呪ｿ師緊縛尋問プレイ"
+            }
+          ],
+          "description": {
+            "en": "A book in which GoNana are lovey-dovey while engaging in bondage play. Does not feature a curse-based storyline. The Gojo here is the type who ends his sentences with a heart symbol."
+          },
+          "isLocked": false,
+          "links": {
+            "raw": "https://ec.toranoana.jp/joshi_r/ec/item/040030914558/"
+          },
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "",
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": 2021,
+          "contentRating": "pornographic",
+          "tags": [
+            {
+              "id": "5920b825-4181-4a17-beeb-9918b0ff7a30",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Boys' Love"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b13b2a48-c720-44a9-9c77-39c9979373fb",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Doujinshi"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2022-09-03T11:30:45+00:00",
+          "updatedAt": "2023-07-12T18:37:26+00:00",
+          "version": 3,
+          "availableTranslatedLanguages": [
+            "en"
+          ],
+          "latestUploadedChapter": "e1815721-2baf-48d7-8b9b-bb85ddfdb5dd"
+        }
+      },
+      {
+        "id": "140458f7-be02-424b-98ac-1aa0cd9f45f9",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Dakuon -Jujutsu Hypnosis-"
+          },
+          "altTitles": [
+            {
+              "ja-ro": "Dakuon -Jujutsu Saimin-"
+            },
+            {
+              "ja-ro": "Dakuon -Jujutsu Hypno-"
+            },
+            {
+              "ja": "濁音 -呪術催眠"
+            }
+          ],
+          "description": {},
+          "isLocked": false,
+          "links": {},
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "1",
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": 2022,
+          "contentRating": "pornographic",
+          "tags": [
+            {
+              "id": "0234a31e-a729-4e28-9d6a-3f87c4966b9e",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Oneshot"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b13b2a48-c720-44a9-9c77-39c9979373fb",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Doujinshi"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2022-03-29T19:56:28+00:00",
+          "updatedAt": "2023-01-31T18:11:50+00:00",
+          "version": 4,
+          "availableTranslatedLanguages": [
+            "en"
+          ],
+          "latestUploadedChapter": "f7c88509-5c4d-4d86-888d-50e1be2121a5"
+        }
+      },
+      {
+        "id": "1b6262cd-19ad-4fbb-b592-acf733ca9456",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen - NobaMaki Wakarase (Doujinshi)"
+          },
+          "altTitles": [
+            {
+              "ja": "ノバマキワカラセ (Jujutsu Kaisen)"
+            },
+            {
+              "ja-ro": "NobaMaki Wakarase (Jujutsu Kaisen)"
+            },
+            {
+              "en": "To Make NobaMaki Understand (Jujutsu Kaisen)"
+            }
+          ],
+          "description": {},
+          "isLocked": false,
+          "links": {},
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "",
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": null,
+          "contentRating": "pornographic",
+          "tags": [
+            {
+              "id": "0234a31e-a729-4e28-9d6a-3f87c4966b9e",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Oneshot"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "81c836c9-914a-4eca-981a-560dad663e73",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Magical Girls"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "a1f53773-c69a-4ce5-8cab-fffcd90b1565",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Magic"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b13b2a48-c720-44a9-9c77-39c9979373fb",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Doujinshi"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "caaa44eb-cd40-4177-b930-79d3ef2afe87",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "School Life"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "cdc58593-87dd-415e-bbc0-2ec27bf404cc",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Fantasy"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2023-09-16T13:24:33+00:00",
+          "updatedAt": "2023-09-16T14:47:55+00:00",
+          "version": 3,
+          "availableTranslatedLanguages": [
+            "pl"
+          ],
+          "latestUploadedChapter": "b7d0c680-337c-4df3-aee7-df260521d583"
+        }
+      },
+      {
+        "id": "22fa9b4c-505e-4bf8-9cab-ff66c84443e4",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen - Manjushage no Yume no Naka"
+          },
+          "altTitles": [],
+          "description": {
+            "en": "Jujutsu Kaisen Doujinshi  \nPairing: Geto Suguru x Gojo Satoru"
+          },
+          "isLocked": false,
+          "links": null,
+          "originalLanguage": "ja",
+          "lastVolume": null,
+          "lastChapter": null,
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": null,
+          "contentRating": "safe",
+          "tags": [
+            {
+              "id": "0234a31e-a729-4e28-9d6a-3f87c4966b9e",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Oneshot"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "5920b825-4181-4a17-beeb-9918b0ff7a30",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Boys' Love"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b13b2a48-c720-44a9-9c77-39c9979373fb",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Doujinshi"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2021-02-19T22:55:51+00:00",
+          "updatedAt": "2021-05-25T15:40:20+00:00",
+          "version": 2,
+          "availableTranslatedLanguages": [
+            "id"
+          ],
+          "latestUploadedChapter": "642b5f86-a970-446b-961a-3b4d3b55837a"
+        }
+      },
+      {
+        "id": "35731f33-27fa-4794-b6ee-3b60da8b994d",
+        "type": "manga",
+        "related": "colored",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen (Official Colored)"
+          },
+          "altTitles": [
+            {
+              "ja": "呪術廻戦"
+            },
+            {
+              "en": "Sorcery Fight"
+            }
+          ],
+          "description": {
+            "en": "Jujutsu Kaisen is set in a world where Cursed Spirits feed on unsuspecting humans and fragments of the legendary and feared demon Ryomen Sukuna have been lost and scattered about.Should any curse consume Sukuna's body parts, the power they gain could destroy the world as we know it.  \nFortunately, there exists a mysterious school of Jujutsu Shamans who exist to protect the precarious existence of the living from the supernatural!\n\n---\nRaws are unavailable since the \"Jump Book Store!\" e-book service closure in december 2022."
+          },
+          "isLocked": false,
+          "links": {},
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "",
+          "publicationDemographic": "shounen",
+          "status": "hiatus",
+          "year": 2020,
+          "contentRating": "safe",
+          "tags": [
+            {
+              "id": "320831a8-4026-470b-94f6-8353740e6f04",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Official Colored"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "36fd93ea-e8b8-445e-b836-358f02b3d33d",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Monsters"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "391b0423-d847-456f-aff0-8b0cfc03066b",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Action"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "39730448-9a5f-48a2-85b0-a70db87b1233",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Demons"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "4d32cc48-9f00-4cca-9b5a-a839f0764984",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Comedy"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b9af3a63-f058-46de-a9a0-e0c13906197a",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Drama"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "cdad7e68-1419-41dd-bdce-27753074a640",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Horror"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2020-08-16T04:31:10+00:00",
+          "updatedAt": "2023-08-03T12:35:33+00:00",
+          "version": 7,
+          "availableTranslatedLanguages": [
+            "en"
+          ],
+          "latestUploadedChapter": "f80c90c8-48f8-4dc0-a1d9-e524fab6ba6e"
+        }
+      },
+      {
+        "id": "46415e92-6a73-4f38-8009-aa0c57d3dba7",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen - Ankousoei (Doujinshi)"
+          },
+          "altTitles": [
+            {
+              "ja": "呪術廻戦 - 暗香疎影"
+            },
+            {
+              "ja-ro": "Jujutsu Kaisen - Redolence of the Dark, Shadows of the Flora"
+            },
+            {
+              "es-la": "Fragancia de la Oscuridad, Sombras de la Flora"
+            }
+          ],
+          "description": {},
+          "isLocked": false,
+          "links": {
+            "mu": "189176"
+          },
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "",
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": null,
+          "contentRating": "erotica",
+          "tags": [
+            {
+              "id": "5920b825-4181-4a17-beeb-9918b0ff7a30",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Boys' Love"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b13b2a48-c720-44a9-9c77-39c9979373fb",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Doujinshi"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b9af3a63-f058-46de-a9a0-e0c13906197a",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Drama"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2021-11-27T10:29:44+00:00",
+          "updatedAt": "2023-07-11T10:54:59+00:00",
+          "version": 4,
+          "availableTranslatedLanguages": [
+            "es-la"
+          ],
+          "latestUploadedChapter": "89d773cb-662b-4fa8-a819-e1597edf4ffd"
+        }
+      },
+      {
+        "id": "4b843685-ca16-41f7-8ad5-eb29a163f2e0",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen - I Just Do What You Want (Doujinshi)"
+          },
+          "altTitles": [
+            {
+              "en": "I Just Do What You Want"
+            }
+          ],
+          "description": {},
+          "isLocked": false,
+          "links": {},
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "",
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": null,
+          "contentRating": "pornographic",
+          "tags": [
+            {
+              "id": "5920b825-4181-4a17-beeb-9918b0ff7a30",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Boys' Love"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b13b2a48-c720-44a9-9c77-39c9979373fb",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Doujinshi"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2022-06-13T19:15:19+00:00",
+          "updatedAt": "2023-07-12T18:36:39+00:00",
+          "version": 3,
+          "availableTranslatedLanguages": [
+            "en"
+          ],
+          "latestUploadedChapter": "22383f9a-aa37-4dc7-b42a-b42191c7c6db"
+        }
+      },
+      {
+        "id": "5afa8629-8582-462a-a9cc-f41a71c50b1b",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen - Forked Road (Doujinshi)"
+          },
+          "altTitles": [
+            {
+              "ja": "岐路"
+            },
+            {
+              "ja-ro": "Kiro"
+            }
+          ],
+          "description": {
+            "en": "This is a story about Nanami and Gojo’s silly exchanges expressing their one-sided feelings for each other before Nanami’s return as a sorcerer."
+          },
+          "isLocked": false,
+          "links": {
+            "raw": "https://ec.toranoana.jp/joshi_r/ec/item/040030958451/"
+          },
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "",
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": 2021,
+          "contentRating": "safe",
+          "tags": [
+            {
+              "id": "0234a31e-a729-4e28-9d6a-3f87c4966b9e",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Oneshot"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "5920b825-4181-4a17-beeb-9918b0ff7a30",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Boys' Love"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b13b2a48-c720-44a9-9c77-39c9979373fb",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Doujinshi"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2022-07-14T10:32:56+00:00",
+          "updatedAt": "2022-07-14T10:55:56+00:00",
+          "version": 3,
+          "availableTranslatedLanguages": [
+            "en"
+          ],
+          "latestUploadedChapter": "396c6c29-33be-453c-8f00-b273a9677d80"
+        }
+      },
+      {
+        "id": "61740fce-b314-4522-b6c5-22d0fb01c979",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Kitakaze to Shakunetsu no Taiyou"
+          },
+          "altTitles": [
+            {
+              "ja": "北風と灼熱の太陽"
+            },
+            {
+              "en": "North Wind and Burning Sun"
+            }
+          ],
+          "description": {
+            "en": "It's a romantic comedy about both Nanami and Gojo's unrequited love."
+          },
+          "isLocked": false,
+          "links": {
+            "raw": "https://ecs.toranoana.jp/joshi/ec/item/040031007249/"
+          },
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "",
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": 2022,
+          "contentRating": "pornographic",
+          "tags": [
+            {
+              "id": "0234a31e-a729-4e28-9d6a-3f87c4966b9e",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Oneshot"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "5920b825-4181-4a17-beeb-9918b0ff7a30",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Boys' Love"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b13b2a48-c720-44a9-9c77-39c9979373fb",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Doujinshi"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2023-08-11T18:18:28+00:00",
+          "updatedAt": "2023-08-12T16:46:49+00:00",
+          "version": 7,
+          "availableTranslatedLanguages": [
+            "id"
+          ],
+          "latestUploadedChapter": "efea0d27-07e7-40a9-b2ed-4400517dc886"
+        }
+      },
+      {
+        "id": "66caf56e-d7ac-4f78-9ddb-edfaabf77a2a",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen - Motto Kimi o Nakasetai (Doujinshi)"
+          },
+          "altTitles": [
+            {
+              "ja": "もっと君をナかせたい"
+            }
+          ],
+          "description": {
+            "en": "Itadori Yuji has to **** Kugisaki Nobara~~"
+          },
+          "isLocked": false,
+          "links": {},
+          "originalLanguage": "ja",
+          "lastVolume": null,
+          "lastChapter": null,
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": null,
+          "contentRating": "pornographic",
+          "tags": [
+            {
+              "id": "0234a31e-a729-4e28-9d6a-3f87c4966b9e",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Oneshot"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "423e2eae-a7a2-4a8b-ac03-a8351462d71d",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Romance"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "4d32cc48-9f00-4cca-9b5a-a839f0764984",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Comedy"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b13b2a48-c720-44a9-9c77-39c9979373fb",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Doujinshi"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "da2d50ca-3018-4cc0-ac7a-6b7d472a29ea",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Delinquents"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2021-03-03T20:24:27+00:00",
+          "updatedAt": "2023-07-10T08:56:24+00:00",
+          "version": 2,
+          "availableTranslatedLanguages": [],
+          "latestUploadedChapter": null
+        }
+      },
+      {
+        "id": "67fb7e2e-95bd-4cd0-9341-0b64fd22944c",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen - You Can't Leave This Room Unless You XXXX (Doujinshi)"
+          },
+          "altTitles": [
+            {
+              "ja": "○○○しないと出られない部屋√A"
+            },
+            {
+              "ja-ro": "￮￮￮ Shinai to de rarenai heya √A (Jujutsu Kaisen)"
+            }
+          ],
+          "description": {
+            "en": "A story about Gojo, Sukuna, and Fushiguro getting locked in a room where they cannot leave unless they have sex, and arguing over whether Gojo or Sukuna should have sex with Fushiguro."
+          },
+          "isLocked": false,
+          "links": {
+            "raw": "https://www.melonbooks.co.jp/detail/detail.php?product_id=1164478"
+          },
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "",
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": 2021,
+          "contentRating": "suggestive",
+          "tags": [
+            {
+              "id": "4d32cc48-9f00-4cca-9b5a-a839f0764984",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Comedy"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "5920b825-4181-4a17-beeb-9918b0ff7a30",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Boys' Love"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b13b2a48-c720-44a9-9c77-39c9979373fb",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Doujinshi"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2022-08-11T13:31:09+00:00",
+          "updatedAt": "2023-07-12T18:35:53+00:00",
+          "version": 4,
+          "availableTranslatedLanguages": [
+            "en"
+          ],
+          "latestUploadedChapter": "5a307815-9776-45e5-b076-5840a620ad46"
+        }
+      },
+      {
+        "id": "8b58f452-4d8a-4aad-a050-349e83fecccb",
+        "type": "manga",
+        "related": "prequel",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen 0"
+          },
+          "altTitles": [
+            {
+              "en": "Jujutsu Kaisen 0: Tokyo Metropolitan Magic Technical School"
+            },
+            {
+              "ru": "Токийская столичная магическо-техническая школа"
+            },
+            {
+              "ja": "呪術廻戦 0: 東京都立呪術高等専門学校"
+            },
+            {
+              "zh": "東京都立咒術高等專門學校"
+            },
+            {
+              "zh-hk": "都立呪術高等専門学校"
+            },
+            {
+              "uk": "Магічна Битва 0: Токійська старша школа магічних мистецтв"
+            },
+            {
+              "ja-ro": "Jujutsu Kaisen 0 - Tokyo Toritsu Jujutsu Koutou Senmon Gakkou"
+            },
+            {
+              "es": "Jujutsu Kaisen 0 - Escuela de Bachillerato Técnico de Brujería de Tokio"
+            },
+            {
+              "fr": "Jujutsu Kaisen 0 - L'école d'exorcisme de Tokyo"
+            },
+            {
+              "et": "Jujutsu Kaisen 0: Technikum Jujutsu w Tokio"
+            },
+            {
+              "id": "Jujutsu Kaisen 0: Tokyo Metropolitan Jujutsu Teknik Koleji"
+            }
+          ],
+          "description": {
+            "en": "Yuta Okkotsu is a nervous high school student who is suffering from a serious problem—his childhood friend Rika has turned into a curse and won't leave him alone. Since Rika is no ordinary curse, his plight is noticed by Satoru Gojo, a teacher at Jujutsu High, a school where fledgling exorcists learn how to combat curses. Gojo convinces Yuta to enroll, but can he learn enough in time to confront the curse that haunts him?  \n  \nThe official prequel mini series to Gege Akutami's hit serialization, \"Jujutsu Kaisen\"!  \n  \n[Official English](https://www.viz.com/read/manga/jujutsu-kaisen/product/6537)\n\n\n---",
+            "ru": "Приквел манги \"Магическая Битва\", что рассказывает историю Оккоцу Юута, который был проклят могущественным духом \"Оримото Рика\" и хочет научиться ее контролировать.",
+            "uk": "Усе життя Оккоцу Юуту переслідує привид - жорстоке чудовисько, одержиме його захистом, яке нещадно вбиває та калічить усіх його кривдників. Після чергового інциденту його затримують люди, які називають себе магами: вони захищають цей світ від подібних створінь, лишаючись у тіні. І в одного з них, Ґоджьо Сатору, уже є на хлопця свої плани: тепер Юута має перевестися до Токійської старшої магічної школи та взяти під контроль своє \"прокляття\", щоб допомагати іншим. Утім, протягом першого року навчання Оккоцу доведеться дізнатися, що у світі магів існують монстри набагато страшніші, ніж прокляття..."
+          },
+          "isLocked": false,
+          "links": {
+            "al": "105469",
+            "ap": "jujutsu-kaisen-0-toritsu-jujutsu-koutou-senmon-gakkou",
+            "bw": "series/185063",
+            "kt": "54710",
+            "mu": "152389",
+            "amz": "https://www.amazon.co.jp/gp/product/4088816722",
+            "cdj": "https://www.cdjapan.co.jp/product/NEOBK-2296259",
+            "ebj": "https://ebookjapan.yahoo.co.jp/books/514692/",
+            "mal": "115710",
+            "engtl": "https://www.viz.com/read/manga/jujutsu-kaisen/product/6537"
+          },
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "4",
+          "publicationDemographic": "shounen",
+          "status": "completed",
+          "year": 2017,
+          "contentRating": "safe",
+          "tags": [
+            {
+              "id": "07251805-a27e-4d59-b488-f0bfbec15168",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Thriller"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "36fd93ea-e8b8-445e-b836-358f02b3d33d",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Monsters"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "391b0423-d847-456f-aff0-8b0cfc03066b",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Action"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "3b60b75c-a2d7-4860-ab56-05f391bb889c",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Psychological"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "5fff9cde-849c-4d78-aab0-0d52b2ee1d25",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Survival"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "799c202e-7daa-44eb-9cf7-8a3c0441531e",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Martial Arts"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "87cc87cd-a395-47af-b27a-93258283bbc6",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Adventure"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "a1f53773-c69a-4ce5-8cab-fffcd90b1565",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Magic"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b29d6a3d-1569-4e7a-8caf-7557bc92cd5d",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Gore"
+                },
+                "description": {},
+                "group": "content",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b9af3a63-f058-46de-a9a0-e0c13906197a",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Drama"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "caaa44eb-cd40-4177-b930-79d3ef2afe87",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "School Life"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "cdad7e68-1419-41dd-bdce-27753074a640",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Horror"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "da2d50ca-3018-4cc0-ac7a-6b7d472a29ea",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Delinquents"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "e5301a23-ebd9-49dd-a0cb-2add944c7fe9",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Slice of Life"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "eabc5b4c-6aff-42f3-b657-3e90cbd00b75",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Supernatural"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "ee968100-4191-4968-93d3-f82d72be7e46",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Mystery"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "f8f62932-27da-4fe4-8ee1-6779a8c5edba",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Tragedy"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2019-08-02T00:52:59+00:00",
+          "updatedAt": "2022-06-30T14:23:41+00:00",
+          "version": 11,
+          "availableTranslatedLanguages": [
+            "it",
+            "id",
+            "pt-br",
+            "tr",
+            "zh-hk",
+            "ru",
+            "en",
+            "hu",
+            "fr",
+            "uk"
+          ],
+          "latestUploadedChapter": "f8f83e1d-9535-4f1c-977b-9b28410f69df"
+        }
+      },
+      {
+        "id": "8b58f452-4d8a-4aad-a050-349e83fecccb",
+        "type": "manga",
+        "related": "preserialization",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen 0"
+          },
+          "altTitles": [
+            {
+              "en": "Jujutsu Kaisen 0: Tokyo Metropolitan Magic Technical School"
+            },
+            {
+              "ru": "Токийская столичная магическо-техническая школа"
+            },
+            {
+              "ja": "呪術廻戦 0: 東京都立呪術高等専門学校"
+            },
+            {
+              "zh": "東京都立咒術高等專門學校"
+            },
+            {
+              "zh-hk": "都立呪術高等専門学校"
+            },
+            {
+              "uk": "Магічна Битва 0: Токійська старша школа магічних мистецтв"
+            },
+            {
+              "ja-ro": "Jujutsu Kaisen 0 - Tokyo Toritsu Jujutsu Koutou Senmon Gakkou"
+            },
+            {
+              "es": "Jujutsu Kaisen 0 - Escuela de Bachillerato Técnico de Brujería de Tokio"
+            },
+            {
+              "fr": "Jujutsu Kaisen 0 - L'école d'exorcisme de Tokyo"
+            },
+            {
+              "et": "Jujutsu Kaisen 0: Technikum Jujutsu w Tokio"
+            },
+            {
+              "id": "Jujutsu Kaisen 0: Tokyo Metropolitan Jujutsu Teknik Koleji"
+            }
+          ],
+          "description": {
+            "en": "Yuta Okkotsu is a nervous high school student who is suffering from a serious problem—his childhood friend Rika has turned into a curse and won't leave him alone. Since Rika is no ordinary curse, his plight is noticed by Satoru Gojo, a teacher at Jujutsu High, a school where fledgling exorcists learn how to combat curses. Gojo convinces Yuta to enroll, but can he learn enough in time to confront the curse that haunts him?  \n  \nThe official prequel mini series to Gege Akutami's hit serialization, \"Jujutsu Kaisen\"!  \n  \n[Official English](https://www.viz.com/read/manga/jujutsu-kaisen/product/6537)\n\n\n---",
+            "ru": "Приквел манги \"Магическая Битва\", что рассказывает историю Оккоцу Юута, который был проклят могущественным духом \"Оримото Рика\" и хочет научиться ее контролировать.",
+            "uk": "Усе життя Оккоцу Юуту переслідує привид - жорстоке чудовисько, одержиме його захистом, яке нещадно вбиває та калічить усіх його кривдників. Після чергового інциденту його затримують люди, які називають себе магами: вони захищають цей світ від подібних створінь, лишаючись у тіні. І в одного з них, Ґоджьо Сатору, уже є на хлопця свої плани: тепер Юута має перевестися до Токійської старшої магічної школи та взяти під контроль своє \"прокляття\", щоб допомагати іншим. Утім, протягом першого року навчання Оккоцу доведеться дізнатися, що у світі магів існують монстри набагато страшніші, ніж прокляття..."
+          },
+          "isLocked": false,
+          "links": {
+            "al": "105469",
+            "ap": "jujutsu-kaisen-0-toritsu-jujutsu-koutou-senmon-gakkou",
+            "bw": "series/185063",
+            "kt": "54710",
+            "mu": "152389",
+            "amz": "https://www.amazon.co.jp/gp/product/4088816722",
+            "cdj": "https://www.cdjapan.co.jp/product/NEOBK-2296259",
+            "ebj": "https://ebookjapan.yahoo.co.jp/books/514692/",
+            "mal": "115710",
+            "engtl": "https://www.viz.com/read/manga/jujutsu-kaisen/product/6537"
+          },
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "4",
+          "publicationDemographic": "shounen",
+          "status": "completed",
+          "year": 2017,
+          "contentRating": "safe",
+          "tags": [
+            {
+              "id": "07251805-a27e-4d59-b488-f0bfbec15168",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Thriller"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "36fd93ea-e8b8-445e-b836-358f02b3d33d",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Monsters"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "391b0423-d847-456f-aff0-8b0cfc03066b",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Action"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "3b60b75c-a2d7-4860-ab56-05f391bb889c",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Psychological"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "5fff9cde-849c-4d78-aab0-0d52b2ee1d25",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Survival"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "799c202e-7daa-44eb-9cf7-8a3c0441531e",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Martial Arts"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "87cc87cd-a395-47af-b27a-93258283bbc6",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Adventure"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "a1f53773-c69a-4ce5-8cab-fffcd90b1565",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Magic"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b29d6a3d-1569-4e7a-8caf-7557bc92cd5d",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Gore"
+                },
+                "description": {},
+                "group": "content",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b9af3a63-f058-46de-a9a0-e0c13906197a",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Drama"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "caaa44eb-cd40-4177-b930-79d3ef2afe87",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "School Life"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "cdad7e68-1419-41dd-bdce-27753074a640",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Horror"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "da2d50ca-3018-4cc0-ac7a-6b7d472a29ea",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Delinquents"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "e5301a23-ebd9-49dd-a0cb-2add944c7fe9",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Slice of Life"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "eabc5b4c-6aff-42f3-b657-3e90cbd00b75",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Supernatural"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "ee968100-4191-4968-93d3-f82d72be7e46",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Mystery"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "f8f62932-27da-4fe4-8ee1-6779a8c5edba",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Tragedy"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2019-08-02T00:52:59+00:00",
+          "updatedAt": "2022-06-30T14:23:41+00:00",
+          "version": 11,
+          "availableTranslatedLanguages": [
+            "it",
+            "id",
+            "pt-br",
+            "tr",
+            "zh-hk",
+            "ru",
+            "en",
+            "hu",
+            "fr",
+            "uk"
+          ],
+          "latestUploadedChapter": "f8f83e1d-9535-4f1c-977b-9b28410f69df"
+        }
+      },
+      {
+        "id": "979920eb-5a86-4536-bc9a-8decd889eec1",
+        "type": "manga",
+        "related": "colored",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen (Fan Colored)"
+          },
+          "altTitles": [
+            {
+              "en": "Sorcery Fight"
+            },
+            {
+              "ja": "呪術廻戦"
+            },
+            {
+              "ja": "Jujutsu Kaisen"
+            }
+          ],
+          "description": {
+            "en": "In a world where cursed spirits feed on unsuspecting humans, fragments of the legendary and feared demon Ryomen Sukuna have been lost and scattered about. Should any demon consume Sukunas body parts, the power they gain could destroy the world as we know it. fortunatly, there exists a mysteious school of Jujutsu Sorcerers who exist to protect the precarious existence of the living from the supernatural."
+          },
+          "isLocked": false,
+          "links": {
+            "al": "101517",
+            "ap": "jujutsu-kaisen",
+            "bw": "series/163351",
+            "kt": "40815",
+            "mu": "147557",
+            "mal": "113138",
+            "raw": "https://mangaplus.shueisha.co.jp/titles/100034"
+          },
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "",
+          "publicationDemographic": "shounen",
+          "status": "ongoing",
+          "year": 2018,
+          "contentRating": "safe",
+          "tags": [
+            {
+              "id": "07251805-a27e-4d59-b488-f0bfbec15168",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Thriller"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "391b0423-d847-456f-aff0-8b0cfc03066b",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Action"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "39730448-9a5f-48a2-85b0-a70db87b1233",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Demons"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "3bb26d85-09d5-4d2e-880c-c34b974339e9",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Ghosts"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "799c202e-7daa-44eb-9cf7-8a3c0441531e",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Martial Arts"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "7b2ce280-79ef-4c09-9b58-12b7c23a9b78",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Fan Colored"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "a1f53773-c69a-4ce5-8cab-fffcd90b1565",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Magic"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "b29d6a3d-1569-4e7a-8caf-7557bc92cd5d",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Gore"
+                },
+                "description": {},
+                "group": "content",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "caaa44eb-cd40-4177-b930-79d3ef2afe87",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "School Life"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "cdc58593-87dd-415e-bbc0-2ec27bf404cc",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Fantasy"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "eabc5b4c-6aff-42f3-b657-3e90cbd00b75",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Supernatural"
+                },
+                "description": {},
+                "group": "theme",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "ee968100-4191-4968-93d3-f82d72be7e46",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Mystery"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "f8f62932-27da-4fe4-8ee1-6779a8c5edba",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Tragedy"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2022-01-22T19:33:25+00:00",
+          "updatedAt": "2023-07-08T16:02:09+00:00",
+          "version": 7,
+          "availableTranslatedLanguages": [],
+          "latestUploadedChapter": null
+        }
+      },
+      {
+        "id": "9db0566f-cfe4-4975-bc1b-b941b0f59b4f",
+        "type": "manga",
+        "related": "doujinshi",
+        "attributes": {
+          "title": {
+            "en": "Jujutsu Kaisen - Le Plus Fort des Exorcistes"
+          },
+          "altTitles": [],
+          "description": {},
+          "isLocked": false,
+          "links": {},
+          "originalLanguage": "fr",
+          "lastVolume": null,
+          "lastChapter": null,
+          "publicationDemographic": null,
+          "status": "completed",
+          "year": null,
+          "contentRating": "safe",
+          "tags": [
+            {
+              "id": "4d32cc48-9f00-4cca-9b5a-a839f0764984",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Comedy"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "f5ba408b-0e7a-484d-8d49-4e9125ac96de",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Full Color"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2021-03-09T18:52:54+00:00",
+          "updatedAt": "2023-06-17T15:10:34+00:00",
+          "version": 2,
+          "availableTranslatedLanguages": [],
+          "latestUploadedChapter": null
+        }
+      }
+    ]
+  }
+}

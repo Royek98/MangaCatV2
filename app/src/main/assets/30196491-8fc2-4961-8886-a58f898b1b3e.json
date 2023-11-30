@@ -1,0 +1,347 @@
+{
+  "result": "ok",
+  "response": "entity",
+  "data": {
+    "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
+    "type": "manga",
+    "attributes": {
+      "title": {
+        "en": "Berserk of Gluttony"
+      },
+      "altTitles": [
+        {
+          "fr": "Berserk de la Gourmandise : Celui qui surpasse le concept même de niveaux"
+        },
+        {
+          "pl": "Berserk obżarstwa"
+        },
+        {
+          "en": "Berserk of Gluttony: The One that Exceeds the Concept of Levels"
+        },
+        {
+          "ja": "Boushoku no Berserk: Ore Dake Level to Iu Gainen o Toppa Suru"
+        },
+        {
+          "ru": "Ненасытный Берсерк"
+        },
+        {
+          "ja": "暴食のベルセルク～俺だけレベルという概念を突破する～ THE COMIC"
+        },
+        {
+          "zh-hk": "狂怒的暴食 ～僅自己突破了等級這概念～"
+        },
+        {
+          "zh": "狂怒的暴食 ～只有我突破了等级这概念～"
+        },
+        {
+          "ko": "폭식의 버서크"
+        },
+        {
+          "ko": "폭식의 베르세르크 ~나만 레벨이라는 개념을 돌파한다~"
+        }
+      ],
+      "description": {
+        "en": "In this world, there are two types of people. Those Who have powerful \"skills\", and those who don't. People born with powerful skills, exterminate monsters to level up and become successful, while people without them, become failures, who are treated harshly by society. Follow the story of Fate, a guy who works as a gatekeeper, and whose only skill is gluttony, a skill that only makes him hungry.",
+        "fr": "Dans ce monde, il y a deux types de personnes. Ceux qui ont un ou plusieurs \"talents\", et ceux qui n'en possèdent pas. Les personnes nées avec de puissant talents, exterminent les monstres pour monter en niveaux et devenir puissants, alors que ceux qui n'en possèdent pas deviennent des échecs et sont traités durement par la société. Nous suivons l'histoire de Fate, un homme travaillant comme garde aux portes de la ville et dont son seul talents est la gourmandise, un talent qui ne fait que lui donner faim.  \n\n\n---",
+        "ro": "În lumea asta sunt două tipuri de oameni: cei care posedă “puteri” incredibile și cei care nu.  \nCei care au fost născuți cu asemenea “puteri” extermină monștrii, evoluează și devin oameni de success, în timp ce ceilalți devin eșecuri, și sunt tratați diferit de societate.  \nCitește povestea lui Fate, un tip ce lucrează ca și gardian, a cărui putere este lăcomia, o putere care îl face să fie mereu înfometat.   \n  \n\n\n---\n\n**Links:**  \n- [Author's Twitter](https://twitter.com/isshiki_ichika)  \n- [Original Web Novel](https://ncode.syosetu.com/n6887dt/) (Raw)  \n- Original Comic on **[** [Comic Ride](http://comicride.jp/gluttony/) **|** [NicoNico](http://seiga.nicovideo.jp/comic/31663) **]** (Raw)",
+        "ru": "В этом мире есть два типа людей. Те, у кого есть сильные «навыки», и те, кто их не имеет. Люди, рожденные с мощными навыками, уничтожают монстров, чтобы стать успешными, в то время как люди без них становятся неудачниками, к которым жестоко относится общество. В нашей истории, парень, который работает в качестве привратника, и чье единственное умение — обжорство, умение, которое только делает его голодным.   \n  \n\n\n---",
+        "pt-br": "Neste mundo, existem dois tipos de pessoas. Aqueles que têm poderosas “habilidades” e aqueles que não. As pessoas nascidas com habilidades poderosas exterminam monstros para subirem de nível e se tornarem bem-sucedidas, enquanto as pessoas sem eles, tornam-se fracassos, que são tratados com dureza pela sociedade. Fate é um cara que trabalha como um porteiro, e cuja única habilidade é a gula, uma habilidade que o faz comer almas."
+      },
+      "isLocked": false,
+      "links": {
+        "al": "101625",
+        "ap": "boshoku-no-berserk",
+        "bw": "series/175790",
+        "kt": "40812",
+        "mu": "147844",
+        "nu": "glutton-berserker-the-one-that-exceeds-the-concept-of-levels",
+        "amz": "https://www.amazon.co.jp/dp/B07PGBXYQZ",
+        "ebj": "https://ebookjapan.yahoo.co.jp/books/436470",
+        "mal": "113958",
+        "raw": "http://comicride.jp/gluttony",
+        "engtl": "https://sevenseasentertainment.com/series/berserk-of-gluttony-manga/"
+      },
+      "originalLanguage": "ja",
+      "lastVolume": "",
+      "lastChapter": "",
+      "publicationDemographic": "seinen",
+      "status": "ongoing",
+      "year": 2018,
+      "contentRating": "safe",
+      "tags": [
+        {
+          "id": "391b0423-d847-456f-aff0-8b0cfc03066b",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Action"
+            },
+            "description": {},
+            "group": "genre",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "423e2eae-a7a2-4a8b-ac03-a8351462d71d",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Romance"
+            },
+            "description": {},
+            "group": "genre",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "87cc87cd-a395-47af-b27a-93258283bbc6",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Adventure"
+            },
+            "description": {},
+            "group": "genre",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "aafb99c1-7f60-43fa-b75f-fc9502ce29c7",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Harem"
+            },
+            "description": {},
+            "group": "theme",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "b9af3a63-f058-46de-a9a0-e0c13906197a",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Drama"
+            },
+            "description": {},
+            "group": "genre",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "cdc58593-87dd-415e-bbc0-2ec27bf404cc",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Fantasy"
+            },
+            "description": {},
+            "group": "genre",
+            "version": 1
+          },
+          "relationships": []
+        },
+        {
+          "id": "f4122d1c-3b44-44d0-9936-ff7502c39ad3",
+          "type": "tag",
+          "attributes": {
+            "name": {
+              "en": "Adaptation"
+            },
+            "description": {},
+            "group": "format",
+            "version": 1
+          },
+          "relationships": []
+        }
+      ],
+      "state": "published",
+      "chapterNumbersResetOnNewVolume": false,
+      "createdAt": "2019-03-26T07:49:40+00:00",
+      "updatedAt": "2023-11-07T19:17:32+00:00",
+      "version": 27,
+      "availableTranslatedLanguages": [
+        "pl",
+        "es-la",
+        "ru",
+        "hu",
+        "fr",
+        "vi",
+        "pt-br",
+        "en",
+        "it",
+        "de",
+        "ar",
+        "ro"
+      ],
+      "latestUploadedChapter": "9a559710-e098-4819-a048-8355b2aaeee9"
+    },
+    "relationships": [
+      {
+        "id": "6e5e2e5e-a19c-4eaf-8f2b-de2593a2a060",
+        "type": "author",
+        "attributes": {
+          "name": "Isshiki Ichika",
+          "imageUrl": null,
+          "biography": {},
+          "twitter": null,
+          "pixiv": null,
+          "melonBook": null,
+          "fanBox": null,
+          "booth": null,
+          "nicoVideo": null,
+          "skeb": null,
+          "fantia": null,
+          "tumblr": null,
+          "youtube": null,
+          "weibo": null,
+          "naver": null,
+          "website": null,
+          "createdAt": "2021-04-19T21:59:45+00:00",
+          "updatedAt": "2021-04-19T21:59:45+00:00",
+          "version": 1
+        }
+      },
+      {
+        "id": "6c744f72-ec67-455b-bdaa-93ef20adf2ae",
+        "type": "artist",
+        "attributes": {
+          "name": "Takino Daisuke",
+          "imageUrl": null,
+          "biography": {},
+          "twitter": null,
+          "pixiv": null,
+          "melonBook": null,
+          "fanBox": null,
+          "booth": null,
+          "nicoVideo": null,
+          "skeb": null,
+          "fantia": null,
+          "tumblr": null,
+          "youtube": null,
+          "weibo": null,
+          "naver": null,
+          "website": null,
+          "createdAt": "2021-04-19T21:59:45+00:00",
+          "updatedAt": "2021-04-19T21:59:45+00:00",
+          "version": 1
+        }
+      },
+      {
+        "id": "5408760c-cb56-46a1-b5f8-08d79da45f73",
+        "type": "cover_art",
+        "attributes": {
+          "description": "",
+          "volume": "11",
+          "fileName": "88b844bc-214b-43d4-842f-82d099d1ccad.jpg",
+          "locale": "ja",
+          "createdAt": "2023-10-07T09:28:45+00:00",
+          "updatedAt": "2023-10-07T09:28:45+00:00",
+          "version": 1
+        }
+      },
+      {
+        "id": "f4e9f182-8345-449b-98b3-54ba4f29493d",
+        "type": "manga",
+        "related": "alternate_version",
+        "attributes": {
+          "title": {
+            "en": "Boushoku no Berserk - Ore dake Level to Iu Gainen wo Toppa shite Saikyou"
+          },
+          "altTitles": [
+            {
+              "ja": "暴食のベルセルク～俺だけレベルという概念を突破して最強～"
+            },
+            {
+              "en": "Berserk of Gluttony"
+            }
+          ],
+          "description": {
+            "en": "In this world, there are two types of people. Those Who have powerful “skills”, and those who don’t. People born with powerful skills, exterminate monsters to level up and become successful, while people without them, become failures, who are treated harshly by society. Follow the story of Fate, a guy who works as a gatekeeper, and whose only skill is gluttony, a skill that only makes him hungry."
+          },
+          "isLocked": false,
+          "links": {
+            "mu": "43z3ja6",
+            "raw": "https://piccoma.com/web/product/125898"
+          },
+          "originalLanguage": "ja",
+          "lastVolume": "",
+          "lastChapter": "",
+          "publicationDemographic": "shounen",
+          "status": "ongoing",
+          "year": 2023,
+          "contentRating": "safe",
+          "tags": [
+            {
+              "id": "391b0423-d847-456f-aff0-8b0cfc03066b",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Action"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "3e2b8dae-350e-4ab8-a8ce-016e844b9f0d",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Long Strip"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "87cc87cd-a395-47af-b27a-93258283bbc6",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Adventure"
+                },
+                "description": {},
+                "group": "genre",
+                "version": 1
+              },
+              "relationships": []
+            },
+            {
+              "id": "f5ba408b-0e7a-484d-8d49-4e9125ac96de",
+              "type": "tag",
+              "attributes": {
+                "name": {
+                  "en": "Full Color"
+                },
+                "description": {},
+                "group": "format",
+                "version": 1
+              },
+              "relationships": []
+            }
+          ],
+          "state": "published",
+          "chapterNumbersResetOnNewVolume": false,
+          "createdAt": "2023-02-22T11:23:49+00:00",
+          "updatedAt": "2023-06-18T04:11:02+00:00",
+          "version": 3,
+          "availableTranslatedLanguages": [
+            "en"
+          ],
+          "latestUploadedChapter": "35adbb2f-e768-4fd1-b3ac-d0ffe447c510"
+        }
+      }
+    ]
+  }
+}

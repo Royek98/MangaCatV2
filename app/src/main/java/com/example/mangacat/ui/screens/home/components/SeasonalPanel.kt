@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -11,11 +12,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,10 +31,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
+import coil.request.ImageRequest
 import com.example.mangacat.R
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 
@@ -40,7 +46,7 @@ import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 internal fun SeasonalPanel(
     mangaList: List<HomeSeasonalMangaItem>,
     modifier: Modifier = Modifier,
-    navigateTo: (Int) -> Unit
+    navigateToManga: (String) -> Unit
 ) {
     val itemsCount = mangaList.size
 
@@ -69,7 +75,7 @@ internal fun SeasonalPanel(
                     publicationDemographic = mangaList[index].tags[0],
                     genres = listOf(mangaList[index].tags[1], mangaList[index].tags[2]),
                     mangaId = mangaList[index].id,
-                    navigateTo = navigateTo
+                    navigateToManga = navigateToManga
                 )
             }
         )
@@ -127,12 +133,12 @@ private fun SeasonalItem(
     genres: List<String?>,
     mangaId: String,
     modifier: Modifier = Modifier,
-    navigateTo: (Int) -> Unit
+    navigateToManga: (String) -> Unit
 ) {
     Box(
-//        modifier = modifier.clickable {
-//            navigateTo(mangaId)
-//        }
+        modifier = modifier.clickable {
+            navigateToManga(mangaId)
+        }
     ) {
 
         MangaCover(cover = cover, mangaId = mangaId)
@@ -153,33 +159,48 @@ fun MangaCover(
     cover: String,
     modifier: Modifier = Modifier
 ) {
-    AsyncImage(
-        model = "https://uploads.mangadex.org/covers/$mangaId/$cover",
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-        alpha = 0.7F,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(dimensionResource(id = R.dimen.cover_size))
-            .blur(radius = 10.dp)
-            .clip(RectangleShape)
-            .background(
-                Color.Black
-            )
-    )
-    AsyncImage(
-        model = "https://uploads.mangadex.org/covers/$mangaId/$cover",
-        contentDescription = null,
-        contentScale = ContentScale.FillHeight,
-        alpha = 0.7F,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(dimensionResource(id = R.dimen.cover_size)),
-        colorFilter = ColorFilter.tint(
-            color = MaterialTheme.colorScheme.background.copy(alpha = 0.2F),
-            blendMode = BlendMode.Darken
+
+    Box(
+
+    ) {
+        SubcomposeAsyncImage(
+            model = ImageRequest
+                .Builder(LocalContext.current)
+                .data("https://uploads.mangadex.org/covers/$mangaId/$cover")
+                .crossfade(true)
+                .build(),
+            loading = { CircularProgressIndicator() },
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alpha = 0.7F,
+            modifier = modifier
+                .fillMaxWidth()
+                .height(dimensionResource(id = R.dimen.cover_size))
+                .blur(radius = 10.dp)
+                .clip(RectangleShape)
+//                .background(
+//                    Color.Black
+//                )
         )
-    )
+        SubcomposeAsyncImage(
+            model = ImageRequest
+                .Builder(LocalContext.current)
+                .data("https://uploads.mangadex.org/covers/$mangaId/$cover")
+                .crossfade(true)
+                .build(),
+            loading = { CircularProgressIndicator() },
+            contentDescription = null,
+            contentScale = ContentScale.FillHeight,
+            alpha = 0.7F,
+            modifier = modifier
+                .fillMaxWidth()
+                .height(dimensionResource(id = R.dimen.cover_size)),
+            colorFilter = ColorFilter.tint(
+                color = MaterialTheme.colorScheme.background.copy(alpha = 0.2F),
+                blendMode = BlendMode.Darken
+            )
+        )
+    }
 }
 
 

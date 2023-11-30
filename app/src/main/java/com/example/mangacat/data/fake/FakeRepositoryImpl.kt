@@ -8,6 +8,8 @@ import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.dto.response.CollectionResponse
+import com.example.mangacat.data.dto.response.Data
+import com.example.mangacat.data.dto.response.DataIncludes
 import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.domain.repository.MangaDexRepository
 import kotlinx.serialization.json.Json
@@ -29,8 +31,8 @@ class FakeRepositoryImpl(
         serializersModule = module
     }
 
-    override suspend fun getSeasonalMangaIds(): EntityResponse<CustomListAttributes, List<DefaultRelationships>> =
-        json.decodeFromString(ReadJSONFromAssets(context, "SeasonalIdList.json"))
+    override suspend fun getSeasonalMangaIds(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> =
+        json.decodeFromString(readJSONFromAssets(context, "SeasonalIdList.json"))
 
 
     override suspend fun getMangaListByIds(
@@ -40,10 +42,12 @@ class FakeRepositoryImpl(
         contentRating: List<ContentRating>,
         ids: List<String>
     ): CollectionResponse<MangaAttributes> =
-        json.decodeFromString(ReadJSONFromAssets(context, "SeasonalResponse_Limit10_Offset0.json"))
+        json.decodeFromString(readJSONFromAssets(context, "SeasonalResponse_Limit10_Offset0.json"))
+
+    override suspend fun getMangaById(id: String): EntityResponse<DataIncludes<MangaAttributes>> =
+        json.decodeFromString(readJSONFromAssets(context, "$id.json"))
 
 
-
-    fun ReadJSONFromAssets(context: Context, path: String): String  =
+    private fun readJSONFromAssets(context: Context, path: String): String =
          context.assets.open(path).readBytes().toString(Charsets.UTF_8)
 }

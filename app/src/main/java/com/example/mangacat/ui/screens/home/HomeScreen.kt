@@ -15,11 +15,12 @@ import com.example.mangacat.ui.screens.home.components.SeasonalPanel
 @Composable
 fun HomeScreen(
     homeUiState: Resource<List<HomeSeasonalMangaItem>>,
-    retryAction: () -> Unit
+    retryAction: () -> Unit,
+    navigateToManga: (String) -> Unit
 ) {
     when (homeUiState) {
         is Resource.Loading -> LoadingScreen()
-        is Resource.Success -> Success(homeUiState.data)
+        is Resource.Success -> Success(homeUiState.data, navigateToManga)
 
         is Resource.Error -> ErrorScreen(retryAction)
     }
@@ -39,17 +40,17 @@ fun ErrorScreen(
 }
 
 @Composable
-fun Success(
-    mangaIdList: List<HomeSeasonalMangaItem>
+private fun Success(
+    mangaIdList: List<HomeSeasonalMangaItem>,
+    navigateToManga: (String) -> Unit
 ) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
         SeasonalPanel(
             mangaList = mangaIdList,
-        ) { mangaId ->
-//            navController.navigate("${MangaCatScreens.MangaDetails.name}/$mangaId")
-        }
+            navigateToManga = navigateToManga
+        )
     }
 }
 

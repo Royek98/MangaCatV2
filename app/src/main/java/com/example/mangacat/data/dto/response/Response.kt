@@ -4,10 +4,11 @@ import com.example.mangacat.data.dto.response.enums.Result
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class EntityResponse<ATTRIBUTES, RELATIONSHIPS>(
+data class EntityResponse<DATA>(
     val result: Result,
     val response: String,
-    val data: Data<ATTRIBUTES, RELATIONSHIPS>
+//    val data: Data<ATTRIBUTES, RELATIONSHIPS>
+    val data: DATA
 )
 
 @Serializable
