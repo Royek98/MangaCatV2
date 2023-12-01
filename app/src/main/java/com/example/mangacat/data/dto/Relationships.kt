@@ -60,7 +60,6 @@ object IncludesResponseSerializer :
 
         attributes.forEach {
             val aa = it.jsonObject
-            Log.d("TAG", "transformDeserialize: $aa")
         }
 
         val ids = element.jsonArray.map { it.jsonObject["id"]!! }

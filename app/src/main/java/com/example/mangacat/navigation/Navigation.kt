@@ -56,7 +56,8 @@ fun MangaCatNavigation(
 
             MangaScreen(
                 mangaUiState = mangaViewModel.mangaUiState,
-                retryAction = mangaViewModel::getManga
+                retryAction = mangaViewModel::getManga,
+                navigateBack = { navController.popBackStack() }
             )
         }
     }

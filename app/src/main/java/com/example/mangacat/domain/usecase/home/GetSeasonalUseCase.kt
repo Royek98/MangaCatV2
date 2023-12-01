@@ -10,6 +10,7 @@ import com.example.mangacat.data.dto.tag.TagAttributes
 import com.example.mangacat.data.dto.tag.enums.TagGroup
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 import com.example.mangacat.domain.repository.MangaDexRepository
+import com.example.mangacat.domain.utils.findFileNameOfCoverInAttributes
 import com.example.mangacat.utils.capitalized
 import javax.inject.Inject
 
@@ -41,17 +42,12 @@ class GetSeasonalUseCase @Inject constructor(
             result.add(
                 HomeSeasonalMangaItem(
                     manga.id,
-                    findFileNameOfCover(manga.relationships!!),
+                    findFileNameOfCoverInAttributes(manga.relationships!!),
                     setTags(manga.attributes.publicationDemographic, manga.attributes.contentRating, manga.attributes.tags)
                 )
             )
         }
         return result
-    }
-
-    private fun findFileNameOfCover(relationships: List<Includes>): String {
-        val coverAttributes= relationships.find { Type.COVER_ART == it.type } as CoverArtIncludes
-        return coverAttributes.fileName
     }
 
     private fun setTags(

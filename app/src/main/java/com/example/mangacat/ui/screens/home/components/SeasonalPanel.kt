@@ -159,10 +159,7 @@ fun MangaCover(
     cover: String,
     modifier: Modifier = Modifier
 ) {
-
-    Box(
-
-    ) {
+    Box {
         SubcomposeAsyncImage(
             model = ImageRequest
                 .Builder(LocalContext.current)
