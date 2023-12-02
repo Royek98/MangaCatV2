@@ -1,6 +1,7 @@
 package com.example.mangacat.domain.repository
 
 import com.example.mangacat.data.dto.DefaultRelationships
+import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
@@ -20,4 +21,6 @@ interface MangaDexRepository {
     ): CollectionResponse<MangaAttributes>
 
     suspend fun getMangaById(id: String): EntityResponse<DataIncludes<MangaAttributes>>
+
+    suspend fun getChapterList(mangaId: String): CollectionResponse<ChapterAttributes>
 }

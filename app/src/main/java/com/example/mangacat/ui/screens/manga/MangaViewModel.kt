@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.Manga
+import com.example.mangacat.domain.usecase.manga.GetChapterListByMangaIdUserCase
 import com.example.mangacat.domain.usecase.manga.GetMangaByIdUseCase
 
 
@@ -19,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MangaViewModel @Inject constructor(
-    private val getMangaByIdUseCase: GetMangaByIdUseCase
+    private val getMangaByIdUseCase: GetMangaByIdUseCase,
+    private val getChapterListByMangaIdUserCase: GetChapterListByMangaIdUserCase
 ) : ViewModel() {
     var mangaUiState: Resource<Manga> by mutableStateOf(Resource.Loading)
         private set
@@ -37,6 +39,13 @@ class MangaViewModel @Inject constructor(
             } catch (e: IOException) {
                 Resource.Error
             }
+        }
+    }
+
+    fun getChapterList() {
+        viewModelScope.launch {
+            val result = getChapterListByMangaIdUserCase(_mangaId)
+            Log.d("TAG", "getChapterList: $result")
         }
     }
 

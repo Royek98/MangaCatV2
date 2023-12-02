@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.mangacat.data.dto.DefaultRelationships
 import com.example.mangacat.data.dto.Includes
 import com.example.mangacat.data.dto.IncludesPolymorphicSerializer
+import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
@@ -47,6 +48,8 @@ class FakeRepositoryImpl(
     override suspend fun getMangaById(id: String): EntityResponse<DataIncludes<MangaAttributes>> =
         json.decodeFromString(readJSONFromAssets(context, "$id.json"))
 
+    override suspend fun getChapterList(mangaId: String): CollectionResponse<ChapterAttributes> =
+        json.decodeFromString(readJSONFromAssets(context, "feed$mangaId.json"))
 
     private fun readJSONFromAssets(context: Context, path: String): String =
          context.assets.open(path).readBytes().toString(Charsets.UTF_8)

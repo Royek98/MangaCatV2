@@ -50,6 +50,23 @@ data class MangaIncludes(
     override val type: Type
 ) : Includes()
 
+@Serializable
+data class ScanlationGroupIncludes(
+    override val id: String,
+    override val type: Type,
+    val name: String,
+    val website: String?,
+    val description: String?,
+    val official: Boolean
+): Includes()
+
+@Serializable
+data class UserIncludes(
+    override val id: String,
+    override val type: Type,
+    val username: String
+): Includes()
+
 
 object IncludesResponseSerializer :
     JsonTransformingSerializer<List<Includes>>(ListSerializer(Includes.serializer())) {
@@ -57,10 +74,6 @@ object IncludesResponseSerializer :
         val attributes: MutableList<JsonElement> = element.jsonArray.map {
             it.jsonObject["attributes"] ?: buildJsonObject { put("attributes", false) }
         }.toMutableList()
-
-        attributes.forEach {
-            val aa = it.jsonObject
-        }
 
         val ids = element.jsonArray.map { it.jsonObject["id"]!! }
         val types = element.jsonArray.map { it.jsonObject["type"]!! }
@@ -90,11 +103,13 @@ object IncludesPolymorphicSerializer :
     JsonContentPolymorphicSerializer<Includes>(Includes::class) {
     override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Includes> {
         if (element.jsonObject.getValue("attributes").toString().toBoolean()) {
-            when (val type =
+            return when (val type =
                 element.jsonObject.getValue("type").toString().filterNot { it == '"' }) {
-                Type.AUTHOR.name.lowercase(), Type.ARTIST.name.lowercase() -> return AuthorIncludes.serializer()
-                Type.COVER_ART.name.lowercase() -> return CoverArtIncludes.serializer()
-                Type.MANGA.name.lowercase() -> return MangaIncludes.serializer()
+                Type.AUTHOR.name.lowercase(), Type.ARTIST.name.lowercase() -> AuthorIncludes.serializer()
+                Type.COVER_ART.name.lowercase() -> CoverArtIncludes.serializer()
+                Type.MANGA.name.lowercase() -> MangaIncludes.serializer()
+                Type.USER.name.lowercase() -> UserIncludes.serializer()
+                Type.SCANLATION_GROUP.name.lowercase() -> ScanlationGroupIncludes.serializer()
                 else -> throw Exception(
                     "Includes type error. Type: $type not found for id ${
                         element.jsonObject.getValue(

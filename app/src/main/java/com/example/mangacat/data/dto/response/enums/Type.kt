@@ -27,5 +27,11 @@ enum class Type {
     COVER_ART,
 
     @SerialName("creator")
-    CREATOR
+    CREATOR,
+
+    @SerialName("chapter")
+    CHAPTER,
+
+    @SerialName("scanlation_group")
+    SCANLATION_GROUP
 }

@@ -3,6 +3,7 @@ package com.example.mangacat.domain.utils
 import com.example.mangacat.data.dto.AuthorIncludes
 import com.example.mangacat.data.dto.CoverArtIncludes
 import com.example.mangacat.data.dto.Includes
+import com.example.mangacat.data.dto.ScanlationGroupIncludes
 import com.example.mangacat.data.dto.response.enums.Type
 
 fun findFileNameOfCoverInAttributes(relationships: List<Includes>): String {
@@ -14,3 +15,8 @@ fun findAuthorInAttributes(relationships: List<Includes>): String {
     val authorAttributes = relationships.find { Type.AUTHOR == it.type } as AuthorIncludes
     return authorAttributes.name
 }
+
+//fun findScanlationGroupInAttributes(relationships: List<Includes>): String {
+//    val scanlationGroupAttributes = relationships.find { Type.SCANLATION_GROUP == it.type } as ScanlationGroupIncludes
+//    return scanlationGroupAttributes.
+//}

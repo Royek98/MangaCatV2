@@ -1,6 +1,7 @@
 package com.example.mangacat.data.repository
 
 import com.example.mangacat.data.dto.DefaultRelationships
+import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
@@ -29,6 +30,10 @@ class MangaDexRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMangaById(id: String): EntityResponse<DataIncludes<MangaAttributes>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getChapterList(mangaId: String): CollectionResponse<ChapterAttributes> {
         TODO("Not yet implemented")
     }
 

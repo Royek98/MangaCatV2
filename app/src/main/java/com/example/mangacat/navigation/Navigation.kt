@@ -53,6 +53,7 @@ fun MangaCatNavigation(
 
             mangaViewModel.setMangaId(mangaId)
             mangaViewModel.getManga()
+            mangaViewModel.getChapterList()
 
             MangaScreen(
                 mangaUiState = mangaViewModel.mangaUiState,
