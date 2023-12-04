@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mangacat.data.network.Resource
+import com.example.mangacat.domain.model.Chapter
 import com.example.mangacat.domain.model.Manga
 import com.example.mangacat.domain.usecase.manga.GetChapterListByMangaIdUserCase
 import com.example.mangacat.domain.usecase.manga.GetMangaByIdUseCase
@@ -26,6 +27,9 @@ class MangaViewModel @Inject constructor(
     var mangaUiState: Resource<Manga> by mutableStateOf(Resource.Loading)
         private set
 
+    var chapterListUiState: Resource<List<Chapter>> by mutableStateOf(Resource.Loading)
+        private set
+
     private var _mangaId = ""
 
     fun getManga() {
@@ -33,9 +37,7 @@ class MangaViewModel @Inject constructor(
             mangaUiState = Resource.Loading
 
             mangaUiState = try {
-                val result = getMangaByIdUseCase(_mangaId)
-
-                Resource.Success(result)
+                Resource.Success(getMangaByIdUseCase(_mangaId))
             } catch (e: IOException) {
                 Resource.Error
             }
@@ -44,8 +46,13 @@ class MangaViewModel @Inject constructor(
 
     fun getChapterList() {
         viewModelScope.launch {
-            val result = getChapterListByMangaIdUserCase(_mangaId)
-            Log.d("TAG", "getChapterList: $result")
+            chapterListUiState = Resource.Loading
+
+            chapterListUiState = try {
+                Resource.Success(getChapterListByMangaIdUserCase(_mangaId))
+            } catch (e: IOException) {
+                Resource.Error
+            }
         }
     }
 

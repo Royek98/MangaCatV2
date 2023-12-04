@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -48,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import com.example.mangacat.R
 import com.example.mangacat.data.dto.manga.enums.Status
 import com.example.mangacat.data.network.Resource
+import com.example.mangacat.domain.model.Chapter
 import com.example.mangacat.domain.model.Manga
 import com.example.mangacat.ui.screens.home.ErrorScreen
 import com.example.mangacat.ui.screens.home.LoadingScreen
@@ -57,34 +59,54 @@ import com.example.mangacat.ui.screens.manga.utils.formatNumber
 @Composable
 fun MangaScreen(
     mangaUiState: Resource<Manga>,
-    retryAction: () -> Unit,
+    chapterListUiState: Resource<List<Chapter>>,
+    retryManga: () -> Unit,
+    retryChapterList: () -> Unit,
     navigateBack: () -> Unit
 ) {
-    when (mangaUiState) {
-        is Resource.Loading -> LoadingScreen()
-        is Resource.Success -> Success(mangaUiState.data, navigateBack)
+    Column {
+        when (mangaUiState) {
+            is Resource.Loading -> LoadingScreen()
+            is Resource.Success -> MangaSuccess(mangaUiState.data, navigateBack)
 
-        is Resource.Error -> ErrorScreen(retryAction)
+            is Resource.Error -> ErrorScreen(retryManga)
+        }
+
+        when (chapterListUiState) {
+            is Resource.Loading -> LoadingScreen()
+            is Resource.Success -> ChapterListSuccess(chapterListUiState.data)
+            is Resource.Error -> ErrorScreen(retryChapterList)
+        }
     }
 }
 
 @Composable
-private fun Success(
+private fun MangaSuccess(
     manga: Manga,
     navigateBack: () -> Unit
 ) {
-    Column {
-        TopBar(manga = manga, navigateBack = navigateBack)
-        LazyColumn {
-            items(20) {
-                ChapterItem(
-                    bgColor = MaterialTheme.colorScheme.primaryContainer,
-                    visibility = Icons.Default.Visibility,
-                    chapterNumber = it
-                )
-            }
-        }
+    TopBar(manga = manga, navigateBack = navigateBack)
+}
 
+@Composable
+private fun ChapterListSuccess(
+    chapterList: List<Chapter>
+) {
+    LazyColumn {
+//        items(20) {
+//            ChapterItem(
+//                bgColor = MaterialTheme.colorScheme.primaryContainer,
+//                visibility = Icons.Default.Visibility,
+//                chapterNumber = it
+//            )
+//        }
+        items(chapterList) { chapter ->
+            ChapterItem(
+                visibility = Icons.Default.Visibility,
+                chapter = chapter,
+                bgColor = MaterialTheme.colorScheme.primaryContainer
+            )
+        }
     }
 }
 
@@ -135,7 +157,7 @@ fun TopBar(
 @Composable
 private fun ChapterItem(
     visibility: ImageVector,
-    chapterNumber: Int,
+    chapter: Chapter,
     bgColor: Color,
     modifier: Modifier = Modifier
 ) {
@@ -160,14 +182,14 @@ private fun ChapterItem(
                 ChapterItemRow(
                     imageVector = visibility,
                     contentDescription = "Chapter reading status",
-                    text = "Ch. $chapterNumber",
+                    text = "Ch. ${chapter.chapter}",
                     style = MaterialTheme.typography.bodyMedium
                 )
 
                 ChapterItemRow(
                     imageVector = Icons.Outlined.PeopleAlt,
                     contentDescription = "Group name",
-                    text = "Kyuukei",
+                    text = chapter.scanlationGroupName,
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
@@ -178,21 +200,21 @@ private fun ChapterItem(
                 ChapterItemRow(
                     imageVector = Icons.Outlined.AccessTime,
                     contentDescription = "Upload date",
-                    text = "4 years ago",
+                    text = chapter.updatedAt,
                     style = MaterialTheme.typography.bodyMedium
                 )
 
                 ChapterItemRow(
                     imageVector = Icons.Outlined.PersonOutline,
                     contentDescription = "Uploader",
-                    text = "Uxtef",
+                    text = chapter.uploaderUsername,
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
 
 
             Spacer(modifier = Modifier.weight(0.9F))
-            Text(text = "$chapterNumber", modifier = Modifier.align(Alignment.CenterVertically))
+            Text(text = chapter.chapter, modifier = Modifier.align(Alignment.CenterVertically))
         }
     }
 

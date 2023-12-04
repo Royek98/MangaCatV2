@@ -3,6 +3,8 @@ package com.example.mangacat.domain.usecase.manga
 import android.util.Log
 import com.example.mangacat.domain.model.Chapter
 import com.example.mangacat.domain.repository.MangaDexRepository
+import com.example.mangacat.domain.utils.findScanlationGroupInAttributes
+import com.example.mangacat.domain.utils.findUserInAttributes
 import javax.inject.Inject
 
 class GetChapterListByMangaIdUserCase @Inject constructor(
@@ -15,7 +17,14 @@ class GetChapterListByMangaIdUserCase @Inject constructor(
 
         response.data.forEach {manga ->
             result.add(
-                Chapter(manga.attributes.chapter)
+                Chapter(
+                    chapter = manga.attributes.chapter,
+                    volume = manga.attributes.volume,
+                    title = manga.attributes.title,
+                    scanlationGroupName = findScanlationGroupInAttributes(manga.relationships)?.name ?: "",
+                    uploaderUsername = findUserInAttributes(manga.relationships)?.username ?: "",
+                    updatedAt = manga.attributes.updatedAt.toString()
+                )
             )
         }
 

@@ -1,6 +1,5 @@
 package com.example.mangacat.navigation
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -57,7 +56,9 @@ fun MangaCatNavigation(
 
             MangaScreen(
                 mangaUiState = mangaViewModel.mangaUiState,
-                retryAction = mangaViewModel::getManga,
+                chapterListUiState = mangaViewModel.chapterListUiState,
+                retryManga = mangaViewModel::getManga,
+                retryChapterList = mangaViewModel::getChapterList,
                 navigateBack = { navController.popBackStack() }
             )
         }
