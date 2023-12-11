@@ -18,12 +18,14 @@ class GetChapterListByMangaIdUserCase @Inject constructor(
         response.data.forEach {manga ->
             result.add(
                 Chapter(
+                    id = manga.id,
+                    mangaId = mangaId,
                     chapter = manga.attributes.chapter,
                     volume = manga.attributes.volume,
                     title = manga.attributes.title,
                     scanlationGroupName = findScanlationGroupInAttributes(manga.relationships)?.name ?: "",
                     uploaderUsername = findUserInAttributes(manga.relationships)?.username ?: "",
-                    updatedAt = manga.attributes.updatedAt.toString()
+                    updatedAt = manga.attributes.updatedAt
                 )
             )
         }

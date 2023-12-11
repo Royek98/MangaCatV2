@@ -27,7 +27,9 @@ fun MangaCatApp() {
         bottomBar = {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentRoute = navBackStackEntry?.destination?.route
-            if (currentRoute?.contains(NavigationScreens.Manga.name.substringBefore("/")) == false) {
+            if (
+                currentRoute?.contains(NavigationScreens.Home.name.substringBefore("/")) == true
+                ) {
                 NavigationBar(
                     modifier = Modifier.height(100.dp)
                 ) {

@@ -1,16 +1,13 @@
 package com.example.mangacat.domain.usecase.home
 
-import com.example.mangacat.data.dto.CoverArtIncludes
-import com.example.mangacat.data.dto.Includes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.dto.manga.enums.PublicationDemographic
 import com.example.mangacat.data.dto.response.DataWithoutRelationships
-import com.example.mangacat.data.dto.response.enums.Type
 import com.example.mangacat.data.dto.tag.TagAttributes
 import com.example.mangacat.data.dto.tag.enums.TagGroup
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 import com.example.mangacat.domain.repository.MangaDexRepository
-import com.example.mangacat.domain.utils.findFileNameOfCoverInAttributes
+import com.example.mangacat.domain.utils.findCoverInAttributes
 import com.example.mangacat.utils.capitalized
 import javax.inject.Inject
 
@@ -42,7 +39,7 @@ class GetSeasonalUseCase @Inject constructor(
             result.add(
                 HomeSeasonalMangaItem(
                     manga.id,
-                    findFileNameOfCoverInAttributes(manga.relationships!!),
+                    findCoverInAttributes(manga.relationships!!).fileName,
                     setTags(manga.attributes.publicationDemographic, manga.attributes.contentRating, manga.attributes.tags)
                 )
             )

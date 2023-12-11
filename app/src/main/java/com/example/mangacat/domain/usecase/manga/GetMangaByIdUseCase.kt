@@ -1,13 +1,9 @@
 package com.example.mangacat.domain.usecase.manga
 
-import com.example.mangacat.data.dto.AuthorIncludes
-import com.example.mangacat.data.dto.CoverArtIncludes
-import com.example.mangacat.data.dto.Includes
-import com.example.mangacat.data.dto.response.enums.Type
 import com.example.mangacat.domain.model.Manga
 import com.example.mangacat.domain.repository.MangaDexRepository
 import com.example.mangacat.domain.utils.findAuthorInAttributes
-import com.example.mangacat.domain.utils.findFileNameOfCoverInAttributes
+import com.example.mangacat.domain.utils.findCoverInAttributes
 import javax.inject.Inject
 
 class GetMangaByIdUseCase @Inject constructor(
@@ -24,8 +20,8 @@ class GetMangaByIdUseCase @Inject constructor(
             contentRating = response.data.attributes.contentRating,
             status = response.data.attributes.status,
             year = response.data.attributes.year,
-            author = findAuthorInAttributes(response.data.relationships!!),
-            cover = findFileNameOfCoverInAttributes(response.data.relationships)
+            author = findAuthorInAttributes(response.data.relationships!!).name,
+            cover = findCoverInAttributes(response.data.relationships).fileName
         )
     }
 

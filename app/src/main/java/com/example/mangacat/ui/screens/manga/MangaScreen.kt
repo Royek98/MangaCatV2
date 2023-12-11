@@ -12,12 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.RadioButtonChecked
@@ -30,11 +27,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,6 +49,7 @@ import com.example.mangacat.ui.screens.home.ErrorScreen
 import com.example.mangacat.ui.screens.home.LoadingScreen
 import com.example.mangacat.ui.screens.home.components.MangaCover
 import com.example.mangacat.ui.screens.manga.utils.formatNumber
+import com.example.mangacat.ui.screens.utils.TopAppBarBackAndAction
 
 @Composable
 fun MangaScreen(
@@ -62,95 +57,56 @@ fun MangaScreen(
     chapterListUiState: Resource<List<Chapter>>,
     retryManga: () -> Unit,
     retryChapterList: () -> Unit,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    navigateToRead: (String, String) -> Unit
 ) {
     Column {
         when (mangaUiState) {
             is Resource.Loading -> LoadingScreen()
-            is Resource.Success -> MangaSuccess(mangaUiState.data, navigateBack)
-
+            is Resource.Success -> TopBarSuccess(mangaUiState.data, navigateBack)
             is Resource.Error -> ErrorScreen(retryManga)
         }
 
         when (chapterListUiState) {
             is Resource.Loading -> LoadingScreen()
-            is Resource.Success -> ChapterListSuccess(chapterListUiState.data)
+            is Resource.Success -> ChapterListSuccess(chapterListUiState.data, navigateToRead)
             is Resource.Error -> ErrorScreen(retryChapterList)
         }
     }
 }
 
 @Composable
-private fun MangaSuccess(
-    manga: Manga,
-    navigateBack: () -> Unit
-) {
-    TopBar(manga = manga, navigateBack = navigateBack)
-}
-
-@Composable
 private fun ChapterListSuccess(
-    chapterList: List<Chapter>
+    chapterList: List<Chapter>,
+    navigateToRead: (String, String) -> Unit
 ) {
     LazyColumn {
-//        items(20) {
-//            ChapterItem(
-//                bgColor = MaterialTheme.colorScheme.primaryContainer,
-//                visibility = Icons.Default.Visibility,
-//                chapterNumber = it
-//            )
-//        }
         items(chapterList) { chapter ->
             ChapterItem(
                 visibility = Icons.Default.Visibility,
                 chapter = chapter,
-                bgColor = MaterialTheme.colorScheme.primaryContainer
+                bgColor = MaterialTheme.colorScheme.primaryContainer,
+                navigateToRead = navigateToRead
             )
         }
     }
 }
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
-fun TopBar(
+fun TopBarSuccess(
     manga: Manga,
     navigateBack: () -> Unit
 ) {
     Box {
         Details(manga = manga)
 
-        TopAppBar(
-            title = { Text(text = "") },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
-            navigationIcon = {
-                IconButton(
-                    onClick = navigateBack,
-                    modifier = Modifier
-                        .clip(
-                            shape = CircleShape
-                        )
-                        .background(MaterialTheme.colorScheme.tertiaryContainer)
-                        .height(40.dp)
-                        .width(40.dp)
-                ) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Go back")
-                }
-            },
-            actions = {
-                IconButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .clip(
-                            shape = CircleShape
-                        )
-                        .background(MaterialTheme.colorScheme.tertiaryContainer)
-                        .height(40.dp)
-                        .width(40.dp)
-                ) {
-                    Icon(imageVector = Icons.Default.Info, contentDescription = "Go back")
-                }
-            }
+        TopAppBarBackAndAction(
+            actionImageVector = Icons.Default.Info,
+            actionContentDescription = "Manga details",
+            action = { /*TODO*/ },
+            navigateBack = navigateBack
         )
+
     }
 }
 
@@ -159,11 +115,14 @@ private fun ChapterItem(
     visibility: ImageVector,
     chapter: Chapter,
     bgColor: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigateToRead: (String, String) -> Unit
 ) {
     val contentColor = if (isSystemInDarkTheme()) Color.White else Color.Black
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+            navigateToRead(chapter.id, chapter.mangaId)
+        },
         modifier = modifier
             .fillMaxWidth()
             .padding(top = 1.dp),
