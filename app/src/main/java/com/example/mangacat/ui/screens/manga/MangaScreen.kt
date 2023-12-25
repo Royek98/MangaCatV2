@@ -58,12 +58,13 @@ fun MangaScreen(
     retryManga: () -> Unit,
     retryChapterList: () -> Unit,
     navigateBack: () -> Unit,
-    navigateToRead: (String, String) -> Unit
+    navigateToRead: (String, String) -> Unit,
+    navigateToDetail: () -> Unit
 ) {
     Column {
         when (mangaUiState) {
             is Resource.Loading -> LoadingScreen()
-            is Resource.Success -> TopBarSuccess(mangaUiState.data, navigateBack)
+            is Resource.Success -> TopBarSuccess(mangaUiState.data, navigateBack, navigateToDetail)
             is Resource.Error -> ErrorScreen(retryManga)
         }
 
@@ -95,7 +96,8 @@ private fun ChapterListSuccess(
 @Composable
 fun TopBarSuccess(
     manga: Manga,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    navigateToDetail: () -> Unit
 ) {
     Box {
         Details(manga = manga)
@@ -103,7 +105,7 @@ fun TopBarSuccess(
         TopAppBarBackAndAction(
             actionImageVector = Icons.Default.Info,
             actionContentDescription = "Manga details",
-            action = { /*TODO*/ },
+            action = navigateToDetail,
             navigateBack = navigateBack
         )
 

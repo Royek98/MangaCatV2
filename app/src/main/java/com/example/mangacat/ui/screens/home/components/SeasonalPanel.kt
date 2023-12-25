@@ -159,45 +159,46 @@ fun MangaCover(
     cover: String,
     modifier: Modifier = Modifier
 ) {
-    Box {
-        SubcomposeAsyncImage(
-            model = ImageRequest
-                .Builder(LocalContext.current)
-                .data("https://uploads.mangadex.org/covers/$mangaId/$cover")
-                .crossfade(true)
-                .build(),
-            loading = { CircularProgressIndicator() },
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            alpha = 0.7F,
-            modifier = modifier
-                .fillMaxWidth()
-                .height(dimensionResource(id = R.dimen.cover_size))
-                .blur(radius = 10.dp)
-                .clip(RectangleShape)
-//                .background(
-//                    Color.Black
-//                )
-        )
-        SubcomposeAsyncImage(
-            model = ImageRequest
-                .Builder(LocalContext.current)
-                .data("https://uploads.mangadex.org/covers/$mangaId/$cover")
-                .crossfade(true)
-                .build(),
-            loading = { CircularProgressIndicator() },
-            contentDescription = null,
-            contentScale = ContentScale.FillHeight,
-            alpha = 0.7F,
-            modifier = modifier
-                .fillMaxWidth()
-                .height(dimensionResource(id = R.dimen.cover_size)),
-            colorFilter = ColorFilter.tint(
-                color = MaterialTheme.colorScheme.background.copy(alpha = 0.2F),
-                blendMode = BlendMode.Darken
-            )
-        )
-    }
+    //toDo uncomment this later
+//    Box {
+//        SubcomposeAsyncImage(
+//            model = ImageRequest
+//                .Builder(LocalContext.current)
+//                .data("https://uploads.mangadex.org/covers/$mangaId/$cover")
+//                .crossfade(true)
+//                .build(),
+//            loading = { CircularProgressIndicator() },
+//            contentDescription = null,
+//            contentScale = ContentScale.Crop,
+//            alpha = 0.7F,
+//            modifier = modifier
+//                .fillMaxWidth()
+//                .height(dimensionResource(id = R.dimen.cover_size))
+//                .blur(radius = 10.dp)
+//                .clip(RectangleShape)
+////                .background(
+////                    Color.Black
+////                )
+//        )
+//        SubcomposeAsyncImage(
+//            model = ImageRequest
+//                .Builder(LocalContext.current)
+//                .data("https://uploads.mangadex.org/covers/$mangaId/$cover")
+//                .crossfade(true)
+//                .build(),
+//            loading = { CircularProgressIndicator() },
+//            contentDescription = null,
+//            contentScale = ContentScale.FillHeight,
+//            alpha = 0.7F,
+//            modifier = modifier
+//                .fillMaxWidth()
+//                .height(dimensionResource(id = R.dimen.cover_size)),
+//            colorFilter = ColorFilter.tint(
+//                color = MaterialTheme.colorScheme.background.copy(alpha = 0.2F),
+//                blendMode = BlendMode.Darken
+//            )
+//        )
+//    }
 }
 
 
