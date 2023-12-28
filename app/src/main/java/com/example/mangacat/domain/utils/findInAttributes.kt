@@ -6,6 +6,7 @@ import com.example.mangacat.data.dto.Includes
 import com.example.mangacat.data.dto.ScanlationGroupIncludes
 import com.example.mangacat.data.dto.UserIncludes
 import com.example.mangacat.data.dto.response.enums.Type
+import com.example.mangacat.data.dto.tag.TagAttributes
 
 //toDo change methods to return a proper Includes type instead of just string
 fun findCoverInAttributes(relationships: List<Includes>): CoverArtIncludes =
@@ -14,6 +15,8 @@ fun findCoverInAttributes(relationships: List<Includes>): CoverArtIncludes =
 fun findAuthorInAttributes(relationships: List<Includes>): AuthorIncludes =
     relationships.find { Type.AUTHOR == it.type } as AuthorIncludes
 
+fun findArtistInAttributes(relationships: List<Includes>): AuthorIncludes =
+    relationships.find { Type.ARTIST == it.type } as AuthorIncludes
 
 fun findScanlationGroupInAttributes(relationships: List<Includes>?): ScanlationGroupIncludes? =
     relationships?.find { Type.SCANLATION_GROUP == it.type } as ScanlationGroupIncludes?

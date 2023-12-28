@@ -84,7 +84,7 @@ fun MangaCatNavigation(
                 route = NavigationScreens.Detail.name
             ) {
                 val mangaViewModel = it.sharedViewModel<MangaViewModel>(navController = navController)
-                DetailScreen(mangaViewModel.mangaUiState) { navController.popBackStack() }
+                DetailScreen(mangaUiState = mangaViewModel.mangaUiState, navigateBack = { navController.popBackStack() })
             }
         }
 

@@ -16,6 +16,9 @@ data class Manga(
     val status: Status,
     val year: Int? = null,
     val author: String,
-    val cover: String
-//    val tags: List<DataWithoutRelationships<TagAttributes>>
+    val artist: String,
+    val cover: String,
+    val genres: List<String?>,
+    val themes: List<String?>,
+    val format: List<String?>
 )

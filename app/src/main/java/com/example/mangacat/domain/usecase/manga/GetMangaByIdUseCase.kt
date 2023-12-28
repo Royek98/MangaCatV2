@@ -1,7 +1,10 @@
 package com.example.mangacat.domain.usecase.manga
 
+import android.util.Log
+import com.example.mangacat.data.dto.tag.enums.TagGroup
 import com.example.mangacat.domain.model.Manga
 import com.example.mangacat.domain.repository.MangaDexRepository
+import com.example.mangacat.domain.utils.findArtistInAttributes
 import com.example.mangacat.domain.utils.findAuthorInAttributes
 import com.example.mangacat.domain.utils.findCoverInAttributes
 import javax.inject.Inject
@@ -11,6 +14,10 @@ class GetMangaByIdUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(mangaId: String): Manga {
         val response = repository.getMangaById(mangaId)
+        val tags = response.data.attributes.tags
+        val genres = tags.filter { it.attributes.group == TagGroup.GENRE }
+        val themes = tags.filter { it.attributes.group == TagGroup.THEME }
+        val format = tags.filter { it.attributes.group == TagGroup.FORMAT }
 
         return Manga(
             id = response.data.id,
@@ -21,7 +28,11 @@ class GetMangaByIdUseCase @Inject constructor(
             status = response.data.attributes.status,
             year = response.data.attributes.year,
             author = findAuthorInAttributes(response.data.relationships!!).name,
-            cover = findCoverInAttributes(response.data.relationships).fileName
+            cover = findCoverInAttributes(response.data.relationships).fileName,
+            artist = findArtistInAttributes(response.data.relationships).name,
+            genres = genres.map { it.attributes.name.en },
+            themes = themes.map { it.attributes.name.en },
+            format = format.map { it.attributes.name.en }
         )
     }
 

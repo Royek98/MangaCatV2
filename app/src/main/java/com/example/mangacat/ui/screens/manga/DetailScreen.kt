@@ -1,23 +1,30 @@
 package com.example.mangacat.ui.screens.manga
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -51,7 +58,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun DetailScreen(
     mangaUiState: Resource<Manga>,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     when (mangaUiState) {
         is Resource.Loading -> LoadingScreen()
@@ -60,15 +68,17 @@ fun DetailScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Success(
     manga: Manga,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
+    val modifierSurfaceVariant = Modifier
+        .background(MaterialTheme.colorScheme.surfaceVariant)
     Column(
-        modifier = Modifier
-            .background(MaterialTheme.colorScheme.surfaceVariant)
+        modifier = modifierSurfaceVariant
             .fillMaxSize()
     ) {
 
@@ -92,35 +102,177 @@ private fun Success(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.Top
         ) { pageIndex ->
-            PagerContent(pageIndex, manga)
+            PagerContent(pageIndex, manga, modifierSurfaceVariant)
         }
     }
 }
 
 @Composable
-private fun PagerContent(pageIndex: Int, manga: Manga) {
+private fun PagerContent(
+    pageIndex: Int,
+    manga: Manga,
+    modifier: Modifier = Modifier
+) {
+    val paddingSmall = dimensionResource(id = R.dimen.padding_small)
+    val modifierPadding = modifier
+        .padding(start = paddingSmall, end = paddingSmall)
     when (pageIndex) {
-        0 -> Details(manga = manga)
-        1 -> CoverList()
-        2 -> Related()
+        0 -> Details(manga = manga, modifier = modifierPadding)
+        1 -> Related()
+        2 -> CoverList()
     }
+
 }
 
 @Composable
-private fun Related() {
+private fun Related(
+    modifier: Modifier = Modifier
+) {
     Text(text = "Related")
 }
 
 @Composable
-private fun CoverList() {
+private fun CoverList(
+    modifier: Modifier = Modifier
+) {
     Text(text = "List of covers")
 }
 
 @Composable
-private fun Details(manga: Manga) {
-    Column {
+private fun Details(
+    manga: Manga,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.verticalScroll(rememberScrollState())
+    ) {
         Text(text = manga.description.en!!)
-        Text(text = "Author")
+
+        Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_small)))
+
+        PairColumn(
+            leftColumn = {
+                TitleFlowRow(title = "Publication year") {
+                    OutlinedCard(text = manga.year.toString())
+                }
+            },
+            rightColumn = {
+                TitleFlowRow(title = "Status") {
+                    OutlinedCard(text = manga.status.name)
+                }
+            }
+        )
+
+        PairColumn(
+            leftColumn = {
+                TitleFlowRow(title = "Author") {
+                    OutlinedCard(text = manga.author)
+                }
+            },
+            rightColumn = {
+                TitleFlowRow(title = "Artist") {
+                    OutlinedCard(text = manga.artist)
+                }
+            }
+        )
+
+        PairColumn(
+            leftColumn = {
+                if (manga.publicationDemographic?.name != null) {
+                    TitleFlowRow(title = "Demographic") {
+                        OutlinedCard(text = manga.publicationDemographic.name)
+                    }
+                }
+            },
+            rightColumn = {
+                if (manga.format.isNotEmpty()) {
+                    TitleFlowRow(title = "Format") {
+                        repeat(manga.format.size) {
+                            OutlinedCard(text = manga.format[it] ?: "")
+                        }
+                    }
+                }
+            }
+        )
+
+        PairColumn(
+            leftColumn = {
+                if (manga.themes.isNotEmpty()) {
+                    TitleFlowRow(title = "Themes") {
+                        repeat(manga.themes.size) {
+                            OutlinedCard(text = manga.themes[it] ?: "")
+                        }
+                    }
+                }
+            },
+            rightColumn = {
+                TitleFlowRow(title = "Content Rating") {
+                    OutlinedCard(text = manga.contentRating.name)
+                }
+            }
+        )
+
+        if (manga.genres.isNotEmpty()) {
+            TitleFlowRow(title = "Genres") {
+                repeat(manga.genres.size) {
+                    OutlinedCard(text = manga.genres[it] ?: "")
+                }
+            }
+        }
+
+    }
+}
+
+@Composable
+private fun PairColumn(
+    leftColumn: @Composable () -> Unit,
+    rightColumn: @Composable () -> Unit
+) {
+    Row {
+        Column(modifier = Modifier.weight(0.5f)) {
+            leftColumn()
+        }
+        Column(modifier = Modifier.weight(0.5f)) {
+            rightColumn()
+        }
+    }
+}
+
+@Composable
+@OptIn(ExperimentalLayoutApi::class)
+private fun TitleFlowRow(
+    title: String,
+    flowRowScope: @Composable () -> Unit
+) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.titleLarge
+    )
+
+    val paddingSmall = dimensionResource(id = R.dimen.padding_small)
+    FlowRow(
+        modifier = Modifier.padding(paddingSmall),
+        horizontalArrangement = Arrangement.spacedBy(paddingSmall),
+        content = { flowRowScope() },
+        verticalArrangement = Arrangement.spacedBy(paddingSmall)
+    )
+}
+
+@Composable
+private fun OutlinedCard(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier,
+//                elevation = CardDefaults.cardElevation(5.dp),
+        border = BorderStroke(1.dp, Color.Black)
+    ) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
+        )
     }
 }
 
@@ -128,7 +280,8 @@ private fun Details(manga: Manga) {
 @Composable
 private fun TopBar(
     title: String,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     CenterAlignedTopAppBar(
         title = { Text(text = title) },
@@ -153,6 +306,7 @@ private fun TopBar(
 @Composable
 private fun PageIndicator(
     currentPage: Int,
+    modifier: Modifier = Modifier,
     jumpToIndex: (Int) -> Unit
 ) {
     Row(
@@ -167,14 +321,14 @@ private fun PageIndicator(
         )
 
         PagerNavigationButton(
-            navigationTitle = "Covers",
+            navigationTitle = "Related",
             jumpToIndex = jumpToIndex,
             index = 1,
             currentPage = currentPage
         )
 
         PagerNavigationButton(
-            navigationTitle = "Related",
+            navigationTitle = "Covers",
             index = 2,
             jumpToIndex = jumpToIndex,
             currentPage = currentPage
@@ -188,7 +342,8 @@ private fun PagerNavigationButton(
     index: Int,
     currentPage: Int,
     jumpToIndex: (Int) -> Unit,
-){
+    modifier: Modifier = Modifier
+) {
     var color = MaterialTheme.colorScheme.secondary
 
     if (currentPage == index) color = MaterialTheme.colorScheme.primary
@@ -213,9 +368,30 @@ private fun PagerNavigationButton(
     }
 }
 
+//@Composable
+//@Preview(showBackground = true)
+//fun SuccessPreview() {
+//    val manga = Manga(
+//        id = "id",
+//        title = English("title"),
+//        description = English(
+//            "very long description about the title you are currently reading. " +
+//                    "hope you have a great time and enjoy this piece of culture"
+//        ),
+//        publicationDemographic = PublicationDemographic.SEINEN,
+//        contentRating = ContentRating.SAFE,
+//        status = Status.COMPLETED,
+//        year = 2023,
+//        author = "author name and surname",
+//        cover = "cover",
+//        artist = "artist name and surname"
+//    )
+//    Success(manga = manga, navigateBack = {})
+//}
+
 @Composable
 @Preview(showBackground = true)
-fun SuccessPreview() {
+fun DetailsPreview() {
     val manga = Manga(
         id = "id",
         title = English("title"),
@@ -228,7 +404,12 @@ fun SuccessPreview() {
         status = Status.COMPLETED,
         year = 2023,
         author = "author name and surname",
-        cover = "cover"
+        cover = "cover",
+        artist = "artist name and surname",
+        genres = listOf("Comedy", "Romance", "Slice of Life"),
+        themes = listOf("School life"),
+        format = listOf("Adaptation"),
     )
-    Success(manga) {}
+
+    Details(manga = manga)
 }
