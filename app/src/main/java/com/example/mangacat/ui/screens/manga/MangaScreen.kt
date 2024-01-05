@@ -53,6 +53,24 @@ import com.example.mangacat.ui.screens.utils.TopAppBarBackAndAction
 
 @Composable
 fun MangaScreen(
+    viewModel: MangaViewModel,
+    navigateBack: () -> Unit,
+    navigateToRead: (String, String) -> Unit,
+    navigateToDetail: () -> Unit
+) {
+    MangaContent(
+        mangaUiState = viewModel.mangaUiState,
+        chapterListUiState = viewModel.chapterListUiState,
+        retryManga = viewModel::getManga,
+        retryChapterList = viewModel::getChapterList,
+        navigateBack = navigateBack,
+        navigateToRead = navigateToRead,
+        navigateToDetail = navigateToDetail
+    )
+}
+
+@Composable
+private fun MangaContent(
     mangaUiState: Resource<Manga>,
     chapterListUiState: Resource<List<Chapter>>,
     retryManga: () -> Unit,

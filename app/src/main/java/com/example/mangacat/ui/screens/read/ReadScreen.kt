@@ -21,9 +21,23 @@ import kotlin.reflect.KFunction0
 
 @Composable
 fun ReadScreen(
+    viewModel: ReadViewModel,
+    navigateBack: () -> Unit,
+) {
+    ReadContent(
+        readUiState = viewModel.readUiState,
+        showBar = viewModel.showBar,
+        showBarChangeState = viewModel::showBarChangeState,
+        retryRead = viewModel::getReadPages,
+        navigateBack = navigateBack
+    )
+}
+
+@Composable
+private fun ReadContent(
     readUiState: Resource<Read>,
     showBar: Boolean,
-    showBarChangeState: KFunction0<Unit>,
+    showBarChangeState: () -> Unit,
     navigateBack: () -> Unit,
     retryRead: () -> Unit
 ) {

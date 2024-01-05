@@ -14,6 +14,19 @@ import com.example.mangacat.ui.screens.home.components.SeasonalPanel
 
 @Composable
 fun HomeScreen(
+    viewModel: HomeViewModel,
+    retryAction: () -> Unit,
+    navigateToManga: (String) -> Unit
+) {
+    HomeContent(
+        homeUiState = viewModel.homeUiState,
+        retryAction = retryAction,
+        navigateToManga = navigateToManga
+    )
+}
+
+@Composable
+private fun HomeContent(
     homeUiState: Resource<List<HomeSeasonalMangaItem>>,
     retryAction: () -> Unit,
     navigateToManga: (String) -> Unit

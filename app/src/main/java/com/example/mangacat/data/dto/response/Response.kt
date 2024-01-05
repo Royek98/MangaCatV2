@@ -17,3 +17,10 @@ data class CollectionResponse<ATTRIBUTES>(
     val response: String,
     val data: List<DataIncludes<ATTRIBUTES>>,
 )
+
+@Serializable
+data class CollectionResponseNotIncludes<ATTRIBUTES>(
+    val result: Result,
+    val response: String,
+    val data: List<ATTRIBUTES>,
+)

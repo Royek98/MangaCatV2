@@ -15,7 +15,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.mangacat.ui.screens.home.HomeScreen
 import com.example.mangacat.ui.screens.home.HomeViewModel
-import com.example.mangacat.ui.screens.manga.DetailScreen
+import com.example.mangacat.ui.screens.manga.detailScreen.DetailScreen
 import com.example.mangacat.ui.screens.manga.MangaScreen
 import com.example.mangacat.ui.screens.manga.MangaViewModel
 import com.example.mangacat.ui.screens.read.ReadScreen
@@ -39,7 +39,7 @@ fun MangaCatNavigation(
             val homeViewModel = hiltViewModel<HomeViewModel>()
 
             HomeScreen(
-                homeUiState = homeViewModel.homeUiState,
+                viewModel = homeViewModel,
                 retryAction = homeViewModel::getSeasonalManga,
                 navigateToManga = { mangaId ->
                     navController.navigate("${NavigationScreens.Manga.name}/$mangaId")
@@ -68,10 +68,7 @@ fun MangaCatNavigation(
                 mangaViewModel.getChapterList()
 
                 MangaScreen(
-                    mangaUiState = mangaViewModel.mangaUiState,
-                    chapterListUiState = mangaViewModel.chapterListUiState,
-                    retryManga = mangaViewModel::getManga,
-                    retryChapterList = mangaViewModel::getChapterList,
+                    viewModel = mangaViewModel,
                     navigateBack = { navController.popBackStack() },
                     navigateToRead = { chapterId, mangaId ->
                         navController.navigate("${NavigationScreens.Read.name}/${mangaId}/${chapterId}")
@@ -84,7 +81,10 @@ fun MangaCatNavigation(
                 route = NavigationScreens.Detail.name
             ) {
                 val mangaViewModel = it.sharedViewModel<MangaViewModel>(navController = navController)
-                DetailScreen(mangaUiState = mangaViewModel.mangaUiState, navigateBack = { navController.popBackStack() })
+                DetailScreen(
+                    viewModel = mangaViewModel,
+                    navigateBack = { navController.popBackStack() },
+                )
             }
         }
 
@@ -109,10 +109,7 @@ fun MangaCatNavigation(
             readViewModel.getReadPages()
 
             ReadScreen(
-                readUiState = readViewModel.readUiState,
-                showBar = readViewModel.showBar,
-                showBarChangeState = readViewModel::showBarChangeState,
-                retryRead = readViewModel::getReadPages,
+                viewModel = readViewModel,
                 navigateBack = { navController.popBackStack() }
             )
         }
