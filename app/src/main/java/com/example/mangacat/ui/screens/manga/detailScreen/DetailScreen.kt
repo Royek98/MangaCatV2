@@ -59,10 +59,12 @@ fun DetailScreen(
     DetailContent(
         mangaUiState = viewModel.mangaUiState,
         coverList = viewModel.coverList,
+        relatedMangaListCover = viewModel.relatedMangaListCover,
         relatedUploaderList = viewModel.uploaderList,
         relatedScanlationGroupList = viewModel.scanlationGroupList,
         navigateBack = navigateBack,
-        getCoverList = viewModel::getCoverList
+        getCoverList = viewModel::getCoverList,
+        getRelatedMangaListCover = viewModel::getRelatedMangaListCover
     )
 }
 
@@ -70,10 +72,12 @@ fun DetailScreen(
 private fun DetailContent(
     mangaUiState: Resource<Manga>,
     coverList: Resource<List<Cover>>,
+    relatedMangaListCover: Resource<List<Pair<String, String>>>,
     relatedUploaderList: List<String>,
     relatedScanlationGroupList: List<String>,
     navigateBack: () -> Unit,
     getCoverList: () -> Unit,
+    getRelatedMangaListCover: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     when (mangaUiState) {
@@ -84,7 +88,9 @@ private fun DetailContent(
             relatedUploaderList = relatedUploaderList,
             relatedScanlationGroupList = relatedScanlationGroupList,
             getCoverList = getCoverList,
-            coverList = coverList
+            coverList = coverList,
+            getRelatedMangaListCover = getRelatedMangaListCover,
+            relatedMangaListCover = relatedMangaListCover
         )
 
         is Resource.Error -> ErrorScreen({})
@@ -100,6 +106,8 @@ private fun Success(
     navigateBack: () -> Unit,
     getCoverList: () -> Unit,
     coverList: Resource<List<Cover>>,
+    getRelatedMangaListCover: () -> Unit,
+    relatedMangaListCover: Resource<List<Pair<String, String>>>,
     modifier: Modifier = Modifier
 ) {
     val modifierSurfaceVariant = Modifier
@@ -117,8 +125,7 @@ private fun Success(
         val coroutineScope = rememberCoroutineScope()
 
         PageIndicator(
-            currentPage = pagerState.currentPage,
-            getCoverList = getCoverList
+            currentPage = pagerState.currentPage
         ) { index ->
             coroutineScope.launch {
                 pagerState.scrollToPage(index)
@@ -132,12 +139,19 @@ private fun Success(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.Top
         ) { pageIndex ->
+            if (pageIndex == 2) {
+                getCoverList()
+            } else if (pageIndex == 1) {
+                getRelatedMangaListCover()
+            }
+
             PagerContent(
                 pageIndex = pageIndex,
                 manga = manga,
                 relatedUploaderList = relatedUploaderList,
                 relatedScanlationGroupList = relatedScanlationGroupList,
                 coverList = coverList,
+                relatedMangaListCover = relatedMangaListCover,
                 modifier = modifierSurfaceVariant
             )
         }
@@ -151,6 +165,7 @@ private fun PagerContent(
     relatedUploaderList: List<String>,
     relatedScanlationGroupList: List<String>,
     coverList: Resource<List<Cover>>,
+    relatedMangaListCover: Resource<List<Pair<String, String>>>,
     modifier: Modifier = Modifier
 ) {
     val paddingSmall = dimensionResource(id = R.dimen.padding_small)
@@ -161,6 +176,8 @@ private fun PagerContent(
         1 -> Related(
             relatedUploaderList = relatedUploaderList,
             relatedScanlationGroupList = relatedScanlationGroupList,
+            relatedManga = manga.related,
+            relatedMangaListCover = relatedMangaListCover,
             modifier = modifierPadding
         )
         2 -> Covers(coverList = coverList, mangaId = manga.id, modifier = modifierPadding)
@@ -197,7 +214,6 @@ private fun TopBar(
 @Composable
 private fun PageIndicator(
     currentPage: Int,
-    getCoverList: () -> Unit,
     modifier: Modifier = Modifier,
     jumpToIndex: (Int) -> Unit
 ) {
@@ -209,24 +225,21 @@ private fun PageIndicator(
             navigationTitle = "Details",
             index = 0,
             currentPage = currentPage,
-            jumpToIndex = jumpToIndex,
-            getCoverList = getCoverList
+            jumpToIndex = jumpToIndex
         )
 
         PagerNavigationButton(
             navigationTitle = "Related",
             index = 1,
             currentPage = currentPage,
-            jumpToIndex = jumpToIndex,
-            getCoverList = getCoverList
+            jumpToIndex = jumpToIndex
         )
 
         PagerNavigationButton(
             navigationTitle = "Covers",
             index = 2,
             jumpToIndex = jumpToIndex,
-            currentPage = currentPage,
-            getCoverList = getCoverList
+            currentPage = currentPage
         )
     }
 }
@@ -237,7 +250,6 @@ private fun PagerNavigationButton(
     index: Int,
     currentPage: Int,
     jumpToIndex: (Int) -> Unit,
-    getCoverList: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var color = MaterialTheme.colorScheme.secondary
@@ -247,7 +259,6 @@ private fun PagerNavigationButton(
     Button(
         onClick = {
             jumpToIndex(index)
-            getCoverList()
         },
         shape = RectangleShape,
         modifier = Modifier.drawBehind {
@@ -308,6 +319,7 @@ fun DetailsPreview() {
         genres = listOf("Comedy", "Romance", "Slice of Life"),
         themes = listOf("School life"),
         format = listOf("Adaptation"),
+        related = listOf()
     )
 
     Details(manga = manga)
