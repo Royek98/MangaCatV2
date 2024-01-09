@@ -35,9 +35,6 @@ class MangaViewModel @Inject constructor(
     var chapterListUiState: Resource<List<Chapter>> by mutableStateOf(Resource.Loading)
         private set
 
-    private var _mangaId = ""
-    private var _manga = Manga()
-
     private val _uploaderList: MutableSet<String> = mutableSetOf()
     var uploaderList: List<String> = listOf()
         private set
@@ -52,24 +49,23 @@ class MangaViewModel @Inject constructor(
     var relatedMangaListCover: Resource<List<Pair<String, String>>> by mutableStateOf(Resource.Loading)
         private set
 
-    fun getManga() {
+    fun getManga(mangaId: String) {
         viewModelScope.launch {
             mangaUiState = Resource.Loading
 
             mangaUiState = try {
-                _manga = getMangaByIdUseCase(_mangaId)
-                Resource.Success(_manga)
+                Resource.Success(getMangaByIdUseCase(mangaId))
             } catch (e: IOException) {
                 Resource.Error
             }
         }
     }
 
-    fun getChapterList() {
+    fun getChapterList(mangaId: String) {
         viewModelScope.launch {
             chapterListUiState = Resource.Loading
             chapterListUiState = try {
-                val chapterList = getChapterListByMangaIdUserCase(_mangaId)
+                val chapterList = getChapterListByMangaIdUserCase(mangaId)
                 chapterList.forEach {
                     _uploaderList.add(it.uploaderUsername)
                     if (it.scanlationGroupName != "") {
@@ -85,33 +81,28 @@ class MangaViewModel @Inject constructor(
         }
     }
 
-    fun getCoverList() {
+    fun getCoverList(mangaId: String) {
         viewModelScope.launch {
             coverList = Resource.Loading
 
             coverList = try {
-                Resource.Success(getMangaCoverListUseCase(_mangaId))
+                Resource.Success(getMangaCoverListUseCase(mangaId))
             } catch (e: IOException) {
                 Resource.Error
             }
         }
     }
 
-    fun getRelatedMangaListCover() {
+    fun getRelatedMangaListCover(idList: List<String>) {
+        Log.d("TAG", "getRelatedMangaListCover: $idList")
         viewModelScope.launch {
             relatedMangaListCover = Resource.Loading
 
             relatedMangaListCover = try {
-                val test = getRelatedMangaListCoverUseCase(_manga.related.map { it!!.id })
-                Log.d("TAG", "getRelatedMangaListCover: $test")
-                Resource.Success(test)
+                Resource.Success(getRelatedMangaListCoverUseCase(idList))
             } catch (e: IOException) {
                 Resource.Error
             }
         }
-    }
-
-    fun setMangaId(mangaId: String) {
-        _mangaId = mangaId
     }
 }

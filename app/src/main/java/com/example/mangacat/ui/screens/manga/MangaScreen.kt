@@ -25,9 +25,9 @@ import androidx.compose.material.icons.outlined.PersonOutline
 import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -53,6 +53,7 @@ import com.example.mangacat.ui.screens.utils.TopAppBarBackAndAction
 
 @Composable
 fun MangaScreen(
+    mangaId: String,
     viewModel: MangaViewModel,
     navigateBack: () -> Unit,
     navigateToRead: (String, String) -> Unit,
@@ -65,16 +66,32 @@ fun MangaScreen(
         retryChapterList = viewModel::getChapterList,
         navigateBack = navigateBack,
         navigateToRead = navigateToRead,
-        navigateToDetail = navigateToDetail
+        navigateToDetail = navigateToDetail,
+        mangaId = mangaId
     )
 }
 
 @Composable
+private fun ErrorScreen(
+    mangaId: String,
+    retryAction: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Surface {
+        Text(text = "Error", modifier = modifier)
+        Button(onClick = { retryAction(mangaId) }) {
+            Text(text = "Retry")
+        }
+    }
+}
+
+@Composable
 private fun MangaContent(
+    mangaId: String,
     mangaUiState: Resource<Manga>,
     chapterListUiState: Resource<List<Chapter>>,
-    retryManga: () -> Unit,
-    retryChapterList: () -> Unit,
+    retryManga: (String) -> Unit,
+    retryChapterList: (String) -> Unit,
     navigateBack: () -> Unit,
     navigateToRead: (String, String) -> Unit,
     navigateToDetail: () -> Unit
@@ -83,13 +100,13 @@ private fun MangaContent(
         when (mangaUiState) {
             is Resource.Loading -> LoadingScreen()
             is Resource.Success -> TopBarSuccess(mangaUiState.data, navigateBack, navigateToDetail)
-            is Resource.Error -> ErrorScreen(retryManga)
+            is Resource.Error -> ErrorScreen(retryAction = retryManga, mangaId = mangaId)
         }
 
         when (chapterListUiState) {
             is Resource.Loading -> LoadingScreen()
             is Resource.Success -> ChapterListSuccess(chapterListUiState.data, navigateToRead)
-            is Resource.Error -> ErrorScreen(retryChapterList)
+            is Resource.Error -> ErrorScreen(retryAction = retryChapterList, mangaId = mangaId)
         }
     }
 }

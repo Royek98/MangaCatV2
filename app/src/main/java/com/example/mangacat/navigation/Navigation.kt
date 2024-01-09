@@ -63,11 +63,11 @@ fun MangaCatNavigation(
                 val mangaId = it.arguments?.getString("mangaId") ?: ""
                 val mangaViewModel = it.sharedViewModel<MangaViewModel>(navController = navController)
 
-                mangaViewModel.setMangaId(mangaId)
-                mangaViewModel.getManga()
-                mangaViewModel.getChapterList()
+                mangaViewModel.getManga(mangaId)
+                mangaViewModel.getChapterList(mangaId)
 
                 MangaScreen(
+                    mangaId = mangaId,
                     viewModel = mangaViewModel,
                     navigateBack = { navController.popBackStack() },
                     navigateToRead = { chapterId, mangaId ->

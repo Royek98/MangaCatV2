@@ -9,18 +9,18 @@ import com.example.mangacat.data.dto.response.DataWithoutRelationships
 import com.example.mangacat.data.dto.tag.TagAttributes
 
 data class Manga(
-    val id: String = "",
-    val title: English = English(""),
-    val description: English = English(""),
+    val id: String,
+    val title: English,
+    val description: English,
     val publicationDemographic: PublicationDemographic? = null,
-    val contentRating: ContentRating = ContentRating.SAFE,
-    val status: Status = Status.COMPLETED,
+    val contentRating: ContentRating,
+    val status: Status,
     val year: Int? = null,
-    val author: String = "",
-    val artist: String = "",
-    val cover: String = "",
-    val genres: List<String?> = listOf(),
-    val themes: List<String?> = listOf(),
-    val format: List<String?> = listOf(),
-    val related: List<MangaIncludes?> = listOf()
+    val author: String,
+    val artist: String,
+    val cover: String,
+    val genres: List<String?>,
+    val themes: List<String?>,
+    val format: List<String?>,
+    val related: List<MangaIncludes?>
 )

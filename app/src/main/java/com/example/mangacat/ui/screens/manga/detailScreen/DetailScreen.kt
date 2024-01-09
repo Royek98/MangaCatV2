@@ -76,8 +76,8 @@ private fun DetailContent(
     relatedUploaderList: List<String>,
     relatedScanlationGroupList: List<String>,
     navigateBack: () -> Unit,
-    getCoverList: () -> Unit,
-    getRelatedMangaListCover: () -> Unit,
+    getCoverList: (String) -> Unit,
+    getRelatedMangaListCover: (List<String>) -> Unit,
     modifier: Modifier = Modifier
 ) {
     when (mangaUiState) {
@@ -104,9 +104,9 @@ private fun Success(
     relatedUploaderList: List<String>,
     relatedScanlationGroupList: List<String>,
     navigateBack: () -> Unit,
-    getCoverList: () -> Unit,
+    getCoverList: (String) -> Unit,
     coverList: Resource<List<Cover>>,
-    getRelatedMangaListCover: () -> Unit,
+    getRelatedMangaListCover: (List<String>) -> Unit,
     relatedMangaListCover: Resource<List<Pair<String, String>>>,
     modifier: Modifier = Modifier
 ) {
@@ -140,9 +140,9 @@ private fun Success(
             verticalAlignment = Alignment.Top
         ) { pageIndex ->
             if (pageIndex == 2) {
-                getCoverList()
+                getCoverList(manga.id)
             } else if (pageIndex == 1) {
-                getRelatedMangaListCover()
+                getRelatedMangaListCover(manga.related.map { it!!.id })
             }
 
             PagerContent(
