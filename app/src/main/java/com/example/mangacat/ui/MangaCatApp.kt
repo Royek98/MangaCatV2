@@ -1,6 +1,5 @@
 package com.example.mangacat.ui
 
-import android.util.Log
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -56,15 +55,7 @@ fun MangaCatApp() {
                     modifier = Modifier.height(100.dp),
 //                    containerColor = MaterialTheme.colorScheme.secondaryContainer
                 ) {
-//                    NavigationBarItem(selected = true, onClick = { navController.navigate(NavigationScreens.Home.name) }, icon = {
-//                        Icon(imageVector = Icons.Default.Home, contentDescription = "Home Page")
-//                    })
-//                    NavigationBarItem(selected = false, onClick = { /*TODO*/ }, icon = {
-//                        Icon(imageVector = Icons.Default.Search, contentDescription = "Search Page")
-//                    })
-//                    NavigationBarItem(selected = false, onClick = { navController.navigate(NavigationScreens.Login.name) }, icon = {
-//                        Icon(imageVector = Icons.Default.Person, contentDescription = "Login Page")
-//                    })
+
                     items.forEach { screen ->
                         NavigationBarItem(
                             selected = currentRoute.contains(screen.route.name),

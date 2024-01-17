@@ -34,8 +34,8 @@ class LoginViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
-    private val _token = MutableStateFlow<Token>(Token(null, null))
-    val token: StateFlow<Token> = _token
+//    private val _token = MutableStateFlow<Token>(Token(null, null))
+//    val token: StateFlow<Token> = _token
 
     fun setUsername(newValue: String) {
         _username.update { newValue }
@@ -49,7 +49,7 @@ class LoginViewModel @Inject constructor(
         _visibility.update { !it }
     }
 
-    fun authenticate() {
+    fun authenticate(navigateToHome: () -> Unit) {
         viewModelScope.launch {
             _credentialsError.value = _credentialsError.value.copy(first = false)
             _isLoading.value = true
@@ -57,6 +57,8 @@ class LoginViewModel @Inject constructor(
                 is Resource.Loading -> {}
                 is Resource.Success -> {
                     _isLoading.value = false
+                    //toDo navigate to home route
+                    navigateToHome()
                 }
                 is Resource.Error -> {
                     _isLoading.value = false

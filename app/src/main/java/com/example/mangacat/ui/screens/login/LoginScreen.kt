@@ -1,6 +1,5 @@
 package com.example.mangacat.ui.screens.login
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -46,7 +45,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mangacat.R
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel = hiltViewModel<LoginViewModel>()) {
+fun LoginScreen(
+    viewModel: LoginViewModel = hiltViewModel<LoginViewModel>(),
+    navigateToHome: () -> Unit
+) {
     LoginContent(
         viewModel.username.collectAsState().value,
         viewModel.password.collectAsState().value,
@@ -57,7 +59,8 @@ fun LoginScreen(viewModel: LoginViewModel = hiltViewModel<LoginViewModel>()) {
         viewModel::setPassword,
         viewModel::setVisibility,
         viewModel::authenticate,
-        viewModel::getToken
+        navigateToHome
+//        viewModel::getToken
     )
 }
 
@@ -71,8 +74,9 @@ private fun LoginContent(
     setUsername: (String) -> Unit,
     setPassword: (String) -> Unit,
     setVisibility: () -> Unit,
-    authenticate: () -> Unit,
-    getToken: () -> Unit
+    authenticate: ( ()->Unit ) -> Unit,
+    navigateToHome: () -> Unit
+//    getToken: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -108,7 +112,8 @@ private fun LoginContent(
                 setPassword = setPassword,
                 setVisibility = setVisibility,
                 authenticate = authenticate,
-                getToken = getToken
+                navigateToHome = navigateToHome
+//                getToken = getToken
             )
         }
     }
@@ -125,8 +130,9 @@ private fun Form(
     setPassword: (String) -> Unit,
     setUsername: (String) -> Unit,
     setVisibility: () -> Unit,
-    authenticate: () -> Unit,
-    getToken: () -> Unit,
+    authenticate: (() -> Unit) -> Unit,
+    navigateToHome: () -> Unit
+//    getToken: () -> Unit,
 ) {
     Column(
 //                horizontalAlignment = Alignment.CenterHorizontally,
@@ -242,14 +248,15 @@ private fun Form(
 
         Confirm(
             isLoading = isLoading,
-            authenticate = authenticate
+            authenticate = authenticate,
+            navigateToHome = navigateToHome
         )
         
-        Button(onClick = {
-            getToken()
-        }) {
-            Text(text = "Testing")
-        }
+//        Button(onClick = {
+//            getToken()
+//        }) {
+//            Text(text = "Testing")
+//        }
 
         Spacer(modifier = Modifier.size(10.dp))
 
@@ -269,13 +276,14 @@ private fun Form(
 @Composable
 private fun Confirm(
     isLoading: Boolean,
-    authenticate: () -> Unit
+    authenticate: (() -> Unit) -> Unit,
+    navigateToHome: () -> Unit
 ) {
     if (isLoading) {
         Text(text = "Loading...")
     } else {
         Button(
-            onClick = { authenticate() },
+            onClick = { authenticate(navigateToHome) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(55.dp)
@@ -288,5 +296,16 @@ private fun Confirm(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun LoginPreview() {
-    LoginScreen()
+    LoginContent(
+        username = "",
+        password = "",
+        visibility = false,
+        credentialsError = Pair(false, ""),
+        isLoading = false,
+        setUsername = {},
+        setPassword = {},
+        setVisibility = { },
+        authenticate = {},
+        navigateToHome = {}
+    )
 }

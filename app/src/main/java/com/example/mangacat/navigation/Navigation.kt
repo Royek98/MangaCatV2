@@ -52,7 +52,9 @@ fun MangaCatNavigation(
 
         composable(route = NavigationScreens.Login.name) {
             val loginViewModel = hiltViewModel<LoginViewModel>()
-            LoginScreen(loginViewModel)
+            LoginScreen(loginViewModel) {
+                navController.navigate(NavigationScreens.Home.name)
+            }
         }
 
         composable(route = NavigationScreens.Search.name) {

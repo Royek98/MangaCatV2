@@ -22,7 +22,7 @@ import javax.inject.Singleton
 class AuthRepositoryImpl(
     private val context: Context,
     private val preferences: AuthPreferences
-): AuthRepository {
+) : AuthRepository {
 
     private val module = SerializersModule {
         polymorphicDefaultDeserializer(Includes::class) { IncludesPolymorphicSerializer }
@@ -32,19 +32,17 @@ class AuthRepositoryImpl(
         ignoreUnknownKeys = true
         serializersModule = module
     }
+
     override suspend fun authenticate(username: String, password: String): Resource<AuthResponse> {
         return try {
-            delay(2000)
-            val response: AuthResponse = json.decodeFromString(readJSONFromAssets(context, "AuthResponse.json"))
-//            Resource.Success(Token(
-//                accessToken = response.accessToken,
-//                refreshToken = response.refreshToken
-//            ))
+            delay(1000)
+            val response: AuthResponse =
+                json.decodeFromString(readJSONFromAssets(context, "AuthResponse.json"))
             preferences.saveAuthToken(response)
             Resource.Success(response)
-        } catch (e: IOException){
+        } catch (e: IOException) {
             Resource.Error("${e.message}")
-        }catch (e: HttpException){
+        } catch (e: HttpException) {
             Resource.Error("${e.message}")
         }
     }
