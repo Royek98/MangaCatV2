@@ -1,7 +1,9 @@
 package com.example.mangacat.di
 
 import com.example.mangacat.data.fake.FakeRepositoryImpl
+import com.example.mangacat.data.repository.AuthRepositoryImpl
 import com.example.mangacat.data.repository.MangaDexRepositoryImpl
+import com.example.mangacat.domain.repository.AuthRepository
 import com.example.mangacat.domain.repository.MangaDexRepository
 import dagger.Binds
 import dagger.Module
@@ -16,4 +18,7 @@ interface RepositoryModules {
 
     @Binds
     fun bindFakeMangaDexRepositoryImpl(repository: FakeRepositoryImpl): MangaDexRepository
+
+    @Binds
+    fun bindAuthRepositoryImpl(repository: AuthRepositoryImpl): AuthRepository
 }

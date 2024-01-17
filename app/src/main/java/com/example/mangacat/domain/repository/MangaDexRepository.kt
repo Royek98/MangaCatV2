@@ -1,6 +1,7 @@
 package com.example.mangacat.domain.repository
 
 import com.example.mangacat.data.dto.DefaultRelationships
+import com.example.mangacat.data.dto.authentication.AuthResponse
 import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cover.CoverAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
@@ -13,6 +14,7 @@ import com.example.mangacat.data.dto.response.Data
 import com.example.mangacat.data.dto.response.DataIncludes
 import com.example.mangacat.data.dto.response.DataWithoutRelationships
 import com.example.mangacat.data.dto.response.EntityResponse
+import com.example.mangacat.data.network.Resource
 
 interface MangaDexRepository {
     suspend fun getSeasonalMangaIds(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>>

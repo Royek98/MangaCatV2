@@ -56,7 +56,7 @@ class MangaViewModel @Inject constructor(
             mangaUiState = try {
                 Resource.Success(getMangaByIdUseCase(mangaId))
             } catch (e: IOException) {
-                Resource.Error
+                Resource.Error()
             }
         }
     }
@@ -76,7 +76,7 @@ class MangaViewModel @Inject constructor(
                 scanlationGroupList = _groupList.toList()
                 Resource.Success(chapterList)
             } catch (e: IOException) {
-                Resource.Error
+                Resource.Error()
             }
         }
     }
@@ -88,20 +88,19 @@ class MangaViewModel @Inject constructor(
             coverList = try {
                 Resource.Success(getMangaCoverListUseCase(mangaId))
             } catch (e: IOException) {
-                Resource.Error
+                Resource.Error()
             }
         }
     }
 
     fun getRelatedMangaListCover(idList: List<String>) {
-        Log.d("TAG", "getRelatedMangaListCover: $idList")
         viewModelScope.launch {
             relatedMangaListCover = Resource.Loading
 
             relatedMangaListCover = try {
                 Resource.Success(getRelatedMangaListCoverUseCase(idList))
             } catch (e: IOException) {
-                Resource.Error
+                Resource.Error()
             }
         }
     }

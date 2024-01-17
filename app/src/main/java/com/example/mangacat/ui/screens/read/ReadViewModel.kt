@@ -33,7 +33,7 @@ class ReadViewModel @Inject constructor(
             readUiState = try {
                 Resource.Success(getReadPagesUseCase(_chapterId))
             } catch (e: IOException) {
-                Resource.Error
+                Resource.Error()
             }
         }
     }
@@ -44,6 +44,5 @@ class ReadViewModel @Inject constructor(
 
     fun showBarChangeState() {
         showBar = !showBar
-        Log.d("TAG", "showBarChangeState: $showBar")
     }
 }

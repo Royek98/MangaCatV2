@@ -78,7 +78,6 @@ object IncludesResponseSerializer :
         val ids = element.jsonArray.map { it.jsonObject["id"]!! }
         val types = element.jsonArray.map { it.jsonObject["type"]!! }
         val related = element.jsonArray.map { it.jsonObject["related"] }
-        Log.d("TAG", "transformDeserialize: $related")
         for (i in attributes.indices) {
             attributes[i] = buildJsonObject {
                 put("id", ids[i])

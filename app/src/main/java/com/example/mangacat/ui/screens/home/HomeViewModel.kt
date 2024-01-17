@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
 
                 Resource.Success(result)
             } catch (e: IOException) {
-                Resource.Error
+                Resource.Error()
             }
         }
     }
