@@ -16,10 +16,10 @@ import androidx.navigation.navigation
 import com.example.mangacat.ui.screens.home.HomeScreen
 import com.example.mangacat.ui.screens.home.HomeViewModel
 import com.example.mangacat.ui.screens.login.LoginScreen
-import com.example.mangacat.ui.screens.login.LoginViewModel
-import com.example.mangacat.ui.screens.manga.detailScreen.DetailScreen
+import com.example.mangacat.ui.screens.login.components.LoginFormViewModel
 import com.example.mangacat.ui.screens.manga.MangaScreen
 import com.example.mangacat.ui.screens.manga.MangaViewModel
+import com.example.mangacat.ui.screens.manga.detailScreen.DetailScreen
 import com.example.mangacat.ui.screens.read.ReadScreen
 import com.example.mangacat.ui.screens.read.ReadViewModel
 import com.example.mangacat.ui.screens.search.SearchScreen
@@ -51,8 +51,8 @@ fun MangaCatNavigation(
         }
 
         composable(route = NavigationScreens.Login.name) {
-            val loginViewModel = hiltViewModel<LoginViewModel>()
-            LoginScreen(loginViewModel) {
+            val loginFormViewModel = hiltViewModel<LoginFormViewModel>()
+            LoginScreen(loginFormViewModel) {
                 navController.navigate(NavigationScreens.Home.name)
             }
         }

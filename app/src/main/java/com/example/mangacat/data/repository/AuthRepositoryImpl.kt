@@ -1,11 +1,17 @@
 package com.example.mangacat.data.repository
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.dataStoreFile
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.mangacat.data.dto.Includes
 import com.example.mangacat.data.dto.IncludesPolymorphicSerializer
+import com.example.mangacat.data.dto.ScanlationGroupIncludes
 import com.example.mangacat.data.dto.authentication.AuthResponse
+import com.example.mangacat.data.dto.authentication.IsAuthenticatedResponse
+import com.example.mangacat.data.dto.response.Data
+import com.example.mangacat.data.dto.response.EntityResponse
+import com.example.mangacat.data.dto.user.UserAttributes
 import com.example.mangacat.data.local.AuthPreferences
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.Token
@@ -47,8 +53,25 @@ class AuthRepositoryImpl(
         }
     }
 
+    override suspend fun refresh(): Resource<AuthResponse> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun check(): Resource<IsAuthenticatedResponse> {
+        return try {
+            Resource.Success(json.decodeFromString(readJSONFromAssets(context, "check.json")))
+        } catch (e: IOException) {
+            Resource.Error("${e.message}")
+        }
+    }
+
     override suspend fun getToken(): Flow<Token> {
         return preferences.getAuthToken()
+    }
+
+    override suspend fun getAuthenticatedUserInformation(accessToken: String):
+            EntityResponse<Data<UserAttributes, List<ScanlationGroupIncludes>>> {
+        return json.decodeFromString(readJSONFromAssets(context, "MeResponse.json"))
     }
 
     private fun readJSONFromAssets(context: Context, path: String): String =

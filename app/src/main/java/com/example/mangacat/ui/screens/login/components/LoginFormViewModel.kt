@@ -1,13 +1,10 @@
-package com.example.mangacat.ui.screens.login
+package com.example.mangacat.ui.screens.login.components
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mangacat.data.network.Resource
-import com.example.mangacat.domain.model.Token
 import com.example.mangacat.domain.usecase.authentication.GetAuthResponseSaveTokenUseCase
-import com.example.mangacat.domain.usecase.authentication.GetTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -15,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+class LoginFormViewModel @Inject constructor(
     private val getAuthResponseSaveTokenUseCase: GetAuthResponseSaveTokenUseCase
 //    private val getTokenUseCase: GetTokenUseCase
 ) : ViewModel() {

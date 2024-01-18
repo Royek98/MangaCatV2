@@ -11,20 +11,24 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.mangacat.domain.usecase.authentication.UserIsAuthenticatedUseCase
 import com.example.mangacat.navigation.MangaCatNavigation
 import com.example.mangacat.navigation.NavigationScreens
 
 @Composable
-fun MangaCatApp() {
-
-    val navController = rememberNavController()
+fun MangaCatApp(
+    navController: NavHostController = rememberNavController()
+) {
     Scaffold(
         bottomBar = {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
