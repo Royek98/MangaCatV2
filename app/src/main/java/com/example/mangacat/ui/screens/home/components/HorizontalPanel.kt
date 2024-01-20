@@ -1,11 +1,13 @@
 package com.example.mangacat.ui.screens.home.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -18,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.mangacat.R
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
@@ -28,13 +31,14 @@ fun HorizontalPanel(
     mangaList: List<HomeSeasonalMangaItem>,
     modifier: Modifier = Modifier,
     testTag: String = "",
-    content: @Composable (HomeSeasonalMangaItem) -> Unit
+    navigateTo: () -> Unit
+//    content: @Composable (HomeSeasonalMangaItem) -> Unit
 ) {
     Column(
         modifier = modifier
             .padding(dimensionResource(id = R.dimen.padding_small))
     ) {
-        TitleBar(title = title)
+        TitleBar(title = title, navigateTo = navigateTo)
 
         LazyRow(
             modifier = Modifier
@@ -45,9 +49,26 @@ fun HorizontalPanel(
         ) {
             items(mangaList) { manga ->
                 Column(
-                    horizontalAlignment = Alignment.Start
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier
+                        .width(135.dp)
+                        .clickable { /* toDo */ }
                 ) {
-                    content(manga)
+                    Text(
+                        text = manga.id,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
+                    )
+                    //toDo uncomment this later
+//                    SubcomposeAsyncImage(
+//                        model = ImageRequest
+//                            .Builder(LocalContext.current)
+//                            .data("https://uploads.mangadex.org/covers/${manga.id}/${manga.cover}")
+//                            .crossfade(true)
+//                            .build(),
+//                        loading = { CircularProgressIndicator() },
+//                        contentDescription = null,
+//                    )
                 }
             }
         }
@@ -55,27 +76,23 @@ fun HorizontalPanel(
 }
 
 @Composable
-private fun TitleBar(title: String) {
+private fun TitleBar(title: String, navigateTo: () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.clickable { navigateTo() }
     ) {
-        Column(
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.weight(1f)
-        ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleLarge
-            )
-        }
-        Column(
-            modifier = Modifier.align(Alignment.CenterVertically)
-        ) {
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowRight,
-                contentDescription = "Arrow right",
-                modifier = Modifier.size(25.dp)
-            )
-        }
+        )
+        Icon(
+            imageVector = Icons.Default.KeyboardArrowRight,
+            contentDescription = "Arrow right",
+            modifier = Modifier
+                .size(25.dp)
+                .align(Alignment.CenterVertically)
+        )
     }
 }
 

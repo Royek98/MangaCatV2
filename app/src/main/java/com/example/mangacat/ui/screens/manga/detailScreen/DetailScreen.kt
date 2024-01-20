@@ -49,6 +49,7 @@ import com.example.mangacat.domain.model.Manga
 import com.example.mangacat.ui.screens.home.ErrorScreen
 import com.example.mangacat.ui.screens.home.LoadingScreen
 import com.example.mangacat.ui.screens.manga.MangaViewModel
+import com.example.mangacat.ui.theme.MangaCatTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -322,5 +323,7 @@ fun DetailsPreview() {
         related = listOf()
     )
 
-    Details(manga = manga)
+    MangaCatTheme {
+        Details(manga = manga)
+    }
 }

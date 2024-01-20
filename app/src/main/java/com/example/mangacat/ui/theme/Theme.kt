@@ -104,7 +104,7 @@ fun MangaCatTheme(
 //            window.statusBarColor = colorScheme.outline.copy(alpha = 0.5f).toArgb()
             window.navigationBarColor = Color.Transparent.toArgb()
 //            window.statusBarColor = colorScheme.primary.toArgb()
-//            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }
 

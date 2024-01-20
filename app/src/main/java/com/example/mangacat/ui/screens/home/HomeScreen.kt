@@ -10,18 +10,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
+import com.example.mangacat.ui.screens.home.components.HorizontalPanel
 import com.example.mangacat.ui.screens.home.components.SeasonalPanel
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
     retryAction: () -> Unit,
-    navigateToManga: (String) -> Unit
+    navigateToManga: (String) -> Unit,
+    navigateToFeed: () -> Unit
 ) {
     HomeContent(
         homeUiState = viewModel.homeUiState,
         retryAction = retryAction,
-        navigateToManga = navigateToManga
+        navigateToManga = navigateToManga,
+        navigateToFeed = navigateToFeed
     )
 }
 
@@ -29,12 +32,12 @@ fun HomeScreen(
 private fun HomeContent(
     homeUiState: Resource<List<HomeSeasonalMangaItem>>,
     retryAction: () -> Unit,
-    navigateToManga: (String) -> Unit
+    navigateToManga: (String) -> Unit,
+    navigateToFeed: () -> Unit
 ) {
     when (homeUiState) {
         is Resource.Loading -> LoadingScreen()
-        is Resource.Success -> Success(homeUiState.data, navigateToManga)
-
+        is Resource.Success -> Success(homeUiState.data, navigateToManga, navigateToFeed)
         is Resource.Error -> ErrorScreen(retryAction)
     }
 }
@@ -55,7 +58,8 @@ fun ErrorScreen(
 @Composable
 private fun Success(
     mangaIdList: List<HomeSeasonalMangaItem>,
-    navigateToManga: (String) -> Unit
+    navigateToManga: (String) -> Unit,
+    navigateToFeed: () -> Unit
 ) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
@@ -64,6 +68,9 @@ private fun Success(
             mangaList = mangaIdList,
             navigateToManga = navigateToManga
         )
+
+        HorizontalPanel(title = "Your Feed", mangaList = mangaIdList, navigateTo = navigateToFeed)
+        HorizontalPanel(title = "Staff Pick", mangaList = mangaIdList) {}
     }
 }
 

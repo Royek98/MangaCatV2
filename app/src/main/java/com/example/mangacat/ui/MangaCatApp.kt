@@ -3,7 +3,10 @@ package com.example.mangacat.ui
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Book
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.LibraryBooks
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
@@ -37,12 +40,19 @@ fun MangaCatApp(
                 currentRoute?.contains(NavigationScreens.Home.name.substringBefore("/")) == true
                 || currentRoute?.contains(NavigationScreens.Login.name.substringBefore("/")) == true
                 || currentRoute?.contains(NavigationScreens.Search.name.substringBefore("/")) == true
+                || currentRoute?.contains(NavigationScreens.Library.name.substringBefore("/")) == true
+                || currentRoute?.contains(NavigationScreens.Feed.name.substringBefore("/")) == true
             ) {
                 val items = listOf(
                     BottomNavigationItem(
                         route = NavigationScreens.Home,
                         icon = Icons.Default.Home,
                         routeDescription = "Home Page"
+                    ),
+                    BottomNavigationItem(
+                        route = NavigationScreens.Library,
+                        icon = Icons.Default.Bookmark,
+                        routeDescription = "Library Page"
                     ),
                     BottomNavigationItem(
                         route = NavigationScreens.Search,

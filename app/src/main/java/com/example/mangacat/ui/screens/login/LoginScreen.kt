@@ -1,13 +1,17 @@
 package com.example.mangacat.ui.screens.login
 
+import android.annotation.SuppressLint
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,50 +29,57 @@ import com.example.mangacat.ui.screens.login.components.LoginForm
 import com.example.mangacat.ui.screens.login.components.LoginFormViewModel
 import com.example.mangacat.ui.screens.login.components.ProfileContent
 import com.example.mangacat.ui.screens.login.components.ProfileContentViewModel
+import com.example.mangacat.ui.screens.utils.TemplateScaffold
 
 
 //toDo Make LoginScreen depend on isAuthenticated - IF user is logged show profile screen ELSE show form to log in
 // current LoginViewModel will be FormViewModel
 // profile screen will depend on a new vm: ProfileViewModel
 // current function LoginScreen will depend on AuthViewModel
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(
     viewModel: LoginFormViewModel = hiltViewModel<LoginFormViewModel>(),
-    authViewModel: AuthViewModel = hiltViewModel<AuthViewModel>(),
+    authViewModel: AuthViewModel,
     profileContentViewModel: ProfileContentViewModel = hiltViewModel<ProfileContentViewModel>(),
     navigateToHome: () -> Unit
 ) {
-    if (authViewModel.isAuthenticated.collectAsState().value) {
-        Template(image = R.drawable.logo_icon2) {
-            ProfileContent(profileContentViewModel.user.collectAsState().value)
-        }
-    } else {
-        Template(image = R.drawable.security_key) {
-            LoginForm(
-                username = viewModel.username.collectAsState().value,
-                password = viewModel.password.collectAsState().value,
-                visibility = viewModel.visibility.collectAsState().value,
-                credentialsError = viewModel.credentialsError.collectAsState().value,
-                isLoading = viewModel.isLoading.collectAsState().value,
-                focusManager = LocalFocusManager.current,
-                setPassword = viewModel::setPassword,
-                setUsername = viewModel::setUsername,
-                setVisibility = viewModel::setVisibility,
-                authenticate = viewModel::authenticate,
-                navigateToHome = navigateToHome
-            )
+    Scaffold(
+        containerColor = MaterialTheme.colorScheme.onSecondary
+    ) {
+        val modifier = Modifier.padding(top = it.calculateTopPadding())
+        if (authViewModel.isAuthenticated.collectAsState().value) {
+            Template(image = R.drawable.logo_icon2, modifier = modifier) {
+                ProfileContent(profileContentViewModel.user.collectAsState().value)
+            }
+        } else {
+            Template(image = R.drawable.security_key2, modifier = modifier) {
+                LoginForm(
+                    username = viewModel.username.collectAsState().value,
+                    password = viewModel.password.collectAsState().value,
+                    visibility = viewModel.visibility.collectAsState().value,
+                    credentialsError = viewModel.credentialsError.collectAsState().value,
+                    isLoading = viewModel.isLoading.collectAsState().value,
+                    focusManager = LocalFocusManager.current,
+                    setPassword = viewModel::setPassword,
+                    setUsername = viewModel::setUsername,
+                    setVisibility = viewModel::setVisibility,
+                    authenticate = viewModel::authenticate,
+                    navigateToHome = navigateToHome
+                )
+            }
         }
     }
-    
 }
 
 @Composable
 private fun Template(
     @DrawableRes image: Int,
+    modifier: Modifier = Modifier,
     content: @Composable() () -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.onSecondary)
     ) {
@@ -77,9 +88,9 @@ private fun Template(
             contentDescription = "",
             modifier = Modifier
                 .weight(0.35f)
-                .padding(top = 20.dp)
                 .align(Alignment.CenterHorizontally)
         )
+        Spacer(modifier = Modifier.size(5.dp))
         Surface(
             color = MaterialTheme.colorScheme.secondaryContainer,
             shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp),

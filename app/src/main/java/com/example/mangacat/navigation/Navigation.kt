@@ -13,8 +13,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.example.mangacat.ui.AuthViewModel
+import com.example.mangacat.ui.screens.feed.FeedScreen
+import com.example.mangacat.ui.screens.feed.FeedViewModel
 import com.example.mangacat.ui.screens.home.HomeScreen
 import com.example.mangacat.ui.screens.home.HomeViewModel
+import com.example.mangacat.ui.screens.library.LibraryScreen
 import com.example.mangacat.ui.screens.login.LoginScreen
 import com.example.mangacat.ui.screens.login.components.LoginFormViewModel
 import com.example.mangacat.ui.screens.manga.MangaScreen
@@ -25,7 +29,7 @@ import com.example.mangacat.ui.screens.read.ReadViewModel
 import com.example.mangacat.ui.screens.search.SearchScreen
 
 enum class NavigationScreens() {
-    Home, Manga, Read, Detail, Profile, Login, Search
+    Home, Manga, Read, Detail, Login, Search, Library, Feed
 }
 
 @Composable
@@ -46,19 +50,40 @@ fun MangaCatNavigation(
                 retryAction = homeViewModel::getSeasonalManga,
                 navigateToManga = { mangaId ->
                     navController.navigate("${NavigationScreens.Manga.name}/$mangaId")
+                },
+                navigateToFeed = {
+                    navController.navigate(NavigationScreens.Feed.name)
                 }
             )
         }
 
         composable(route = NavigationScreens.Login.name) {
-            val loginFormViewModel = hiltViewModel<LoginFormViewModel>()
-            LoginScreen(loginFormViewModel) {
+            val authViewModel = it.sharedViewModel<AuthViewModel>(navController = navController)
+            LoginScreen(
+                authViewModel = authViewModel
+            ) {
                 navController.navigate(NavigationScreens.Home.name)
             }
         }
 
         composable(route = NavigationScreens.Search.name) {
             SearchScreen()
+        }
+
+        composable(route = NavigationScreens.Library.name) {
+            LibraryScreen()
+        }
+
+        composable(route = NavigationScreens.Feed.name) {
+            val feedFormViewModel = hiltViewModel<FeedViewModel>()
+            val authViewModel = it.sharedViewModel<AuthViewModel>(navController = navController)
+            FeedScreen(
+                viewModel = feedFormViewModel,
+                authViewModel = authViewModel,
+                navigateBack = {
+                    navController.popBackStack()
+                }
+            )
         }
 
         navigation(
