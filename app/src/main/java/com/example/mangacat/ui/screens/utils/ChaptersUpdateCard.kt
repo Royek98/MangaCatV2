@@ -30,41 +30,19 @@ import com.example.mangacat.ui.theme.MangaCatTheme
 
 @Composable
 fun ChaptersUpdateCard(manga: MangaFeedItem) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 5.dp
-        )
+    MangaCard(
+        title = manga.titleManga,
+        cover = manga.cover
     ) {
-        Column(
-            modifier = Modifier.padding(10.dp)
-        ) {
-            Text(text = manga.titleManga)
+        repeat(manga.chapterList.size) {
+            ChapterItem(chapter = manga.chapterList[it])
             Divider(
                 modifier = Modifier.padding(5.dp),
                 color = MaterialTheme.colorScheme.onSecondaryContainer
             )
-            Row {
-                Image(
-                    imageVector = manga.cover,
-                    contentDescription = "",
-                    modifier = Modifier.weight(0.2f),
-                    contentScale = ContentScale.Crop
-                )
-                Column(
-                    modifier = Modifier.weight(0.8f)
-                ) {
-                    repeat(manga.chapterList.size) {
-                        ChapterItem(chapter = manga.chapterList[it])
-                        Divider(
-                            modifier = Modifier.padding(5.dp),
-                            color = MaterialTheme.colorScheme.onSecondaryContainer
-                        )
-                    }
-                }
-            }
         }
     }
+
 }
 
 @Composable

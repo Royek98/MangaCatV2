@@ -35,4 +35,6 @@ interface MangaDexRepository {
     suspend fun getReadPages(chapterId: String): Read
 
     suspend fun getMangaCoverList(mangaId: String): CollectionResponseNotIncludes<DataWithoutRelationships<CoverAttributes>>
+
+    suspend fun getStuffPicks(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>>
 }

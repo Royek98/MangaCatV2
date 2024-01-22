@@ -18,13 +18,17 @@ fun HomeScreen(
     viewModel: HomeViewModel,
     retryAction: () -> Unit,
     navigateToManga: (String) -> Unit,
-    navigateToFeed: () -> Unit
+    navigateToFeed: () -> Unit,
+    navigateToStaffPicks: () -> Unit,
+    navigateToRecentlyAdded: () -> Unit
 ) {
     HomeContent(
         homeUiState = viewModel.homeUiState,
         retryAction = retryAction,
         navigateToManga = navigateToManga,
-        navigateToFeed = navigateToFeed
+        navigateToFeed = navigateToFeed,
+        navigateToStaffPicks = navigateToStaffPicks,
+        navigateToRecentlyAdded = navigateToRecentlyAdded
     )
 }
 
@@ -33,11 +37,19 @@ private fun HomeContent(
     homeUiState: Resource<List<HomeSeasonalMangaItem>>,
     retryAction: () -> Unit,
     navigateToManga: (String) -> Unit,
-    navigateToFeed: () -> Unit
+    navigateToFeed: () -> Unit,
+    navigateToStaffPicks: () -> Unit,
+    navigateToRecentlyAdded: () -> Unit
 ) {
     when (homeUiState) {
         is Resource.Loading -> LoadingScreen()
-        is Resource.Success -> Success(homeUiState.data, navigateToManga, navigateToFeed)
+        is Resource.Success -> Success(
+            homeUiState.data,
+            navigateToManga,
+            navigateToFeed,
+            navigateToStaffPicks,
+            navigateToRecentlyAdded
+        )
         is Resource.Error -> ErrorScreen(retryAction)
     }
 }
@@ -59,7 +71,9 @@ fun ErrorScreen(
 private fun Success(
     mangaIdList: List<HomeSeasonalMangaItem>,
     navigateToManga: (String) -> Unit,
-    navigateToFeed: () -> Unit
+    navigateToFeed: () -> Unit,
+    navigateToStaffPicks: () -> Unit,
+    navigateToRecentlyAdded: () -> Unit
 ) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
@@ -69,8 +83,10 @@ private fun Success(
             navigateToManga = navigateToManga
         )
 
-        HorizontalPanel(title = "Your Feed", mangaList = mangaIdList, navigateTo = navigateToFeed)
-        HorizontalPanel(title = "Staff Pick", mangaList = mangaIdList) {}
+
+        HorizontalPanel(title = HomeElements.FEED.title, mangaList = mangaIdList, navigateTo = navigateToFeed)
+        HorizontalPanel(title = HomeElements.STAFF.title, mangaList = mangaIdList, navigateTo = navigateToStaffPicks)
+        HorizontalPanel(title = HomeElements.ADDED.title, mangaList = mangaIdList, navigateTo = navigateToRecentlyAdded)
     }
 }
 

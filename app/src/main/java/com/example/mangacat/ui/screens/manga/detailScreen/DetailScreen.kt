@@ -320,7 +320,8 @@ fun DetailsPreview() {
         genres = listOf("Comedy", "Romance", "Slice of Life"),
         themes = listOf("School life"),
         format = listOf("Adaptation"),
-        related = listOf()
+        related = listOf(),
+        content = listOf()
     )
 
     MangaCatTheme {

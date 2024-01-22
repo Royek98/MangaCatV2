@@ -35,12 +35,16 @@ class GetSeasonalUseCase @Inject constructor(
         val dataMangaList = responseMangaList.data
 
         val result = mutableListOf<HomeSeasonalMangaItem>()
-        dataMangaList.forEach { manga->
+        dataMangaList.forEach { manga ->
             result.add(
                 HomeSeasonalMangaItem(
                     manga.id,
                     findCoverInAttributes(manga.relationships!!).fileName,
-                    setTags(manga.attributes.publicationDemographic, manga.attributes.contentRating, manga.attributes.tags)
+                    setTags(
+                        manga.attributes.publicationDemographic,
+                        manga.attributes.contentRating,
+                        manga.attributes.tags
+                    )
                 )
             )
         }
@@ -58,14 +62,16 @@ class GetSeasonalUseCase @Inject constructor(
 
 
         // add genres to display
-        val genres = tags.filter { it.attributes.group == TagGroup.GENRE }.map { it.attributes.name.en }
+        val genres =
+            tags.filter { it.attributes.group == TagGroup.GENRE }.map { it.attributes.name.en }
         for (i in genres.indices) {
             resultTags.add(genres[i]!!)
             if (resultTags.size == 3) return resultTags
         }
 
         // if there is not enough genres then add themes to display
-        val themes = tags.filter { it.attributes.group == TagGroup.THEME }.map { it.attributes.name.en }
+        val themes =
+            tags.filter { it.attributes.group == TagGroup.THEME }.map { it.attributes.name.en }
         for (i in themes.indices) {
             resultTags.add(themes[i]!!)
             if (resultTags.size == 3) return resultTags

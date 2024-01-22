@@ -9,6 +9,7 @@ import com.example.mangacat.data.dto.response.Data
 import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.utils.AppConstants
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import javax.inject.Singleton
 
@@ -17,8 +18,8 @@ interface MangaDexApiService {
 //    @GET("list/${AppConstants.seasonal_id}")
 //    suspend fun getSeasonalManga(): Response<Attributes, Relationships>
 
-    @GET("list/${AppConstants.seasonal_id}")
-    suspend fun getSeasonalMangaIds(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>>
+    @GET("list/{id}")
+    suspend fun getCustomListIds(@Path("id") customListId: String): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>>
 
 
     // https://api.mangadex.org/manga?limit=32&offset=32&includes[]=cover_art&includes[]=artist&includes[]=author&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&ids[]=98ca8bd8-c834-4627-ac64-4b765be22464&ids[]

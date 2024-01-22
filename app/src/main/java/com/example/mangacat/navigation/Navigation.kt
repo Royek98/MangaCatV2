@@ -16,11 +16,13 @@ import androidx.navigation.navigation
 import com.example.mangacat.ui.AuthViewModel
 import com.example.mangacat.ui.screens.feed.FeedScreen
 import com.example.mangacat.ui.screens.feed.FeedViewModel
+import com.example.mangacat.ui.screens.home.HomeElements
 import com.example.mangacat.ui.screens.home.HomeScreen
 import com.example.mangacat.ui.screens.home.HomeViewModel
 import com.example.mangacat.ui.screens.library.LibraryScreen
+import com.example.mangacat.ui.screens.list.ListScreen
+import com.example.mangacat.ui.screens.list.ListViewModel
 import com.example.mangacat.ui.screens.login.LoginScreen
-import com.example.mangacat.ui.screens.login.components.LoginFormViewModel
 import com.example.mangacat.ui.screens.manga.MangaScreen
 import com.example.mangacat.ui.screens.manga.MangaViewModel
 import com.example.mangacat.ui.screens.manga.detailScreen.DetailScreen
@@ -29,7 +31,7 @@ import com.example.mangacat.ui.screens.read.ReadViewModel
 import com.example.mangacat.ui.screens.search.SearchScreen
 
 enum class NavigationScreens() {
-    Home, Manga, Read, Detail, Login, Search, Library, Feed
+    Home, Manga, Read, Detail, Login, Search, Library, Feed, StaffPicks, RecentlyAdded
 }
 
 @Composable
@@ -53,6 +55,12 @@ fun MangaCatNavigation(
                 },
                 navigateToFeed = {
                     navController.navigate(NavigationScreens.Feed.name)
+                },
+                navigateToStaffPicks = {
+                    navController.navigate(NavigationScreens.StaffPicks.name)
+                },
+                navigateToRecentlyAdded = {
+                    navController.navigate(NavigationScreens.RecentlyAdded.name)
                 }
             )
         }
@@ -86,6 +94,30 @@ fun MangaCatNavigation(
             )
         }
 
+        composable(route = NavigationScreens.StaffPicks.name) {
+            val listViewModel = hiltViewModel<ListViewModel>()
+            listViewModel.setStaffPicks()
+            ListScreen(
+                viewModel = listViewModel,
+                title = HomeElements.STAFF.title,
+                navigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(route = NavigationScreens.RecentlyAdded.name) {
+            val listViewModel = hiltViewModel<ListViewModel>()
+            listViewModel.setRecentlyAdded()
+            ListScreen(
+                viewModel = listViewModel,
+                title = HomeElements.ADDED.title,
+                navigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
         navigation(
             startDestination = NavigationScreens.Manga.name,
             route = "manga"
@@ -100,7 +132,8 @@ fun MangaCatNavigation(
                 )
             ) {
                 val mangaId = it.arguments?.getString("mangaId") ?: ""
-                val mangaViewModel = it.sharedViewModel<MangaViewModel>(navController = navController)
+                val mangaViewModel =
+                    it.sharedViewModel<MangaViewModel>(navController = navController)
 
                 mangaViewModel.getManga(mangaId)
                 mangaViewModel.getChapterList(mangaId)
@@ -119,7 +152,8 @@ fun MangaCatNavigation(
             composable(
                 route = NavigationScreens.Detail.name
             ) {
-                val mangaViewModel = it.sharedViewModel<MangaViewModel>(navController = navController)
+                val mangaViewModel =
+                    it.sharedViewModel<MangaViewModel>(navController = navController)
                 DetailScreen(
                     viewModel = mangaViewModel,
                     navigateBack = { navController.popBackStack() },

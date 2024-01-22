@@ -18,6 +18,7 @@ class GetMangaByIdUseCase @Inject constructor(
         val genres = tags.filter { it.attributes.group == TagGroup.GENRE }
         val themes = tags.filter { it.attributes.group == TagGroup.THEME }
         val format = tags.filter { it.attributes.group == TagGroup.FORMAT }
+        val content = tags.filter { it.attributes.group == TagGroup.CONTENT }
 
         return Manga(
             id = response.data.id,
@@ -33,7 +34,8 @@ class GetMangaByIdUseCase @Inject constructor(
             related = findRelatedMangaInAttributes(response.data.relationships),
             genres = genres.map { it.attributes.name.en },
             themes = themes.map { it.attributes.name.en },
-            format = format.map { it.attributes.name.en }
+            format = format.map { it.attributes.name.en },
+            content = content.map { it.attributes.name.en }
         )
     }
 

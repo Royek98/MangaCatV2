@@ -42,6 +42,8 @@ fun MangaCatApp(
                 || currentRoute?.contains(NavigationScreens.Search.name.substringBefore("/")) == true
                 || currentRoute?.contains(NavigationScreens.Library.name.substringBefore("/")) == true
                 || currentRoute?.contains(NavigationScreens.Feed.name.substringBefore("/")) == true
+                || currentRoute?.contains(NavigationScreens.StaffPicks.name.substringBefore("/")) == true
+                || currentRoute?.contains(NavigationScreens.RecentlyAdded.name.substringBefore("/")) == true
             ) {
                 val items = listOf(
                     BottomNavigationItem(

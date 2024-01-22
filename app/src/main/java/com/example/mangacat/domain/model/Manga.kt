@@ -22,5 +22,6 @@ data class Manga(
     val genres: List<String?>,
     val themes: List<String?>,
     val format: List<String?>,
+    val content: List<String?>,
     val related: List<MangaIncludes?>
 )

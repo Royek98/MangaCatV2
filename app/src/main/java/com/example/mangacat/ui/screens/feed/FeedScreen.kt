@@ -6,14 +6,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Image
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -23,6 +17,7 @@ import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.ChapterFeedItem
 import com.example.mangacat.domain.model.MangaFeedItem
 import com.example.mangacat.ui.AuthViewModel
+import com.example.mangacat.ui.screens.home.HomeElements
 import com.example.mangacat.ui.screens.utils.ChaptersUpdateCard
 import com.example.mangacat.ui.screens.utils.TemplateScaffold
 import com.example.mangacat.ui.theme.MangaCatTheme
@@ -51,7 +46,7 @@ private fun FeedContent(
         }
 
         is Resource.Success -> {
-            SuccessContent(mangaList = uiState.data, navigateBack = navigateBack)
+            Success(mangaList = uiState.data, navigateBack = navigateBack)
         }
 
         is Resource.Error -> {
@@ -61,12 +56,12 @@ private fun FeedContent(
 }
 
 @Composable
-private fun SuccessContent(
+private fun Success(
     mangaList: List<MangaFeedItem>,
     navigateBack: () -> Unit
 ) {
     TemplateScaffold(
-        title = "Your Manga Feed",
+        title = HomeElements.FEED.title,
         navigateBack = navigateBack
     ) { paddingValues ->
         LazyColumn(
@@ -86,7 +81,7 @@ private fun SuccessContent(
 @Composable
 fun FeedSuccessContentPreview() {
     MangaCatTheme {
-        SuccessContent(
+        Success(
             listOf(
                 MangaFeedItem(
                     mangaId = "",
