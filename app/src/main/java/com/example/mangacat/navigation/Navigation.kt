@@ -20,6 +20,7 @@ import com.example.mangacat.ui.screens.home.HomeElements
 import com.example.mangacat.ui.screens.home.HomeScreen
 import com.example.mangacat.ui.screens.home.HomeViewModel
 import com.example.mangacat.ui.screens.library.LibraryScreen
+import com.example.mangacat.ui.screens.library.LibraryViewModel
 import com.example.mangacat.ui.screens.list.ListScreen
 import com.example.mangacat.ui.screens.list.ListViewModel
 import com.example.mangacat.ui.screens.login.LoginScreen
@@ -79,7 +80,8 @@ fun MangaCatNavigation(
         }
 
         composable(route = NavigationScreens.Library.name) {
-            LibraryScreen()
+            val libraryViewModel = hiltViewModel<LibraryViewModel>()
+            LibraryScreen(vieModel = libraryViewModel)
         }
 
         composable(route = NavigationScreens.Feed.name) {

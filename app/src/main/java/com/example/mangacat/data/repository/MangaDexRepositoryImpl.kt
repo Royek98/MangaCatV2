@@ -4,6 +4,7 @@ import com.example.mangacat.data.dto.DefaultRelationships
 import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cover.CoverAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
+import com.example.mangacat.data.dto.libraryStatus.LibraryResponse
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.dto.read.Read
@@ -51,6 +52,10 @@ class MangaDexRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getStuffPicks(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getLibraryStatus(): LibraryResponse {
         TODO("Not yet implemented")
     }
 

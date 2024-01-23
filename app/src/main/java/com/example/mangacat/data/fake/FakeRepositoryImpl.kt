@@ -7,6 +7,7 @@ import com.example.mangacat.data.dto.IncludesPolymorphicSerializer
 import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cover.CoverAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
+import com.example.mangacat.data.dto.libraryStatus.LibraryResponse
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.dto.read.Read
@@ -64,6 +65,9 @@ class FakeRepositoryImpl(
     override suspend fun getStuffPicks():
             EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> =
         json.decodeFromString(readJSONFromAssets(context, "SeasonalResponse_Limit10_Offset0.json"))
+
+    override suspend fun getLibraryStatus(): LibraryResponse =
+        json.decodeFromString(readJSONFromAssets(context, "libraryStatusResponse.json"))
 
     private fun readJSONFromAssets(context: Context, path: String): String =
         context.assets.open(path).readBytes().toString(Charsets.UTF_8)

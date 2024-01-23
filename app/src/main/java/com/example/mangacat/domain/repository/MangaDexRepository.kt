@@ -6,6 +6,7 @@ import com.example.mangacat.data.dto.authentication.AuthResponse
 import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cover.CoverAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
+import com.example.mangacat.data.dto.libraryStatus.LibraryResponse
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.dto.read.Read
@@ -37,4 +38,6 @@ interface MangaDexRepository {
     suspend fun getMangaCoverList(mangaId: String): CollectionResponseNotIncludes<DataWithoutRelationships<CoverAttributes>>
 
     suspend fun getStuffPicks(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>>
+
+    suspend fun getLibraryStatus(): LibraryResponse
 }
