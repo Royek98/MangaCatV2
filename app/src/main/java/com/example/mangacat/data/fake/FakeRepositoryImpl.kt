@@ -37,7 +37,7 @@ class FakeRepositoryImpl(
         serializersModule = module
     }
 
-    override suspend fun getListOfSeasonalCustomLists(): CollectionResponse<CustomListAttributes> =
+    override suspend fun getCustomListsMangaDexAdminUser(): CollectionResponse<CustomListAttributes> =
         json.decodeFromString(readJSONFromAssets(context, "list_of_seasonalCustomLists.json"))
 
     override suspend fun getSeasonalMangaIds(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> =
@@ -49,7 +49,8 @@ class FakeRepositoryImpl(
         offset: Int,
         includes: List<String>,
         contentRating: List<ContentRating>,
-        ids: List<String>
+        ids: List<String>,
+        hasAvailableChapters: Boolean
     ): CollectionResponse<MangaAttributes> =
         json.decodeFromString(readJSONFromAssets(context, "SeasonalResponse_Limit10_Offset0.json"))
 
@@ -65,8 +66,8 @@ class FakeRepositoryImpl(
     override suspend fun getMangaCoverList(mangaId: String): CollectionResponseNotIncludes<DataWithoutRelationships<CoverAttributes>> =
         json.decodeFromString(readJSONFromAssets(context, "gluttonyCoverList.json"))
 
-    override suspend fun getStuffPicks():
-            EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> =
+    override suspend fun getRecentlyAddedManga():
+            CollectionResponse<MangaAttributes> =
         json.decodeFromString(readJSONFromAssets(context, "SeasonalResponse_Limit10_Offset0.json"))
 
     override suspend fun getLibraryStatus(): LibraryResponse =

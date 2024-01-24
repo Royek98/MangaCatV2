@@ -6,7 +6,6 @@ import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.response.CollectionResponse
 import com.example.mangacat.data.dto.response.Data
 import com.example.mangacat.data.dto.response.EntityResponse
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -17,7 +16,8 @@ interface MangaDexApiService {
 //    @GET("list/${AppConstants.seasonal_id}")
 //    suspend fun getSeasonalManga(): Response<Attributes, Relationships>
 
-    suspend fun getCustomListIds(@Path("id") customListId: String): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>>
+    suspend fun getCustomListIds(@Path("id") customListId: String):
+            EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>>
 
     @GET("/user/{id}/list")
     suspend fun getUserCustomList(
@@ -35,5 +35,11 @@ interface MangaDexApiService {
         @Query("contentRating[]") contentRating: List<String>,
         @Query("ids[]") ids: List<String>,
         @Query("order[latestUploadedChapter]") latestUploadedChapter: String = "desc"
-    ): Response<CollectionResponse<MangaAttributes>>
+    ): CollectionResponse<MangaAttributes>
+
+    @GET("manga?limit=15&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=" +
+            "erotica&order[createdAt]=desc&includes[]=cover_art" +
+            "&hasAvailableChapters=true")
+    suspend fun getRecentlyAddedManga(
+    ): CollectionResponse<MangaAttributes>
 }

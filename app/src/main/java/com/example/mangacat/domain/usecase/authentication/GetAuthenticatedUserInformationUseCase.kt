@@ -6,7 +6,6 @@ import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.data.dto.user.UserAttributes
 import com.example.mangacat.domain.model.Token
 import com.example.mangacat.domain.repository.AuthRepository;
-import kotlinx.coroutines.flow.collect
 
 import javax.inject.Inject;
 

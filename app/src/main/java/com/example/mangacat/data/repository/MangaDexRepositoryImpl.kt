@@ -1,6 +1,5 @@
 package com.example.mangacat.data.repository
 
-import android.util.Log
 import com.example.mangacat.data.dto.DefaultRelationships
 import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cover.CoverAttributes
@@ -26,7 +25,7 @@ import javax.inject.Singleton
 class MangaDexRepositoryImpl @Inject constructor(
     private val service: MangaDexApiService
 ) : MangaDexRepository {
-    override suspend fun getListOfSeasonalCustomLists(): CollectionResponse<CustomListAttributes> {
+    override suspend fun getCustomListsMangaDexAdminUser(): CollectionResponse<CustomListAttributes> {
         return service.getUserCustomList(
             userId = "d2ae45e0-b5e2-4e7f-a688-17925c2d7d6b",
             limit = 10
@@ -38,28 +37,24 @@ class MangaDexRepositoryImpl @Inject constructor(
             EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> =
         service.getCustomListIds(AppConstants.seasonal_id)
 
+    @Throws(HttpException::class)
     override suspend fun getMangaListByIds(
         limit: Int,
         offset: Int,
         includes: List<String>,
         contentRating: List<ContentRating>,
-        ids: List<String>
-    ): CollectionResponse<MangaAttributes> {
-        val response = service.getMangaListByIds(
+        ids: List<String>,
+        hasAvailableChapters: Boolean
+    ): CollectionResponse<MangaAttributes> =
+        service.getMangaListByIds(
             limit,
             offset,
             includes,
-//            contentRating.map { it.name.lowercase() },
-            contentRating.map { it.name },
+            contentRating.map { it.name.lowercase() },
+//            contentRating.map { it.name },
             ids
         )
 
-        return if (response.isSuccessful) {
-            response.body()!!
-        } else {
-            throw HttpException(response)
-        }
-    }
 
     override suspend fun getMangaById(id: String): EntityResponse<DataIncludes<MangaAttributes>> {
         TODO("Not yet implemented")
@@ -77,9 +72,8 @@ class MangaDexRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getStuffPicks(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getRecentlyAddedManga():
+            CollectionResponse<MangaAttributes> = service.getRecentlyAddedManga()
 
     override suspend fun getLibraryStatus(): LibraryResponse {
         TODO("Not yet implemented")

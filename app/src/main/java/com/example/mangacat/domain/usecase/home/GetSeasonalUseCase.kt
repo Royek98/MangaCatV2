@@ -20,7 +20,7 @@ class GetSeasonalUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(): List<HomeSeasonalMangaItem> {
-        val listOfSeasonalCustomLists = repository.getListOfSeasonalCustomLists()
+        val listOfSeasonalCustomLists = repository.getCustomListsMangaDexAdminUser()
 
         val foundList = findCurrentSeasonList(listOfSeasonalCustomLists)
 

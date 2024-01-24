@@ -1,11 +1,15 @@
 package com.example.mangacat.ui.screens.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mangacat.data.dto.response.ErrorResponse
 import com.example.mangacat.data.network.Resource
+import com.example.mangacat.domain.model.HomeMangaItem
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
+import com.example.mangacat.domain.usecase.home.GetRecentlyAddedMangaUseCase
 import com.example.mangacat.domain.usecase.home.GetSeasonalUseCase
+import com.example.mangacat.domain.usecase.home.GetStaffPicksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +18,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.json.JSONException
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -21,15 +26,17 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getSeasonalUseCase: GetSeasonalUseCase,
+    private val getStaffPicksUseCase: GetStaffPicksUseCase,
+    private val getRecentlyAddedMangaUseCase: GetRecentlyAddedMangaUseCase
 ) : ViewModel() {
 
     private val _seasonal =
         MutableStateFlow<Resource<List<HomeSeasonalMangaItem>>>(Resource.Loading)
     private val _feed = MutableStateFlow<Resource<List<HomeSeasonalMangaItem>>>(Resource.Loading)
     private val _staffPicks =
-        MutableStateFlow<Resource<List<HomeSeasonalMangaItem>>>(Resource.Loading)
+        MutableStateFlow<Resource<List<HomeMangaItem>>>(Resource.Loading)
     private val _recentlyAdded =
-        MutableStateFlow<Resource<List<HomeSeasonalMangaItem>>>(Resource.Loading)
+        MutableStateFlow<Resource<List<HomeMangaItem>>>(Resource.Loading)
 
     val homeUiState: StateFlow<HomeUiState> =
         combine(
@@ -62,7 +69,6 @@ class HomeViewModel @Inject constructor(
 
             _seasonal.value = try {
                 val result = getSeasonalUseCase()
-
                 Resource.Success(result)
             } catch (e: HttpException) {
                 Resource.Error(ErrorResponse(e).getMessages())
@@ -91,7 +97,7 @@ class HomeViewModel @Inject constructor(
             _staffPicks.value = Resource.Loading
 
             _staffPicks.value = try {
-                val result = getSeasonalUseCase()
+                val result = getStaffPicksUseCase()
 
                 Resource.Success(result)
             } catch (e: HttpException) {
@@ -106,7 +112,7 @@ class HomeViewModel @Inject constructor(
             _recentlyAdded.value = Resource.Loading
 
             _recentlyAdded.value = try {
-                val result = getSeasonalUseCase()
+                val result = getRecentlyAddedMangaUseCase()
 
                 Resource.Success(result)
             } catch (e: HttpException) {
@@ -120,6 +126,6 @@ class HomeViewModel @Inject constructor(
 data class HomeUiState(
     val seasonal: Resource<List<HomeSeasonalMangaItem>> = Resource.Loading,
     val feed: Resource<List<HomeSeasonalMangaItem>> = Resource.Loading,
-    val staffPicks: Resource<List<HomeSeasonalMangaItem>> = Resource.Loading,
-    val recentlyAdded: Resource<List<HomeSeasonalMangaItem>> = Resource.Loading,
+    val staffPicks: Resource<List<HomeMangaItem>> = Resource.Loading,
+    val recentlyAdded: Resource<List<HomeMangaItem>> = Resource.Loading,
 )

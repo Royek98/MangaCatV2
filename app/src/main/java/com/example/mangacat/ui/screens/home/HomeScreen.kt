@@ -73,16 +73,16 @@ private fun HomeContent(
 //            mangaList = homeUiState.feed,
 //            navigateTo = navigateToFeed
 //        )
-//        HorizontalPanel(
-//            title = HomeElements.STAFF.title,
-//            mangaList = homeUiState.staffPicks,
-//            navigateTo = navigateToStaffPicks
-//        )
-//        HorizontalPanel(
-//            title = HomeElements.ADDED.title,
-//            mangaList = homeUiState.recentlyAdded,
-//            navigateTo = navigateToRecentlyAdded
-//        )
+        HorizontalPanel(
+            title = HomeElements.STAFF.title,
+            mangaList = homeUiState.staffPicks,
+            navigateTo = navigateToStaffPicks
+        )
+        HorizontalPanel(
+            title = HomeElements.ADDED.title,
+            mangaList = homeUiState.recentlyAdded,
+            navigateTo = navigateToRecentlyAdded
+        )
     }
 }
 
@@ -93,7 +93,7 @@ fun ErrorScreen(
     retryAction: () -> Unit
 ) {
     Column(
-        modifier = modifier.background(MaterialTheme.colorScheme.onErrorContainer),
+        modifier = modifier.background(MaterialTheme.colorScheme.onErrorContainer).fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         messages?.forEach {
