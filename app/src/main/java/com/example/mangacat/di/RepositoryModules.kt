@@ -13,11 +13,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 interface RepositoryModules {
-//    @Binds
-//    fun bindMangaDexRepositoryImpl(repository: MangaDexRepositoryImpl): MangaDexRepository
-
     @Binds
-    fun bindFakeMangaDexRepositoryImpl(repository: FakeRepositoryImpl): MangaDexRepository
+    fun bindMangaDexRepositoryImpl(repository: MangaDexRepositoryImpl): MangaDexRepository
+
+//    @Binds
+//    fun bindFakeMangaDexRepositoryImpl(repository: FakeRepositoryImpl): MangaDexRepository
 
     @Binds
     fun bindAuthRepositoryImpl(repository: AuthRepositoryImpl): AuthRepository

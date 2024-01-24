@@ -1,19 +1,14 @@
 package com.example.mangacat.data.dto.response
 
-import android.util.Log
 import com.example.mangacat.data.dto.response.enums.Result
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.KSerializer
+import com.example.mangacat.di.appJson
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
+import retrofit2.HttpException
 
 @Serializable
 data class EntityResponse<DATA>(
     val result: Result,
     val response: String,
-//    val data: Data<ATTRIBUTES, RELATIONSHIPS>
     val data: DATA
 )
 
@@ -32,10 +27,26 @@ data class CollectionResponseNotIncludes<ATTRIBUTES>(
 )
 
 @Serializable
-data class Error(
-    val result: String,
-    val errors: List<ErrorMessage>
-)
+data class ErrorResponse(
+    var result: String,
+    var errors: List<ErrorMessage>
+) {
+    constructor(e: HttpException) : this(
+        result = "",
+        errors = emptyList()
+    ) {
+        val errorResponseBody = e.response()?.errorBody()?.string()?.let {
+            appJson.decodeFromString<ErrorResponse>(it)
+        }
+
+        if (errorResponseBody != null) {
+            this.result = errorResponseBody.result
+            this.errors = errorResponseBody.errors
+        }
+    }
+
+    fun getMessages(): List<String> = errors.map { it.detail }
+}
 
 @Serializable
 data class ErrorMessage(

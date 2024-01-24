@@ -2,9 +2,8 @@ package com.example.mangacat.ui.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mangacat.data.dto.response.Error
+import com.example.mangacat.data.dto.response.ErrorResponse
 import com.example.mangacat.data.network.Resource
-import com.example.mangacat.di.appJson
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 import com.example.mangacat.domain.usecase.home.GetSeasonalUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -66,14 +65,9 @@ class HomeViewModel @Inject constructor(
 
                 Resource.Success(result)
             } catch (e: HttpException) {
-                Resource.Error(handleError(e))
+                Resource.Error(ErrorResponse(e).getMessages())
             }
         }
-    }
-
-    private fun handleError(e: HttpException): List<String>? {
-        val errors = e.response()?.errorBody()?.string()?.let { appJson.decodeFromString<Error>(it) }
-        return errors?.errors?.map { it.detail }
     }
 
 //    fun getFeed() {

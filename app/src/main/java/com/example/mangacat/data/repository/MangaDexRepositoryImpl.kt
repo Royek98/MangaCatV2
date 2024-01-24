@@ -33,6 +33,7 @@ class MangaDexRepositoryImpl @Inject constructor(
         )
     }
 
+    //toDo probably delete this one
     override suspend fun getSeasonalMangaIds():
             EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> =
         service.getCustomListIds(AppConstants.seasonal_id)
@@ -48,7 +49,8 @@ class MangaDexRepositoryImpl @Inject constructor(
             limit,
             offset,
             includes,
-            contentRating.map { it.name.lowercase() },
+//            contentRating.map { it.name.lowercase() },
+            contentRating.map { it.name },
             ids
         )
 
