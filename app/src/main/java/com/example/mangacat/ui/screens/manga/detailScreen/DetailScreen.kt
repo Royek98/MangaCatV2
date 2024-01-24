@@ -94,7 +94,7 @@ private fun DetailContent(
             relatedMangaListCover = relatedMangaListCover
         )
 
-        is Resource.Error -> ErrorScreen({})
+        is Resource.Error -> ErrorScreen() {}
     }
 }
 

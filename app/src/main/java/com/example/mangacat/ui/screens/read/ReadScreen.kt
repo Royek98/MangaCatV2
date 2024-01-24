@@ -44,7 +44,7 @@ private fun ReadContent(
     when (readUiState) {
         is Resource.Loading -> LoadingScreen()
         is Resource.Success -> ReadSuccess(readUiState.data, showBarChangeState)
-        is Resource.Error -> ErrorScreen(retryRead)
+        is Resource.Error -> ErrorScreen(retryAction = retryRead)
     }
 
     if (showBar) {

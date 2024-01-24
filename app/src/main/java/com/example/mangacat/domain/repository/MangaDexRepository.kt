@@ -20,6 +20,9 @@ import com.example.mangacat.data.dto.user.UserAttributes
 import com.example.mangacat.data.network.Resource
 
 interface MangaDexRepository {
+
+    suspend fun getListOfSeasonalCustomLists(): CollectionResponse<CustomListAttributes>
+
     suspend fun getSeasonalMangaIds(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>>
     suspend fun getMangaListByIds(
         limit: Int,

@@ -1,5 +1,6 @@
 package com.example.mangacat.data.repository
 
+import android.util.Log
 import com.example.mangacat.data.dto.DefaultRelationships
 import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cover.CoverAttributes
@@ -17,6 +18,7 @@ import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.data.network.MangaDexApiService
 import com.example.mangacat.domain.repository.MangaDexRepository
 import com.example.mangacat.utils.AppConstants
+import retrofit2.HttpException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -24,7 +26,17 @@ import javax.inject.Singleton
 class MangaDexRepositoryImpl @Inject constructor(
     private val service: MangaDexApiService
 ) : MangaDexRepository {
-    override suspend fun getSeasonalMangaIds(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> = service.getCustomListIds(AppConstants.seasonal_id)
+    override suspend fun getListOfSeasonalCustomLists(): CollectionResponse<CustomListAttributes> {
+        return service.getUserCustomList(
+            userId = "d2ae45e0-b5e2-4e7f-a688-17925c2d7d6b",
+            limit = 10
+        )
+    }
+
+    override suspend fun getSeasonalMangaIds():
+            EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> =
+        service.getCustomListIds(AppConstants.seasonal_id)
+
     override suspend fun getMangaListByIds(
         limit: Int,
         offset: Int,
@@ -32,7 +44,19 @@ class MangaDexRepositoryImpl @Inject constructor(
         contentRating: List<ContentRating>,
         ids: List<String>
     ): CollectionResponse<MangaAttributes> {
-        return service.getMangaListByIds(limit, offset, includes, contentRating, ids)
+        val response = service.getMangaListByIds(
+            limit,
+            offset,
+            includes,
+            contentRating.map { it.name.lowercase() },
+            ids
+        )
+
+        return if (response.isSuccessful) {
+            response.body()!!
+        } else {
+            throw HttpException(response)
+        }
     }
 
     override suspend fun getMangaById(id: String): EntityResponse<DataIncludes<MangaAttributes>> {

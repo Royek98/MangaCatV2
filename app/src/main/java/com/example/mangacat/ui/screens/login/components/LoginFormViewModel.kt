@@ -60,7 +60,7 @@ class LoginFormViewModel @Inject constructor(
                 is Resource.Error -> {
                     _isLoading.value = false
                     _credentialsError.value =
-                        _credentialsError.value.copy(first = true, second = response.message)
+                        _credentialsError.value.copy(first = true, second = response.message!![0])
                 }
             }
         }

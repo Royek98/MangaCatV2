@@ -23,12 +23,15 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.mangacat.R
+import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
+import com.example.mangacat.ui.screens.home.HomeElements
+import com.example.mangacat.ui.screens.home.LoadingScreen
 
 @Composable
 fun HorizontalPanel(
     title: String,
-    mangaList: List<HomeSeasonalMangaItem>,
+    mangaList: Resource<List<HomeSeasonalMangaItem>>,
     modifier: Modifier = Modifier,
     testTag: String = "",
     navigateTo: () -> Unit
@@ -40,26 +43,29 @@ fun HorizontalPanel(
     ) {
         TitleBar(title = title, navigateTo = navigateTo)
 
-        LazyRow(
-            modifier = Modifier
-                .height(200.dp)
-                .testTag(testTag),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            items(mangaList) { manga ->
-                Column(
-                    horizontalAlignment = Alignment.Start,
+        when(mangaList) {
+            is Resource.Loading -> LoadingScreen()
+            is Resource.Success -> {
+                LazyRow(
                     modifier = Modifier
-                        .width(135.dp)
-                        .clickable { /* toDo */ }
+                        .height(200.dp)
+                        .testTag(testTag),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    Text(
-                        text = manga.id,
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
-                    )
-                    //toDo uncomment this later
+                    items(mangaList.data) { manga ->
+                        Column(
+                            horizontalAlignment = Alignment.Start,
+                            modifier = Modifier
+                                .width(135.dp)
+                                .clickable { /* toDo */ }
+                        ) {
+                            Text(
+                                text = manga.id,
+                                overflow = TextOverflow.Ellipsis,
+                                maxLines = 1
+                            )
+                            //toDo uncomment this later
 //                    SubcomposeAsyncImage(
 //                        model = ImageRequest
 //                            .Builder(LocalContext.current)
@@ -69,7 +75,12 @@ fun HorizontalPanel(
 //                        loading = { CircularProgressIndicator() },
 //                        contentDescription = null,
 //                    )
+                        }
+                    }
                 }
+            }
+            is Resource.Error -> {
+                Text(text = "Error ${mangaList.message}")
             }
         }
     }

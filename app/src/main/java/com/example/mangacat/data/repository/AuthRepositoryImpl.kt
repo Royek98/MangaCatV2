@@ -47,9 +47,9 @@ class AuthRepositoryImpl(
             preferences.saveAuthToken(response)
             Resource.Success(response)
         } catch (e: IOException) {
-            Resource.Error("${e.message}")
+            Resource.Error(listOf("${e.message}"))
         } catch (e: HttpException) {
-            Resource.Error("${e.message}")
+            Resource.Error(listOf("${e.message}"))
         }
     }
 
@@ -61,7 +61,7 @@ class AuthRepositoryImpl(
         return try {
             Resource.Success(json.decodeFromString(readJSONFromAssets(context, "check.json")))
         } catch (e: IOException) {
-            Resource.Error("${e.message}")
+            Resource.Error(listOf("${e.message}"))
         }
     }
 

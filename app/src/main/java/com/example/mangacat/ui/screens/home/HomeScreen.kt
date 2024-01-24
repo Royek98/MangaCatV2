@@ -1,13 +1,22 @@
 package com.example.mangacat.ui.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 import com.example.mangacat.ui.screens.home.components.HorizontalPanel
@@ -23,7 +32,7 @@ fun HomeScreen(
     navigateToRecentlyAdded: () -> Unit
 ) {
     HomeContent(
-        homeUiState = viewModel.homeUiState,
+        homeUiState = viewModel.homeUiState.collectAsState().value,
         retryAction = retryAction,
         navigateToManga = navigateToManga,
         navigateToFeed = navigateToFeed,
@@ -34,65 +43,88 @@ fun HomeScreen(
 
 @Composable
 private fun HomeContent(
-    homeUiState: Resource<List<HomeSeasonalMangaItem>>,
+    homeUiState: HomeUiState,
     retryAction: () -> Unit,
     navigateToManga: (String) -> Unit,
     navigateToFeed: () -> Unit,
     navigateToStaffPicks: () -> Unit,
     navigateToRecentlyAdded: () -> Unit
 ) {
-    when (homeUiState) {
-        is Resource.Loading -> LoadingScreen()
-        is Resource.Success -> Success(
-            homeUiState.data,
-            navigateToManga,
-            navigateToFeed,
-            navigateToStaffPicks,
-            navigateToRecentlyAdded
-        )
-        is Resource.Error -> ErrorScreen(retryAction)
+
+    Column(
+        modifier = Modifier.verticalScroll(rememberScrollState())
+    ) {
+        when (val state = homeUiState.seasonal) {
+            is Resource.Loading -> LoadingScreen()
+            is Resource.Success -> {
+                SeasonalPanel(
+                    mangaList = state.data,
+                    navigateToManga = navigateToManga
+                )
+            }
+
+            is Resource.Error -> {
+                ErrorScreen(messages = state.message, modifier = Modifier.padding(top = 20.dp)) {}
+            }
+        }
+
+//        HorizontalPanel(
+//            title = HomeElements.FEED.title,
+//            mangaList = homeUiState.feed,
+//            navigateTo = navigateToFeed
+//        )
+//        HorizontalPanel(
+//            title = HomeElements.STAFF.title,
+//            mangaList = homeUiState.staffPicks,
+//            navigateTo = navigateToStaffPicks
+//        )
+//        HorizontalPanel(
+//            title = HomeElements.ADDED.title,
+//            mangaList = homeUiState.recentlyAdded,
+//            navigateTo = navigateToRecentlyAdded
+//        )
     }
 }
 
 @Composable
 fun ErrorScreen(
-    retryAction: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    messages: List<String>? = listOf(),
+    retryAction: () -> Unit
 ) {
-    Surface {
-        Text(text = "Error", modifier = modifier)
-        Button(onClick = retryAction) {
+    Column(
+        modifier = modifier.background(MaterialTheme.colorScheme.onErrorContainer),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        messages?.forEach {
+            Text(
+                text = it,
+                color = MaterialTheme.colorScheme.errorContainer,
+                modifier = Modifier.padding(5.dp)
+            )
+        }
+        Button(
+            onClick = retryAction,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.onError,
+                contentColor = MaterialTheme.colorScheme.error
+            )
+        ) {
             Text(text = "Retry")
         }
     }
-}
 
-@Composable
-private fun Success(
-    mangaIdList: List<HomeSeasonalMangaItem>,
-    navigateToManga: (String) -> Unit,
-    navigateToFeed: () -> Unit,
-    navigateToStaffPicks: () -> Unit,
-    navigateToRecentlyAdded: () -> Unit
-) {
-    Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
-    ) {
-        SeasonalPanel(
-            mangaList = mangaIdList,
-            navigateToManga = navigateToManga
-        )
-
-
-        HorizontalPanel(title = HomeElements.FEED.title, mangaList = mangaIdList, navigateTo = navigateToFeed)
-        HorizontalPanel(title = HomeElements.STAFF.title, mangaList = mangaIdList, navigateTo = navigateToStaffPicks)
-        HorizontalPanel(title = HomeElements.ADDED.title, mangaList = mangaIdList, navigateTo = navigateToRecentlyAdded)
-    }
 }
 
 @Composable
 fun LoadingScreen(
     modifier: Modifier = Modifier
 ) {
-    Text(text = "Loading...", modifier = modifier)
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        CircularProgressIndicator()
+    }
+//    Text(text = "Loading...", modifier = modifier)
 }

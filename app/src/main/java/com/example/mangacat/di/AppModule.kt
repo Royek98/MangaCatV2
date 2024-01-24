@@ -11,7 +11,6 @@ import com.example.mangacat.data.fake.FakeRepositoryImpl
 import com.example.mangacat.data.local.AuthPreferences
 import com.example.mangacat.data.network.MangaDexApiService
 import com.example.mangacat.data.repository.AuthRepositoryImpl
-import com.example.mangacat.data.repository.MangaDexRepositoryImpl
 import com.example.mangacat.utils.AppConstants
 import com.example.mangacat.utils.AppConstants.AUTH_PREFERENCES
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -20,14 +19,20 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import okhttp3.MediaType.Companion.toMediaType
-import retrofit2.Converter
 import retrofit2.Retrofit
-import java.lang.reflect.Type
 import javax.inject.Singleton
+
+private val module = SerializersModule {
+    polymorphicDefaultDeserializer(Includes::class ) { IncludesPolymorphicSerializer }
+}
+
+val appJson = Json {
+    ignoreUnknownKeys = true
+    serializersModule = module
+}
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -60,14 +65,14 @@ class AppModule {
     fun provideAuthPreferences(dataStore: DataStore<Preferences>) =
         AuthPreferences(dataStore)
 
-    private val module = SerializersModule {
-        polymorphicDefaultDeserializer(Includes::class ) { IncludesPolymorphicSerializer }
-    }
+//    private val module = SerializersModule {
+//        polymorphicDefaultDeserializer(Includes::class ) { IncludesPolymorphicSerializer }
+//    }
 
-    private val json = Json {
-        ignoreUnknownKeys = true
-        serializersModule = module
-    }
+//    val appJson = Json {
+//        ignoreUnknownKeys = true
+//        serializersModule = module
+//    }
 
     @Singleton
     @Provides
@@ -75,7 +80,7 @@ class AppModule {
         return Retrofit.Builder()
             .baseUrl(AppConstants.baseUrl)
             .addConverterFactory(
-                json.asConverterFactory("application/json".toMediaType()))
+                appJson.asConverterFactory("application/json".toMediaType()))
             .build()
             .create(MangaDexApiService::class.java)
     }

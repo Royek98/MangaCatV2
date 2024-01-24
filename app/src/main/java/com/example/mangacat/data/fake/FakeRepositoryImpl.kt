@@ -37,6 +37,9 @@ class FakeRepositoryImpl(
         serializersModule = module
     }
 
+    override suspend fun getListOfSeasonalCustomLists(): CollectionResponse<CustomListAttributes> =
+        json.decodeFromString(readJSONFromAssets(context, "list_of_seasonalCustomLists.json"))
+
     override suspend fun getSeasonalMangaIds(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>> =
         json.decodeFromString(readJSONFromAssets(context, "SeasonalIdList.json"))
 

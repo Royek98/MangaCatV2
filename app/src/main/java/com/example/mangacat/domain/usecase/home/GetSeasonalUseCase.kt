@@ -1,7 +1,10 @@
 package com.example.mangacat.domain.usecase.home
 
+import android.util.Log
+import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.dto.manga.enums.PublicationDemographic
+import com.example.mangacat.data.dto.response.CollectionResponse
 import com.example.mangacat.data.dto.response.DataWithoutRelationships
 import com.example.mangacat.data.dto.tag.TagAttributes
 import com.example.mangacat.data.dto.tag.enums.TagGroup
@@ -9,6 +12,7 @@ import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 import com.example.mangacat.domain.repository.MangaDexRepository
 import com.example.mangacat.domain.utils.findCoverInAttributes
 import com.example.mangacat.utils.capitalized
+import java.time.LocalDate
 import javax.inject.Inject
 
 class GetSeasonalUseCase @Inject constructor(
@@ -16,10 +20,10 @@ class GetSeasonalUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(): List<HomeSeasonalMangaItem> {
-        val responseIds = repository.getSeasonalMangaIds()
+        val listOfSeasonalCustomLists = repository.getListOfSeasonalCustomLists()
 
-        val listOfRelationships = responseIds.data.relationships
-        val listOfIds = listOfRelationships.map { it.id }
+        val foundList = findCurrentSeasonList(listOfSeasonalCustomLists)
+
         val responseMangaList = repository.getMangaListByIds(
             10,
             0,
@@ -28,11 +32,11 @@ class GetSeasonalUseCase @Inject constructor(
                 ContentRating.SAFE,
                 ContentRating.SUGGESTIVE,
                 ContentRating.EROTICA,
-
-                ),
-            listOfIds
+            ),
+            foundList
         )
         val dataMangaList = responseMangaList.data
+        Log.d("TAG", "invoke: $responseMangaList")
 
         val result = mutableListOf<HomeSeasonalMangaItem>()
         dataMangaList.forEach { manga ->
@@ -49,6 +53,47 @@ class GetSeasonalUseCase @Inject constructor(
             )
         }
         return result
+    }
+
+    private fun findCurrentSeasonList(
+        listOfSeasonalCustomLists: CollectionResponse<CustomListAttributes>
+    ): List<String> {
+        // seasons by broadcasting anime standards
+        // JANUARY returns 1 that's why element 0 is ""
+        val seasons: List<String> = listOf(
+            "", "Winter", "Winter", "Winter", "Spring", "Spring", "Spring",
+            "Summer", "Summer", "Summer", "Fall", "Fall", "Fall"
+        )
+        val currentDate = LocalDate.now()
+        val currentSeason = seasons[currentDate.month.value]
+
+        var foundList = listOfSeasonalCustomLists.data
+            .find {
+                it.attributes.name.contains("Seasonal: $currentSeason ${currentDate.year}")
+            }
+
+        // if the list for current season not exists then take previous one
+        if (foundList == null) {
+            // from previous month
+            if (currentDate.month.value > 1) {
+                foundList = listOfSeasonalCustomLists.data
+                    .find {
+                        it.attributes.name.contains(
+                            "Seasonal: ${seasons[currentDate.month.value - 1]} ${currentDate.year}"
+                        )
+                    }
+            }
+            // from previous year (December)
+            else {
+                foundList = listOfSeasonalCustomLists.data
+                    .find {
+                        it.attributes.name.contains(
+                            "Seasonal: ${seasons[12]} ${currentDate.year - 1}"
+                        )
+                    }
+            }
+        }
+        return foundList?.relationships!!.map { it.id }
     }
 
     private fun setTags(
