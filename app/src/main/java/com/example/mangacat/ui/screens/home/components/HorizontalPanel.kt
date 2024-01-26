@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -71,15 +72,16 @@ fun HorizontalPanel(
                                 maxLines = 1
                             )
                             //toDo uncomment this later
-                            SubcomposeAsyncImage(
-                                model = ImageRequest
-                                    .Builder(LocalContext.current)
-                                    .data("https://uploads.mangadex.org/covers/${manga.id}/${manga.cover}")
-                                    .crossfade(true)
-                                    .build(),
-                                loading = { CircularProgressIndicator() },
-                                contentDescription = null,
-                            )
+//                            SubcomposeAsyncImage(
+//                                model = ImageRequest
+//                                    .Builder(LocalContext.current)
+//                                    .data("https://uploads.mangadex.org/covers/${manga.id}/${manga.cover}")
+//                                    .crossfade(true)
+//                                    .build(),
+//                                loading = { CircularProgressIndicator() },
+//                                contentDescription = null,
+//                                modifier = Modifier.fillMaxHeight()
+//                            )
                         }
                     }
                 }
@@ -93,7 +95,7 @@ fun HorizontalPanel(
 }
 
 @Composable
-private fun TitleBar(title: String, navigateTo: () -> Unit) {
+fun TitleBar(title: String, navigateTo: () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable { navigateTo() }
@@ -105,7 +107,7 @@ private fun TitleBar(title: String, navigateTo: () -> Unit) {
         )
         Icon(
             imageVector = Icons.Default.KeyboardArrowRight,
-            contentDescription = "Arrow right",
+            contentDescription = "Go to $title",
             modifier = Modifier
                 .size(25.dp)
                 .align(Alignment.CenterVertically)

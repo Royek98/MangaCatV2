@@ -73,6 +73,18 @@ class FakeRepositoryImpl(
     override suspend fun getLibraryStatus(): LibraryResponse =
         json.decodeFromString(readJSONFromAssets(context, "libraryStatusResponse.json"))
 
+    override suspend fun getLatestUpdates(): CollectionResponse<ChapterAttributes> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getCoverListByMangaIds(
+        limit: Int,
+        offset: Int,
+        mangaIds: List<String>
+    ): CollectionResponse<CoverAttributes> {
+        TODO("Not yet implemented")
+    }
+
     private fun readJSONFromAssets(context: Context, path: String): String =
         context.assets.open(path).readBytes().toString(Charsets.UTF_8)
 }

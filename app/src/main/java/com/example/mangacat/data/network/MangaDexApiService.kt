@@ -1,6 +1,8 @@
 package com.example.mangacat.data.network
 
 import com.example.mangacat.data.dto.DefaultRelationships
+import com.example.mangacat.data.dto.chapter.ChapterAttributes
+import com.example.mangacat.data.dto.cover.CoverAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.response.CollectionResponse
@@ -16,6 +18,7 @@ interface MangaDexApiService {
 //    @GET("list/${AppConstants.seasonal_id}")
 //    suspend fun getSeasonalManga(): Response<Attributes, Relationships>
 
+    @GET("list")
     suspend fun getCustomListIds(@Path("id") customListId: String):
             EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>>
 
@@ -34,7 +37,7 @@ interface MangaDexApiService {
         @Query("includes[]") includes: List<String>,
         @Query("contentRating[]") contentRating: List<String>,
         @Query("ids[]") ids: List<String>,
-        @Query("order[latestUploadedChapter]") latestUploadedChapter: String = "desc"
+        @Query("order[latestUploadedChapter]") latestUploadedChapter: String = "desc",
     ): CollectionResponse<MangaAttributes>
 
     @GET("manga?limit=15&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=" +
@@ -42,4 +45,19 @@ interface MangaDexApiService {
             "&hasAvailableChapters=true")
     suspend fun getRecentlyAddedManga(
     ): CollectionResponse<MangaAttributes>
+
+    @GET("chapter?translatedLanguage[]=en&includes[]=scanlation_group&includes[]=manga&includes[]=user" +
+            "&contentRating[]=safe&contentRating[]=suggestive" +
+            "&contentRating[]=erotica&order[readableAt]=desc")
+    suspend fun getLatestUpdates(
+        @Query("limit") limit: Int,
+    ): CollectionResponse<ChapterAttributes>
+
+
+    @GET("cover")
+    suspend fun getCoverListByMangaIds(
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int,
+        @Query("manga[]") mangaIds: List<String>,
+    ): CollectionResponse<CoverAttributes>
 }

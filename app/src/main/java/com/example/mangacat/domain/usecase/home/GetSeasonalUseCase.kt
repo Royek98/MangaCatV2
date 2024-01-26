@@ -36,7 +36,6 @@ class GetSeasonalUseCase @Inject constructor(
             foundList
         )
         val dataMangaList = responseMangaList.data
-        Log.d("TAG", "invoke: $responseMangaList")
 
         val result = mutableListOf<HomeSeasonalMangaItem>()
         dataMangaList.forEach { manga ->

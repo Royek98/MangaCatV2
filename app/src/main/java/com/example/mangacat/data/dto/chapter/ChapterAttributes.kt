@@ -16,8 +16,8 @@ import java.util.Locale
 @Serializable
 @SerialName("attributes")
 data class ChapterAttributes(
-    val volume: String,
-    val chapter: String,
+    val volume: String?,
+    val chapter: String?,
     val title: String?,
     val translatedLanguage: String,
     val pages: Int,

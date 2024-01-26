@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mangacat.data.dto.response.ErrorResponse
 import com.example.mangacat.data.network.Resource
+import com.example.mangacat.domain.model.HomeLatestUpdate
 import com.example.mangacat.domain.model.HomeMangaItem
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
+import com.example.mangacat.domain.usecase.home.GetLatestUpdatesUseCase
 import com.example.mangacat.domain.usecase.home.GetRecentlyAddedMangaUseCase
 import com.example.mangacat.domain.usecase.home.GetSeasonalUseCase
 import com.example.mangacat.domain.usecase.home.GetStaffPicksUseCase
@@ -27,7 +29,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getSeasonalUseCase: GetSeasonalUseCase,
     private val getStaffPicksUseCase: GetStaffPicksUseCase,
-    private val getRecentlyAddedMangaUseCase: GetRecentlyAddedMangaUseCase
+    private val getRecentlyAddedMangaUseCase: GetRecentlyAddedMangaUseCase,
+    private val getLatestUpdatesUseCase: GetLatestUpdatesUseCase
 ) : ViewModel() {
 
     private val _seasonal =
@@ -37,15 +40,18 @@ class HomeViewModel @Inject constructor(
         MutableStateFlow<Resource<List<HomeMangaItem>>>(Resource.Loading)
     private val _recentlyAdded =
         MutableStateFlow<Resource<List<HomeMangaItem>>>(Resource.Loading)
+    private val _latestUpdates =
+        MutableStateFlow<Resource<List<HomeLatestUpdate>>>(Resource.Loading)
 
     val homeUiState: StateFlow<HomeUiState> =
         combine(
             _seasonal,
             _feed,
             _staffPicks,
-            _recentlyAdded
-        ) { seasonal, feed, staffPicks, recentlyAdded ->
-            HomeUiState(seasonal, feed, staffPicks, recentlyAdded)
+            _recentlyAdded,
+            _latestUpdates
+        ) { seasonal, feed, staffPicks, recentlyAdded, latestUpdates ->
+            HomeUiState(seasonal, feed, staffPicks, recentlyAdded, latestUpdates)
         }.stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
@@ -61,6 +67,7 @@ class HomeViewModel @Inject constructor(
 //        getFeed()
         getStaffPicks()
         getRecentlyAdded()
+        getLatestUpdates()
     }
 
     fun getSeasonalManga() {
@@ -75,6 +82,20 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    fun getLatestUpdates() {
+        viewModelScope.launch {
+            _latestUpdates.value = Resource.Loading
+
+            _latestUpdates.value = try {
+                val result = getLatestUpdatesUseCase()
+                Resource.Success(result)
+            } catch (e: HttpException) {
+                Resource.Error(ErrorResponse(e).getMessages())
+            }
+        }
+    }
+
 
 //    fun getFeed() {
 //        viewModelScope.launch {
@@ -128,4 +149,5 @@ data class HomeUiState(
     val feed: Resource<List<HomeSeasonalMangaItem>> = Resource.Loading,
     val staffPicks: Resource<List<HomeMangaItem>> = Resource.Loading,
     val recentlyAdded: Resource<List<HomeMangaItem>> = Resource.Loading,
+    val latestUpdate: Resource<List<HomeLatestUpdate>> = Resource.Loading,
 )

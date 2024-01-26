@@ -183,7 +183,7 @@ fun MangaCover(
 //        SubcomposeAsyncImage(
 //            model = ImageRequest
 //                .Builder(LocalContext.current)
-//                .data("https://uploads.mangadex.org/covers/$mangaId/$cover")
+//                .data("https://uploads.mangadex.org/covers/$mangaId/$cover.256.jpg")
 //                .crossfade(true)
 //                .build(),
 //            loading = { CircularProgressIndicator() },

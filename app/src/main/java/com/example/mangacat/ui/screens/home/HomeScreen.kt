@@ -18,8 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.mangacat.data.network.Resource
+import com.example.mangacat.domain.model.HomeLatestUpdate
 import com.example.mangacat.domain.model.HomeSeasonalMangaItem
 import com.example.mangacat.ui.screens.home.components.HorizontalPanel
+import com.example.mangacat.ui.screens.home.components.LatestUpdates
 import com.example.mangacat.ui.screens.home.components.SeasonalPanel
 
 @Composable
@@ -73,6 +75,17 @@ private fun HomeContent(
 //            mangaList = homeUiState.feed,
 //            navigateTo = navigateToFeed
 //        )
+
+        when (val state = homeUiState.latestUpdate) {
+            is Resource.Loading -> LoadingScreen()
+            is Resource.Success -> {
+                LatestUpdates(state.data)
+            }
+            is Resource.Error -> {
+                ErrorScreen(messages = state.message, modifier = Modifier.padding(top = 20.dp)) {}
+            }
+        }
+
         HorizontalPanel(
             title = HomeElements.STAFF.title,
             mangaList = homeUiState.staffPicks,
@@ -93,7 +106,9 @@ fun ErrorScreen(
     retryAction: () -> Unit
 ) {
     Column(
-        modifier = modifier.background(MaterialTheme.colorScheme.onErrorContainer).fillMaxWidth(),
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.onErrorContainer)
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         messages?.forEach {

@@ -14,6 +14,7 @@ import com.example.mangacat.data.dto.response.Data
 import com.example.mangacat.data.dto.response.DataIncludes
 import com.example.mangacat.data.dto.response.DataWithoutRelationships
 import com.example.mangacat.data.dto.response.EntityResponse
+import retrofit2.http.Query
 
 interface MangaDexRepository {
 
@@ -22,7 +23,7 @@ interface MangaDexRepository {
     suspend fun getSeasonalMangaIds(): EntityResponse<Data<CustomListAttributes, List<DefaultRelationships>>>
     suspend fun getMangaListByIds(
         limit: Int,
-        offset: Int,
+        offset: Int = 0,
         includes: List<String>,
         contentRating: List<ContentRating>,
         ids: List<String>,
@@ -40,4 +41,12 @@ interface MangaDexRepository {
     suspend fun getRecentlyAddedManga(): CollectionResponse<MangaAttributes>
 
     suspend fun getLibraryStatus(): LibraryResponse
+
+    suspend fun getLatestUpdates(): CollectionResponse<ChapterAttributes>
+
+    suspend fun getCoverListByMangaIds(
+        limit: Int = 5,
+        offset: Int = 0,
+        mangaIds: List<String>,
+    ): CollectionResponse<CoverAttributes>
 }

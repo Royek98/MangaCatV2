@@ -30,7 +30,6 @@ class LibraryViewModel @Inject constructor(
 
             _uiState.value = try {
                 val resposne = getLibraryStatusesUseCase()
-                Log.d("TAG", "getStatuses: $resposne")
                 Resource.Success(resposne)
             } catch (e: IOException) {
                 Resource.Error()

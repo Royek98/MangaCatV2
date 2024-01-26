@@ -79,4 +79,14 @@ class MangaDexRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
+    override suspend fun getLatestUpdates(): CollectionResponse<ChapterAttributes> =
+        service.getLatestUpdates(limit = 5)
+
+    override suspend fun getCoverListByMangaIds(
+        limit: Int,
+        offset: Int,
+        mangaIds: List<String>
+    ): CollectionResponse<CoverAttributes> = service.getCoverListByMangaIds(limit, offset, mangaIds)
+
+
 }

@@ -20,8 +20,8 @@ class GetChapterListByMangaIdUserCase @Inject constructor(
                 Chapter(
                     id = manga.id,
                     mangaId = mangaId,
-                    chapter = manga.attributes.chapter,
-                    volume = manga.attributes.volume,
+                    chapter = manga.attributes.chapter ?: "Chapter",
+                    volume = manga.attributes.volume ?: "No vol",
                     title = manga.attributes.title,
                     scanlationGroupName = findScanlationGroupInAttributes(manga.relationships)?.name ?: "",
                     uploaderUsername = findUserInAttributes(manga.relationships)?.username ?: "",

@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CoverAttributes(
     val fileName: String,
-    val volume: String
+    val volume: String?
 )
