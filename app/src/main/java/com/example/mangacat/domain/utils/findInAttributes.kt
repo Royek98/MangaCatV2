@@ -15,14 +15,14 @@ import com.example.mangacat.domain.model.Manga
 fun findCoverInAttributes(relationships: List<Includes>?): CoverArtIncludes =
     relationships?.find { Type.COVER_ART == it.type } as CoverArtIncludes
 
-fun findAuthorInAttributes(relationships: List<Includes>): AuthorIncludes =
-    relationships.find { Type.AUTHOR == it.type } as AuthorIncludes
+fun findAuthorInAttributes(relationships: List<Includes>?): AuthorIncludes =
+    relationships?.find { Type.AUTHOR == it.type } as AuthorIncludes
 
-fun findArtistInAttributes(relationships: List<Includes>): AuthorIncludes =
-    relationships.find { Type.ARTIST == it.type } as AuthorIncludes
+fun findArtistInAttributes(relationships: List<Includes>?): AuthorIncludes =
+    relationships?.find { Type.ARTIST == it.type } as AuthorIncludes
 
-fun findRelatedMangaInAttributes(relationships: List<Includes>): List<MangaIncludes?> =
-    relationships.filter { Type.MANGA == it.type } as List<MangaIncludes?>
+fun findRelatedMangaInAttributes(relationships: List<Includes>?): List<MangaIncludes?> =
+    relationships?.filter { Type.MANGA == it.type } as List<MangaIncludes?>
 
 
 

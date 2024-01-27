@@ -7,6 +7,7 @@ import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.response.CollectionResponse
 import com.example.mangacat.data.dto.response.Data
+import com.example.mangacat.data.dto.response.DataIncludes
 import com.example.mangacat.data.dto.response.EntityResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,8 +16,24 @@ import javax.inject.Singleton
 
 @Singleton
 interface MangaDexApiService {
-//    @GET("list/${AppConstants.seasonal_id}")
-//    suspend fun getSeasonalManga(): Response<Attributes, Relationships>
+    @GET("manga/{id}")
+    suspend fun getMangaById(
+        @Path("id") mangaId: String,
+        @Query("includes[]") includes: List<String>
+    ): EntityResponse<DataIncludes<MangaAttributes>>
+
+
+    @GET("manga/{id}/feed")
+    suspend fun getChapterListByMangaId(
+        @Path("id") mangaId: String,
+        @Query("translatedLanguage[]") translatedLanguage: List<String>,
+        @Query("limit") limit: Int,
+        @Query("includes[]") includes: List<String>,
+        @Query("order[volume]") orderVolume: String,
+        @Query("order[chapter]") orderChapter: String,
+        @Query("offset") offset: Int,
+        @Query("contentRating[]") contentRating: List<String>
+    ): CollectionResponse<ChapterAttributes>
 
     @GET("list")
     suspend fun getCustomListIds(@Path("id") customListId: String):
@@ -37,7 +54,7 @@ interface MangaDexApiService {
         @Query("includes[]") includes: List<String>,
         @Query("contentRating[]") contentRating: List<String>,
         @Query("ids[]") ids: List<String>,
-        @Query("order[latestUploadedChapter]") latestUploadedChapter: String = "desc",
+        @Query("order[latestUploadedChapter]") latestUploadedChapter: String,
     ): CollectionResponse<MangaAttributes>
 
     @GET("manga?limit=15&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=" +

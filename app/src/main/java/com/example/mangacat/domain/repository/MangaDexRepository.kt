@@ -14,6 +14,7 @@ import com.example.mangacat.data.dto.response.Data
 import com.example.mangacat.data.dto.response.DataIncludes
 import com.example.mangacat.data.dto.response.DataWithoutRelationships
 import com.example.mangacat.data.dto.response.EntityResponse
+import com.example.mangacat.data.dto.response.enums.Type
 import retrofit2.http.Query
 
 interface MangaDexRepository {
@@ -27,12 +28,30 @@ interface MangaDexRepository {
         includes: List<String>,
         contentRating: List<ContentRating>,
         ids: List<String>,
-        hasAvailableChapters: Boolean = true
+        hasAvailableChapters: Boolean = true,
+        latestUploadedChapter: String = "desc"
     ): CollectionResponse<MangaAttributes>
 
-    suspend fun getMangaById(id: String): EntityResponse<DataIncludes<MangaAttributes>>
+    suspend fun getMangaById(id: String, includes: List<String>): EntityResponse<DataIncludes<MangaAttributes>>
 
-    suspend fun getChapterList(mangaId: String): CollectionResponse<ChapterAttributes>
+    suspend fun getChapterListByMangaId(
+        translatedLanguage: List<String> = listOf("en"),
+        limit: Int = 10,
+        includes: List<String> = listOf(
+            Type.SCANLATION_GROUP.name.lowercase(),
+            Type.USER.name.lowercase()
+        ),
+        orderVolume: String = "desc",
+        orderChapter: String = "desc",
+        offset: Int = 0,
+        contentRating: List<String> = listOf(
+            ContentRating.SAFE.name.lowercase(),
+            ContentRating.SUGGESTIVE.name.lowercase(),
+            ContentRating.EROTICA.name.lowercase(),
+            ContentRating.PORNOGRAPHIC.name.lowercase()
+        ),
+        mangaId: String
+    ): CollectionResponse<ChapterAttributes>
 
     suspend fun getReadPages(chapterId: String): Read
 

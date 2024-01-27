@@ -45,7 +45,6 @@ import com.example.mangacat.data.dto.manga.enums.Status
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.Chapter
 import com.example.mangacat.domain.model.Manga
-import com.example.mangacat.ui.screens.home.ErrorScreen
 import com.example.mangacat.ui.screens.home.LoadingScreen
 import com.example.mangacat.ui.screens.home.components.MangaCover
 import com.example.mangacat.ui.screens.manga.utils.formatNumber
@@ -118,12 +117,14 @@ private fun ChapterListSuccess(
 ) {
     LazyColumn {
         items(chapterList) { chapter ->
-            ChapterItem(
-                visibility = Icons.Default.Visibility,
-                chapter = chapter,
-                bgColor = MaterialTheme.colorScheme.primaryContainer,
-                navigateToRead = navigateToRead
-            )
+            chapter.chapterId?.let{
+                ChapterItem(
+                    visibility = Icons.Default.Visibility,
+                    chapter = chapter,
+                    bgColor = MaterialTheme.colorScheme.primaryContainer,
+                    navigateToRead = navigateToRead
+                )
+            }
         }
     }
 }
@@ -158,7 +159,7 @@ private fun ChapterItem(
     val contentColor = if (isSystemInDarkTheme()) Color.White else Color.Black
     Button(
         onClick = {
-            navigateToRead(chapter.id, chapter.mangaId)
+            navigateToRead(chapter.chapterId!!, chapter.mangaId)
         },
         modifier = modifier
             .fillMaxWidth()
@@ -178,7 +179,7 @@ private fun ChapterItem(
                 ChapterItemRow(
                     imageVector = visibility,
                     contentDescription = "Chapter reading status",
-                    text = "Ch. ${chapter.chapter}",
+                    text = "Ch. ${chapter.chapterNumber}",
                     style = MaterialTheme.typography.bodyMedium
                 )
 
@@ -210,7 +211,7 @@ private fun ChapterItem(
 
 
             Spacer(modifier = Modifier.weight(0.9F))
-            Text(text = chapter.chapter, modifier = Modifier.align(Alignment.CenterVertically))
+            Text(text = chapter.chapterNumber, modifier = Modifier.align(Alignment.CenterVertically))
         }
     }
 

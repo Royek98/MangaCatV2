@@ -50,14 +50,24 @@ class FakeRepositoryImpl(
         includes: List<String>,
         contentRating: List<ContentRating>,
         ids: List<String>,
-        hasAvailableChapters: Boolean
+        hasAvailableChapters: Boolean,
+        latestUploadedChapter: String
     ): CollectionResponse<MangaAttributes> =
         json.decodeFromString(readJSONFromAssets(context, "SeasonalResponse_Limit10_Offset0.json"))
 
-    override suspend fun getMangaById(id: String): EntityResponse<DataIncludes<MangaAttributes>> =
+    override suspend fun getMangaById(id: String, includes: List<String>): EntityResponse<DataIncludes<MangaAttributes>> =
         json.decodeFromString(readJSONFromAssets(context, "$id.json"))
 
-    override suspend fun getChapterList(mangaId: String): CollectionResponse<ChapterAttributes> =
+    override suspend fun getChapterListByMangaId(
+        translatedLanguage: List<String>,
+        limit: Int,
+        includes: List<String>,
+        orderVolume: String,
+        orderChapter: String,
+        offset: Int,
+        contentRating: List<String>,
+        mangaId: String
+    ): CollectionResponse<ChapterAttributes> =
         json.decodeFromString(readJSONFromAssets(context, "feed$mangaId.json"))
 
     override suspend fun getReadPages(chapterId: String): Read =
