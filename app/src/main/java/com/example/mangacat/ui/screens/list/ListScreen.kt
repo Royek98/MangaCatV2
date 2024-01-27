@@ -82,7 +82,7 @@ private fun Success(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(mangaList) { manga ->
-                MangaCard(title = manga.title, cover = Icons.Default.Image) {
+                MangaCard(title = manga.title, mangaId = manga.id, coverId = manga.cover) {
                     StatusItem(
                         icon = Icons.Default.RadioButtonChecked,
                         iconDescription = "Status ${manga.status.name}",

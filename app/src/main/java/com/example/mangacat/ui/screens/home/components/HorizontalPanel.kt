@@ -40,7 +40,8 @@ fun HorizontalPanel(
     mangaList: Resource<List<HomeMangaItem>>,
     modifier: Modifier = Modifier,
     testTag: String = "",
-    navigateTo: () -> Unit
+    navigateTo: () -> Unit,
+    navigateToManga: (String) -> Unit
 //    content: @Composable (HomeSeasonalMangaItem) -> Unit
 ) {
     Column(
@@ -64,7 +65,7 @@ fun HorizontalPanel(
                             horizontalAlignment = Alignment.Start,
                             modifier = Modifier
                                 .width(135.dp)
-                                .clickable { /* toDo */ }
+                                .clickable { navigateToManga(manga.id) }
                         ) {
                             Text(
                                 text = manga.title,

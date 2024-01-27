@@ -42,7 +42,7 @@ interface MangaDexApiService {
 
     @GET("manga?limit=15&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=" +
             "erotica&order[createdAt]=desc&includes[]=cover_art" +
-            "&hasAvailableChapters=true")
+            "&hasAvailableChapters=true&availableTranslatedLanguage[]=en")
     suspend fun getRecentlyAddedManga(
     ): CollectionResponse<MangaAttributes>
 

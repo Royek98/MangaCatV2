@@ -89,12 +89,14 @@ private fun HomeContent(
         HorizontalPanel(
             title = HomeElements.STAFF.title,
             mangaList = homeUiState.staffPicks,
-            navigateTo = navigateToStaffPicks
+            navigateTo = navigateToStaffPicks,
+            navigateToManga = navigateToManga
         )
         HorizontalPanel(
             title = HomeElements.ADDED.title,
             mangaList = homeUiState.recentlyAdded,
-            navigateTo = navigateToRecentlyAdded
+            navigateTo = navigateToRecentlyAdded,
+            navigateToManga = navigateToManga
         )
     }
 }

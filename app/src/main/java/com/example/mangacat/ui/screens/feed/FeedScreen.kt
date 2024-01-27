@@ -85,7 +85,7 @@ fun FeedSuccessContentPreview() {
             listOf(
                 MangaFeedItem(
                     mangaId = "",
-                    cover = Icons.Default.Image,
+                    cover = "",
                     titleManga = "Title",
                     chapterList = listOf(
                         ChapterFeedItem(
@@ -100,7 +100,7 @@ fun FeedSuccessContentPreview() {
                 ),
                 MangaFeedItem(
                     mangaId = "",
-                    cover = Icons.Default.Image,
+                    cover = "",
                     titleManga = "Title2",
                     chapterList = listOf(
                         ChapterFeedItem(

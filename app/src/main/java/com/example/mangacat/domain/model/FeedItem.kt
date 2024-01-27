@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 data class MangaFeedItem(
     val mangaId: String,
-    val cover: ImageVector,
+    val cover: String,
     val titleManga: String,
     val chapterList: List<ChapterFeedItem>
 )

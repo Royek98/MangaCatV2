@@ -36,7 +36,7 @@ class FeedViewModel @Inject constructor(
                 val result = listOf(
                     MangaFeedItem(
                         mangaId = "",
-                        cover = Icons.Default.Image,
+                        cover = "",
                         titleManga = "Title",
                         chapterList = listOf(
                             ChapterFeedItem(
@@ -51,7 +51,7 @@ class FeedViewModel @Inject constructor(
                     ),
                     MangaFeedItem(
                         mangaId = "",
-                        cover = Icons.Default.Image,
+                        cover = "",
                         titleManga = "Title2",
                         chapterList = listOf(
                             ChapterFeedItem(

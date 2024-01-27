@@ -1,6 +1,8 @@
 package com.example.mangacat.domain.usecase.home
 
+import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
+import com.example.mangacat.data.dto.response.CollectionResponse
 import com.example.mangacat.domain.model.HomeMangaItem
 import com.example.mangacat.domain.repository.MangaDexRepository
 import com.example.mangacat.domain.utils.findCoverInAttributes
@@ -9,7 +11,7 @@ import javax.inject.Inject
 class GetStaffPicksUseCase @Inject constructor(
     private val repository: MangaDexRepository
 ) {
-    suspend operator fun invoke(): List<HomeMangaItem> {
+    suspend operator fun invoke(): CollectionResponse<MangaAttributes> {
         val customLists = repository.getCustomListsMangaDexAdminUser()
         val staffPicksMangaList = customLists.data
             .find { it.attributes.name.contains("Staff Picks") }
@@ -17,8 +19,8 @@ class GetStaffPicksUseCase @Inject constructor(
 
         val mangaIds = staffPicksMangaList.relationships!!.map { it.id }
 
-        val response = repository.getMangaListByIds(
-            10,
+        return repository.getMangaListByIds(
+            15,
             0,
             listOf("cover_art"),
             listOf(
@@ -28,17 +30,5 @@ class GetStaffPicksUseCase @Inject constructor(
             ),
             mangaIds
         )
-
-        val mangaResult = mutableListOf<HomeMangaItem>()
-        response.data.forEach { manga ->
-            mangaResult.add(
-                HomeMangaItem(
-                    id = manga.id,
-                    title = manga.attributes.title.en!!,
-                    cover = findCoverInAttributes(manga.relationships!!).fileName
-                )
-            )
-        }
-        return mangaResult
     }
 }

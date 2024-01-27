@@ -32,7 +32,8 @@ import com.example.mangacat.ui.theme.MangaCatTheme
 fun ChaptersUpdateCard(manga: MangaFeedItem) {
     MangaCard(
         title = manga.titleManga,
-        cover = manga.cover
+        mangaId = manga.mangaId,
+        coverId = manga.cover
     ) {
         repeat(manga.chapterList.size) {
             ChapterItem(chapter = manga.chapterList[it])
@@ -84,7 +85,7 @@ fun ChaptersUpdateCardPreview() {
         ChaptersUpdateCard(
             MangaFeedItem(
                 mangaId = "",
-                cover = Icons.Default.Image,
+                cover = "",
                 titleManga = "Title",
                 chapterList = listOf(
                     ChapterFeedItem(

@@ -1,6 +1,5 @@
 package com.example.mangacat.ui.screens.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mangacat.data.dto.response.ErrorResponse
@@ -20,7 +19,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import org.json.JSONException
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -118,9 +116,10 @@ class HomeViewModel @Inject constructor(
             _staffPicks.value = Resource.Loading
 
             _staffPicks.value = try {
-                val result = getStaffPicksUseCase()
 
-                Resource.Success(result)
+                val response = getStaffPicksUseCase()
+                Resource.Success(HomeMangaItem.toList(response))
+
             } catch (e: HttpException) {
                 Resource.Error()
             }
@@ -133,9 +132,10 @@ class HomeViewModel @Inject constructor(
             _recentlyAdded.value = Resource.Loading
 
             _recentlyAdded.value = try {
-                val result = getRecentlyAddedMangaUseCase()
 
-                Resource.Success(result)
+                val response = getRecentlyAddedMangaUseCase()
+                Resource.Success(HomeMangaItem.toList(response))
+
             } catch (e: HttpException) {
                 Resource.Error()
             }

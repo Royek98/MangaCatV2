@@ -12,8 +12,8 @@ import com.example.mangacat.data.dto.tag.TagAttributes
 import com.example.mangacat.domain.model.Manga
 
 //toDo change methods to return a proper Includes type instead of just string
-fun findCoverInAttributes(relationships: List<Includes>): CoverArtIncludes =
-    relationships.find { Type.COVER_ART == it.type } as CoverArtIncludes
+fun findCoverInAttributes(relationships: List<Includes>?): CoverArtIncludes =
+    relationships?.find { Type.COVER_ART == it.type } as CoverArtIncludes
 
 fun findAuthorInAttributes(relationships: List<Includes>): AuthorIncludes =
     relationships.find { Type.AUTHOR == it.type } as AuthorIncludes
