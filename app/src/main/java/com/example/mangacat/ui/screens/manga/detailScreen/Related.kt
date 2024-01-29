@@ -2,6 +2,11 @@ package com.example.mangacat.ui.screens.manga.detailScreen
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
@@ -10,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.example.mangacat.data.dto.MangaIncludes
@@ -26,52 +32,65 @@ fun Related(
     relatedMangaListCover: Resource<List<Pair<String, String>>>,
     modifier: Modifier = Modifier
 ) {
-    Column(
+    LazyColumn(
         modifier = modifier
     ) {
-        TitleFlowRow(title = "Users") {
-            repeat(relatedUploaderList.size) {
-                OutlinedCard(text = relatedUploaderList[it])
+        item {
+            TitleFlowRow(title = "Users") {
+                repeat(relatedUploaderList.size) {
+                    OutlinedCard(text = relatedUploaderList[it])
+                }
             }
-        }
-        TitleFlowRow(title = "Groups") {
-            repeat(relatedScanlationGroupList.size) {
-                OutlinedCard(text = relatedScanlationGroupList[it])
+            TitleFlowRow(title = "Groups") {
+                repeat(relatedScanlationGroupList.size) {
+                    OutlinedCard(text = relatedScanlationGroupList[it])
+                }
             }
-        }
 
-        // todo Finish this later, when stop using fake repository
-        when(relatedMangaListCover) {
-            is Resource.Loading -> {}
-            is Resource.Success -> {
-                val relatedByGroup = relatedManga.groupBy { it?.related }
-                relatedByGroup.forEach{ related ->
-                    Column {
-                        Text(
-                            text = related.key!!.toTitle(),
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                        LazyRow {
-                            items(related.value) { manga ->
-                                val test = relatedMangaListCover.data.find {pair-> pair.first == manga!!.id }?.second
-                                SubcomposeAsyncImage(
-                                    model = ImageRequest
-                                        .Builder(LocalContext.current)
-                                        .data("https://uploads.mangadex.org/covers/${manga!!.id}/${test}")
-                                        .crossfade(true)
-                                        .build(),
-                                    contentDescription = "",
-                                    loading = { CircularProgressIndicator() },
+            // todo Finish this later, when stop using fake repository
+            when (relatedMangaListCover) {
+                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    val relatedByGroup = relatedManga.groupBy { it?.relationshipWithParentManga }
+                    Log.d("TAG", "Related: $relatedByGroup")
+                    relatedByGroup.forEach { related ->
+                        Column {
+                            related.key?.let {
+                                Text(
+                                    text = it.toTitle(),
+                                    style = MaterialTheme.typography.titleLarge
                                 )
-//                                Text(text = it!!.title.en!!)
-
+                            }
+                            LazyRow {
+                                items(related.value) { manga ->
+                                    Column(
+                                        modifier = Modifier.padding(5.dp).width(200.dp)
+                                    ) {
+                                        val coverId =
+                                            relatedMangaListCover.data.find { pair -> pair.first == manga!!.id }?.second
+                                        SubcomposeAsyncImage(
+                                            model = ImageRequest
+                                                .Builder(LocalContext.current)
+                                                .data("https://uploads.mangadex.org/covers/${manga!!.id}/${coverId}")
+                                                .crossfade(true)
+                                                .build(),
+                                            contentDescription = "",
+                                            loading = { CircularProgressIndicator() },
+                                        )
+                                        manga.title.en?.let { title ->
+                                            Text(text = title)
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
+
+                is Resource.Error -> {}
             }
-            is Resource.Error -> {}
         }
+
         //toDo display related manga (cover, title, type eg. doujin)
     }
 }

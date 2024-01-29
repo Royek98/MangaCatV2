@@ -1,5 +1,6 @@
 package com.example.mangacat.ui.screens.manga.detailScreen
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,7 +28,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -65,7 +72,7 @@ fun DetailScreen(
         relatedScanlationGroupList = viewModel.scanlationGroupList,
         navigateBack = navigateBack,
         getCoverList = viewModel::getCoverList,
-        getRelatedMangaListCover = viewModel::getRelatedMangaListCover
+        getRelatedMangaListCover = viewModel::getRelatedMangaListCover,
     )
 }
 
@@ -91,7 +98,7 @@ private fun DetailContent(
             getCoverList = getCoverList,
             coverList = coverList,
             getRelatedMangaListCover = getRelatedMangaListCover,
-            relatedMangaListCover = relatedMangaListCover
+            relatedMangaListCover = relatedMangaListCover,
         )
 
         is Resource.Error -> ErrorScreen() {}
@@ -135,17 +142,21 @@ private fun Success(
 
         Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_medium)))
 
+        LaunchedEffect(pagerState) {
+            snapshotFlow { pagerState.currentPage }.collect { page ->
+                if (page == 1) {
+                    getRelatedMangaListCover(manga.related.map { it!!.id })
+                } else if (page == 2) {
+                    getCoverList(manga.id)
+                }
+            }
+        }
+
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.Top
         ) { pageIndex ->
-            if (pageIndex == 2) {
-                getCoverList(manga.id)
-            } else if (pageIndex == 1) {
-                getRelatedMangaListCover(manga.related.map { it!!.id })
-            }
-
             PagerContent(
                 pageIndex = pageIndex,
                 manga = manga,
@@ -181,6 +192,7 @@ private fun PagerContent(
             relatedMangaListCover = relatedMangaListCover,
             modifier = modifierPadding
         )
+
         2 -> Covers(coverList = coverList, mangaId = manga.id, modifier = modifierPadding)
     }
 }

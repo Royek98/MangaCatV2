@@ -1,11 +1,16 @@
 package com.example.mangacat.ui.screens.manga;
 
 import android.util.Log
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mangacat.data.dto.MangaIncludes
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.Chapter
 import com.example.mangacat.domain.model.Cover
@@ -49,6 +54,9 @@ class MangaViewModel @Inject constructor(
     var relatedMangaListCover: Resource<List<Pair<String, String>>> by mutableStateOf(Resource.Loading)
         private set
 
+    private var coverChecked = mutableStateOf(false)
+    private var relatedChecked = mutableStateOf(false)
+
     fun getManga(mangaId: String) {
         viewModelScope.launch {
             mangaUiState = Resource.Loading
@@ -82,25 +90,32 @@ class MangaViewModel @Inject constructor(
     }
 
     fun getCoverList(mangaId: String) {
-        viewModelScope.launch {
-            coverList = Resource.Loading
+        if (!coverChecked.value) {
+            viewModelScope.launch {
+                coverList = Resource.Loading
 
-            coverList = try {
-                Resource.Success(getMangaCoverListUseCase(mangaId))
-            } catch (e: IOException) {
-                Resource.Error()
+                coverList = try {
+                    val result = getMangaCoverListUseCase(mangaId)
+                    coverChecked.value = true
+                    Resource.Success(result)
+                } catch (e: IOException) {
+                    Resource.Error()
+                }
             }
         }
     }
 
     fun getRelatedMangaListCover(idList: List<String>) {
-        viewModelScope.launch {
-            relatedMangaListCover = Resource.Loading
-
-            relatedMangaListCover = try {
-                Resource.Success(getRelatedMangaListCoverUseCase(idList))
-            } catch (e: IOException) {
-                Resource.Error()
+        if (!relatedChecked.value) {
+            viewModelScope.launch {
+                relatedMangaListCover = Resource.Loading
+                relatedMangaListCover = try {
+                    val result = getRelatedMangaListCoverUseCase(idList)
+                    relatedChecked.value = true
+                    Resource.Success(result)
+                } catch (e: IOException) {
+                    Resource.Error()
+                }
             }
         }
     }

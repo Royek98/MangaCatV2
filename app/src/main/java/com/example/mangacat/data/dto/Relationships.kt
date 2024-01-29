@@ -1,9 +1,9 @@
 package com.example.mangacat.data.dto
 
-import android.util.Log
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.data.dto.response.enums.Type
 import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonArray
@@ -43,7 +43,8 @@ data class CoverArtIncludes(
 
 @Serializable
 data class MangaIncludes(
-    val related: String? = null,
+    @SerialName("related")
+    val relationshipWithParentManga: String? = null, // examples: colored, doujin, spinoff etc.
     val title: English,
     val contentRating: ContentRating? = null,
     override val id: String,

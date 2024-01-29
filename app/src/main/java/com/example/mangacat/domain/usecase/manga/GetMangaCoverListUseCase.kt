@@ -1,5 +1,6 @@
 package com.example.mangacat.domain.usecase.manga
 
+import android.util.Log
 import com.example.mangacat.domain.model.Cover
 import com.example.mangacat.domain.repository.MangaDexRepository
 import javax.inject.Inject

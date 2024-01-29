@@ -6,8 +6,10 @@ import com.example.mangacat.data.dto.cover.CoverAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.response.CollectionResponse
+import com.example.mangacat.data.dto.response.CollectionResponseNotIncludes
 import com.example.mangacat.data.dto.response.Data
 import com.example.mangacat.data.dto.response.DataIncludes
+import com.example.mangacat.data.dto.response.DataWithoutRelationships
 import com.example.mangacat.data.dto.response.EntityResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -77,4 +79,12 @@ interface MangaDexApiService {
         @Query("offset") offset: Int,
         @Query("manga[]") mangaIds: List<String>,
     ): CollectionResponse<CoverAttributes>
+
+    @GET("cover")
+    suspend fun getMangaCoverList(
+        @Query("order[volume]") orderVolume: String,
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int,
+        @Query("manga[]") mangaId: String,
+    ): CollectionResponseNotIncludes<DataWithoutRelationships<CoverAttributes>>
 }

@@ -117,14 +117,12 @@ private fun ChapterListSuccess(
 ) {
     LazyColumn {
         items(chapterList) { chapter ->
-            chapter.chapterId?.let{
-                ChapterItem(
-                    visibility = Icons.Default.Visibility,
-                    chapter = chapter,
-                    bgColor = MaterialTheme.colorScheme.primaryContainer,
-                    navigateToRead = navigateToRead
-                )
-            }
+            ChapterItem(
+                visibility = Icons.Default.Visibility,
+                chapter = chapter,
+                bgColor = MaterialTheme.colorScheme.primaryContainer,
+                navigateToRead = navigateToRead
+            )
         }
     }
 }
@@ -159,7 +157,7 @@ private fun ChapterItem(
     val contentColor = if (isSystemInDarkTheme()) Color.White else Color.Black
     Button(
         onClick = {
-            navigateToRead(chapter.chapterId!!, chapter.mangaId)
+            navigateToRead(chapter.chapterId, chapter.mangaId)
         },
         modifier = modifier
             .fillMaxWidth()

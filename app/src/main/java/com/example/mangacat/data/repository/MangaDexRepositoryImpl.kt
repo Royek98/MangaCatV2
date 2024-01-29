@@ -89,9 +89,8 @@ class MangaDexRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMangaCoverList(mangaId: String):
-            CollectionResponseNotIncludes<DataWithoutRelationships<CoverAttributes>> {
-        TODO("Not yet implemented")
-    }
+            CollectionResponseNotIncludes<DataWithoutRelationships<CoverAttributes>> =
+        service.getMangaCoverList(orderVolume = "asc", limit = 10, offset = 0, mangaId = mangaId)
 
     override suspend fun getRecentlyAddedManga():
             CollectionResponse<MangaAttributes> = service.getRecentlyAddedManga()

@@ -1,5 +1,6 @@
 package com.example.mangacat.domain.usecase.manga
 
+import android.util.Log
 import com.example.mangacat.data.dto.response.enums.Type
 import com.example.mangacat.domain.model.Manga
 import com.example.mangacat.domain.repository.MangaDexRepository
@@ -14,10 +15,10 @@ class GetMangaByIdUseCase @Inject constructor(
             includes = listOf(
                 Type.ARTIST.name.lowercase(),
                 Type.AUTHOR.name.lowercase(),
-                Type.COVER_ART.name.lowercase()
+                Type.COVER_ART.name.lowercase(),
+                Type.MANGA.name.lowercase()
             )
         )
-
         return Manga(
             response.data
         )

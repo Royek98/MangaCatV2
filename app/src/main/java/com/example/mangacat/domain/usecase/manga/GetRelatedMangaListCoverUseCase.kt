@@ -1,6 +1,7 @@
 package com.example.mangacat.domain.usecase.manga
 
 import android.util.Log
+import com.example.mangacat.data.dto.MangaIncludes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
 import com.example.mangacat.domain.repository.MangaDexRepository
 import com.example.mangacat.domain.utils.findCoverInAttributes
@@ -25,7 +26,6 @@ class GetRelatedMangaListCoverUseCase@Inject constructor(
                 ),
             idList
         )
-
         val result = mutableListOf<Pair<String, String>>()
         responseMangaList.data.forEach {
             result.add(Pair(it.id, findCoverInAttributes(it.relationships!!).fileName))

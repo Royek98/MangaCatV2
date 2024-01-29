@@ -19,12 +19,6 @@ class GetLatestUpdatesUseCase @Inject constructor(
 
         val result = mutableListOf<HomeLatestUpdate>()
 
-        chaptersResponse.data.forEach { chapter ->
-            chapter.relationships?.let { relationship ->
-
-            }
-        }
-
         val coverInfo = mutableListOf<CoverInfo>()
         chaptersResponse.data.forEach { chapter ->
             chapter.relationships?.let { relationship ->
