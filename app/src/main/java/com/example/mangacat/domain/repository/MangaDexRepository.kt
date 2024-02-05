@@ -7,7 +7,7 @@ import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.libraryStatus.LibraryResponse
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
-import com.example.mangacat.data.dto.read.Read
+import com.example.mangacat.data.dto.read.ReadResponse
 import com.example.mangacat.data.dto.response.CollectionResponse
 import com.example.mangacat.data.dto.response.CollectionResponseNotIncludes
 import com.example.mangacat.data.dto.response.Data
@@ -15,7 +15,6 @@ import com.example.mangacat.data.dto.response.DataIncludes
 import com.example.mangacat.data.dto.response.DataWithoutRelationships
 import com.example.mangacat.data.dto.response.EntityResponse
 import com.example.mangacat.data.dto.response.enums.Type
-import retrofit2.http.Query
 
 interface MangaDexRepository {
 
@@ -53,7 +52,7 @@ interface MangaDexRepository {
         mangaId: String
     ): CollectionResponse<ChapterAttributes>
 
-    suspend fun getReadPages(chapterId: String): Read
+    suspend fun getReadPages(chapterId: String): ReadResponse
 
     suspend fun getMangaCoverList(mangaId: String): CollectionResponseNotIncludes<DataWithoutRelationships<CoverAttributes>>
 

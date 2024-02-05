@@ -5,13 +5,24 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AuthRequest(
+open class Request(
     @SerialName("grant_type")
-    val grantType: String = "password",
-    val username: String,
-    val password: String,
+    open val grantType: String,
     @SerialName("client_id")
     val clientId: String = AppConstants.clientId,
     @SerialName("client_secret")
     val clientSecret: String = AppConstants.clientSecret
 )
+
+@Serializable
+data class AuthRequest(
+    val username: String,
+    val password: String,
+    override val grantType: String = "password"
+): Request(grantType)
+
+@Serializable
+data class RefreshRequest(
+    val refreshToken: String,
+    override val grantType: String = "refresh_token"
+): Request(grantType)

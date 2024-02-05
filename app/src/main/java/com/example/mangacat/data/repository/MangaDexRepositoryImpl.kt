@@ -7,7 +7,7 @@ import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.libraryStatus.LibraryResponse
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.manga.enums.ContentRating
-import com.example.mangacat.data.dto.read.Read
+import com.example.mangacat.data.dto.read.ReadResponse
 import com.example.mangacat.data.dto.response.CollectionResponse
 import com.example.mangacat.data.dto.response.CollectionResponseNotIncludes
 import com.example.mangacat.data.dto.response.Data
@@ -84,9 +84,7 @@ class MangaDexRepositoryImpl @Inject constructor(
             contentRating,
         )
 
-    override suspend fun getReadPages(chapterId: String): Read {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getReadPages(chapterId: String): ReadResponse = service.getReadPages(chapterId)
 
     override suspend fun getMangaCoverList(mangaId: String):
             CollectionResponseNotIncludes<DataWithoutRelationships<CoverAttributes>> =

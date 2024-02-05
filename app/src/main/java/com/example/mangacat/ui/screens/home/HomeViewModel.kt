@@ -1,7 +1,9 @@
 package com.example.mangacat.ui.screens.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mangacat.data.dto.authentication.RefreshRequest
 import com.example.mangacat.data.dto.response.ErrorResponse
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.HomeLatestUpdate

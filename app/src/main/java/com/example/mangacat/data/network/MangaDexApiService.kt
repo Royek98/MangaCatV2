@@ -1,17 +1,27 @@
 package com.example.mangacat.data.network
 
 import com.example.mangacat.data.dto.DefaultRelationships
+import com.example.mangacat.data.dto.ScanlationGroupIncludes
+import com.example.mangacat.data.dto.authentication.AuthRequest
+import com.example.mangacat.data.dto.authentication.AuthResponse
+import com.example.mangacat.data.dto.authentication.IsAuthenticatedResponse
 import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cover.CoverAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
 import com.example.mangacat.data.dto.manga.MangaAttributes
+import com.example.mangacat.data.dto.read.ReadResponse
 import com.example.mangacat.data.dto.response.CollectionResponse
 import com.example.mangacat.data.dto.response.CollectionResponseNotIncludes
 import com.example.mangacat.data.dto.response.Data
 import com.example.mangacat.data.dto.response.DataIncludes
 import com.example.mangacat.data.dto.response.DataWithoutRelationships
 import com.example.mangacat.data.dto.response.EntityResponse
+import com.example.mangacat.data.dto.user.UserAttributes
+import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import javax.inject.Singleton
@@ -87,4 +97,19 @@ interface MangaDexApiService {
         @Query("offset") offset: Int,
         @Query("manga[]") mangaId: String,
     ): CollectionResponseNotIncludes<DataWithoutRelationships<CoverAttributes>>
+
+    @GET("at-home/server/{id}?forcePort443=false")
+    suspend fun getReadPages(
+        @Path("id") chapterId: String
+    ): ReadResponse
+
+    @GET("/user/me?includes[]=scanlation_group")
+    suspend fun getAuthenticatedUserInformation(
+        @Header("Authorization") bearerToken: String
+    ): EntityResponse<Data<UserAttributes, List<ScanlationGroupIncludes>>>
+
+    @GET("auth/check")
+    suspend fun check(
+        @Header("Authorization") bearerToken: String
+    ): IsAuthenticatedResponse
 }

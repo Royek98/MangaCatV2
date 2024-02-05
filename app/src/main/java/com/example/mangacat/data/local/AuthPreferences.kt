@@ -12,6 +12,8 @@ import com.example.mangacat.utils.AppConstants.ACCESS_TOKEN
 import com.example.mangacat.utils.AppConstants.REFRESH_TOKEN
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -22,15 +24,23 @@ class AuthPreferences @Inject constructor(
 ) {
     suspend fun saveAuthToken(token: AuthResponse) {
         dataStore.edit { pref ->
-            pref[ACCESS_TOKEN] = token.accessToken
-            pref[REFRESH_TOKEN] = token.refreshToken
+            token.accessToken?.let {
+                pref[ACCESS_TOKEN] = it
+            }
+            token.refreshToken?.let {
+                pref[REFRESH_TOKEN] = it
+            }
         }
     }
 
-    fun getAuthToken(): Flow<Token> =
+    suspend fun clearAuthToken() {
+        dataStore.edit { it.clear() }
+    }
+
+    suspend fun getAuthToken(): Token? =
         dataStore.data
             .catch { emptyPreferences() }
             .map { pref ->
                 Token(accessToken = pref[ACCESS_TOKEN], refreshToken = pref[REFRESH_TOKEN])
-            }
+            }.firstOrNull()
 }

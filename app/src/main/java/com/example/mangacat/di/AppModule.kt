@@ -9,6 +9,7 @@ import com.example.mangacat.data.dto.Includes
 import com.example.mangacat.data.dto.IncludesPolymorphicSerializer
 import com.example.mangacat.data.fake.FakeRepositoryImpl
 import com.example.mangacat.data.local.AuthPreferences
+import com.example.mangacat.data.network.AuthApiService
 import com.example.mangacat.data.network.MangaDexApiService
 import com.example.mangacat.data.repository.AuthRepositoryImpl
 import com.example.mangacat.utils.AppConstants
@@ -21,7 +22,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Response
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
@@ -48,8 +52,12 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideAuthRepository(@ApplicationContext appContext: Context, preferences: AuthPreferences)
-    = AuthRepositoryImpl(appContext, preferences)
+    fun provideAuthRepository(
+        preferences: AuthPreferences,
+        authService: AuthApiService,
+        mangaDexService: MangaDexApiService
+    )
+    = AuthRepositoryImpl(preferences, authService, mangaDexService)
 
     @Provides
     @Singleton
@@ -74,14 +82,42 @@ class AppModule {
 //        serializersModule = module
 //    }
 
+    val okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(UserAgentInterceptor(System.getProperty("http.agent") ?: ""))
+        .build()
+
     @Singleton
     @Provides
     fun providesRetrofit(): MangaDexApiService {
         return Retrofit.Builder()
             .baseUrl(AppConstants.baseUrl)
+            .client(okHttpClient)
             .addConverterFactory(
                 appJson.asConverterFactory("application/json".toMediaType()))
             .build()
             .create(MangaDexApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providesRetrofitAuth(): AuthApiService {
+        return Retrofit.Builder()
+            .baseUrl(AppConstants.authUrl)
+            .client(okHttpClient)
+            .addConverterFactory(
+                appJson.asConverterFactory("application/x-www-form-urlencoded".toMediaType()))
+            .build()
+            .create(AuthApiService::class.java)
+    }
+
+    private class UserAgentInterceptor(private val userAgent: String) : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val originalRequest = chain.request()
+            val requestWithUserAgent = originalRequest.newBuilder()
+                .header("User-Agent", userAgent)
+                .build()
+
+            return chain.proceed(requestWithUserAgent)
+        }
     }
 }

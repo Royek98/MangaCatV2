@@ -52,7 +52,6 @@ fun Related(
                 is Resource.Loading -> {}
                 is Resource.Success -> {
                     val relatedByGroup = relatedManga.groupBy { it?.relationshipWithParentManga }
-                    Log.d("TAG", "Related: $relatedByGroup")
                     relatedByGroup.forEach { related ->
                         Column {
                             related.key?.let {

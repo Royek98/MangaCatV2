@@ -13,7 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import com.example.mangacat.ui.AuthViewModel
+import com.example.mangacat.ui.screens.login.AuthViewModel
 import com.example.mangacat.ui.screens.feed.FeedScreen
 import com.example.mangacat.ui.screens.feed.FeedViewModel
 import com.example.mangacat.ui.screens.home.HomeElements

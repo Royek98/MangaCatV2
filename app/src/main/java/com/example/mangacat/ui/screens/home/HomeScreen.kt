@@ -1,7 +1,9 @@
 package com.example.mangacat.ui.screens.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -10,6 +12,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -76,28 +79,28 @@ private fun HomeContent(
 //            navigateTo = navigateToFeed
 //        )
 
-        when (val state = homeUiState.latestUpdate) {
-            is Resource.Loading -> LoadingScreen()
-            is Resource.Success -> {
-                LatestUpdates(state.data)
-            }
-            is Resource.Error -> {
-                ErrorScreen(messages = state.message, modifier = Modifier.padding(top = 20.dp)) {}
-            }
-        }
-
-        HorizontalPanel(
-            title = HomeElements.STAFF.title,
-            mangaList = homeUiState.staffPicks,
-            navigateTo = navigateToStaffPicks,
-            navigateToManga = navigateToManga
-        )
-        HorizontalPanel(
-            title = HomeElements.ADDED.title,
-            mangaList = homeUiState.recentlyAdded,
-            navigateTo = navigateToRecentlyAdded,
-            navigateToManga = navigateToManga
-        )
+//        when (val state = homeUiState.latestUpdate) {
+//            is Resource.Loading -> LoadingScreen()
+//            is Resource.Success -> {
+//                LatestUpdates(state.data)
+//            }
+//            is Resource.Error -> {
+//                ErrorScreen(messages = state.message, modifier = Modifier.padding(top = 20.dp)) {}
+//            }
+//        }
+//
+//        HorizontalPanel(
+//            title = HomeElements.STAFF.title,
+//            mangaList = homeUiState.staffPicks,
+//            navigateTo = navigateToStaffPicks,
+//            navigateToManga = navigateToManga
+//        )
+//        HorizontalPanel(
+//            title = HomeElements.ADDED.title,
+//            mangaList = homeUiState.recentlyAdded,
+//            navigateTo = navigateToRecentlyAdded,
+//            navigateToManga = navigateToManga
+//        )
     }
 }
 
@@ -139,9 +142,11 @@ fun LoadingScreen(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxWidth()
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxSize()
     ) {
         CircularProgressIndicator()
     }
+
 //    Text(text = "Loading...", modifier = modifier)
 }

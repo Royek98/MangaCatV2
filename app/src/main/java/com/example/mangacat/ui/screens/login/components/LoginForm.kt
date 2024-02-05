@@ -41,7 +41,7 @@ fun LoginForm(
     username: String,
     password: String,
     visibility: Boolean,
-    credentialsError: Pair<Boolean, String>,
+    credentialsError: List<String>,
     isLoading: Boolean,
     focusManager: FocusManager,
     setPassword: (String) -> Unit,
@@ -70,20 +70,22 @@ fun LoginForm(
 
         Spacer(modifier = Modifier.size(20.dp))
 
-        if (credentialsError.first) {
-            Text(
-                text = credentialsError.second,
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.error,
-                modifier = Modifier
-                    .background(
-                        color = MaterialTheme.colorScheme.errorContainer,
-                        shape = RoundedCornerShape(5.dp)
-                    )
-                    .padding(5.dp)
-                    .align(Alignment.CenterHorizontally)
-            )
-            Spacer(modifier = Modifier.size(5.dp))
+        if (credentialsError.isNotEmpty()) {
+            credentialsError.forEach { errorMessage ->
+                Text(
+                    text = errorMessage,
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier
+                        .background(
+                            color = MaterialTheme.colorScheme.errorContainer,
+                            shape = RoundedCornerShape(5.dp)
+                        )
+                        .padding(5.dp)
+                        .align(Alignment.CenterHorizontally)
+                )
+                Spacer(modifier = Modifier.size(5.dp))
+            }
         }
 
         Text(

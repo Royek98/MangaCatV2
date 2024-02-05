@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Image
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.ChapterFeedItem
 import com.example.mangacat.domain.model.MangaFeedItem
-import com.example.mangacat.ui.AuthViewModel
+import com.example.mangacat.ui.screens.login.AuthViewModel
 import com.example.mangacat.ui.screens.home.HomeElements
 import com.example.mangacat.ui.screens.utils.ChaptersUpdateCard
 import com.example.mangacat.ui.screens.utils.TemplateScaffold
@@ -28,10 +26,16 @@ fun FeedScreen(
     authViewModel: AuthViewModel,
     navigateBack: () -> Unit
 ) {
-    if (authViewModel.isAuthenticated.collectAsState().value) {
-        FeedContent(uiState = viewModel.uiState.collectAsState().value, navigateBack = navigateBack)
-    } else {
-        Text(text = "Log In to see your feed.")
+    when(val feedState = authViewModel.isAuthenticated.collectAsState().value) {
+        is Resource.Loading -> {}
+        is Resource.Success -> {
+            if (feedState.data) {
+                FeedContent(uiState = viewModel.uiState.collectAsState().value, navigateBack = navigateBack)
+            } else {
+                Text(text = "Log In to see your feed.")
+            }
+        }
+        is Resource.Error -> {}
     }
 }
 

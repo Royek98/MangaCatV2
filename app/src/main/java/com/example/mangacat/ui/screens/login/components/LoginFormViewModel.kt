@@ -2,8 +2,8 @@ package com.example.mangacat.ui.screens.login.components
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.usecase.authentication.GetAuthResponseSaveTokenUseCase
+import com.example.mangacat.utils.IOHttpCustomException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,8 +25,8 @@ class LoginFormViewModel @Inject constructor(
     private val _visibility = MutableStateFlow(false)
     val visibility: StateFlow<Boolean> = _visibility
 
-    private val _credentialsError = MutableStateFlow(Pair(false, ""))
-    val credentialsError: StateFlow<Pair<Boolean, String>> = _credentialsError
+    private val _credentialsError = MutableStateFlow<List<String>>(emptyList())
+    val credentialsError: StateFlow<List<String>> = _credentialsError
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
@@ -48,28 +48,16 @@ class LoginFormViewModel @Inject constructor(
 
     fun authenticate(navigateToHome: () -> Unit) {
         viewModelScope.launch {
-            _credentialsError.value = _credentialsError.value.copy(first = false)
+            _credentialsError.value = emptyList()
             _isLoading.value = true
-            when(val response = getAuthResponseSaveTokenUseCase.invoke(_username.value, _password.value)) {
-                is Resource.Loading -> {}
-                is Resource.Success -> {
-                    _isLoading.value = false
-                    //toDo navigate to home route
-                    navigateToHome()
-                }
-                is Resource.Error -> {
-                    _isLoading.value = false
-                    _credentialsError.value =
-                        _credentialsError.value.copy(first = true, second = response.message!![0])
-                }
+            try {
+                getAuthResponseSaveTokenUseCase.invoke(_username.value, _password.value)
+                _isLoading.value = false
+                navigateToHome()
+            } catch (e: IOHttpCustomException) {
+                _isLoading.value = false
+                _credentialsError.value = e.messages
             }
         }
     }
-//    fun getToken() {
-//        viewModelScope.launch{
-//            getTokenUseCase.invoke().collect {
-//                _token.value = it
-//            }
-//        }
-//    }
 }

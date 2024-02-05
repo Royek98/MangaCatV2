@@ -1,5 +1,6 @@
 package com.example.mangacat.domain.usecase.authentication
 
+import android.util.Log
 import com.example.mangacat.data.dto.response.ErrorResponse
 import com.example.mangacat.domain.model.Token
 import com.example.mangacat.domain.repository.AuthRepository
@@ -9,18 +10,21 @@ import java.io.IOException
 import javax.inject.Inject
 import kotlin.jvm.Throws
 
-class GetAuthResponseSaveTokenUseCase @Inject constructor(
+class RefreshUseCase @Inject constructor(
     private val repository: AuthRepository
 ) {
     @Throws(IOHttpCustomException::class)
-    suspend operator fun invoke(username: String, password: String) {
+    suspend operator fun invoke(refreshToken: String): String {
         try {
-            val tokenResponse = repository.authenticate(username, password)
+            val responseToken = repository.refresh(refreshToken)
 
-            repository.saveTokenLocally(Token(tokenResponse))
+            repository.saveTokenLocally(Token(responseToken))
+            return responseToken.accessToken!!
         } catch (e: HttpException) {
             throw IOHttpCustomException(ErrorResponse(e).getMessages())
         } catch (e: IOException) {
+            throw IOHttpCustomException(listOf("${e.message}"))
+        } catch (e: NullPointerException) {
             throw IOHttpCustomException(listOf("${e.message}"))
         }
     }

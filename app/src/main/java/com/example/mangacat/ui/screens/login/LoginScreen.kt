@@ -5,6 +5,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,7 +14,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -24,12 +24,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mangacat.R
-import com.example.mangacat.ui.AuthViewModel
+import com.example.mangacat.data.network.Resource
+import com.example.mangacat.ui.screens.home.LoadingScreen
 import com.example.mangacat.ui.screens.login.components.LoginForm
 import com.example.mangacat.ui.screens.login.components.LoginFormViewModel
 import com.example.mangacat.ui.screens.login.components.ProfileContent
 import com.example.mangacat.ui.screens.login.components.ProfileContentViewModel
-import com.example.mangacat.ui.screens.utils.TemplateScaffold
 
 
 //toDo Make LoginScreen depend on isAuthenticated - IF user is logged show profile screen ELSE show form to log in
@@ -39,35 +39,62 @@ import com.example.mangacat.ui.screens.utils.TemplateScaffold
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(
-    viewModel: LoginFormViewModel = hiltViewModel<LoginFormViewModel>(),
     authViewModel: AuthViewModel,
-    profileContentViewModel: ProfileContentViewModel = hiltViewModel<ProfileContentViewModel>(),
     navigateToHome: () -> Unit
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.onSecondary
-    ) {
-        val modifier = Modifier.padding(top = it.calculateTopPadding())
-        if (authViewModel.isAuthenticated.collectAsState().value) {
-            Template(image = R.drawable.logo_icon2, modifier = modifier) {
-                ProfileContent(profileContentViewModel.user.collectAsState().value)
+    ) { paddingValues ->
+        when(val state = authViewModel.isAuthenticated.collectAsState().value) {
+            is Resource.Loading -> {
+                LoadingScreen()
             }
-        } else {
-            Template(image = R.drawable.security_key2, modifier = modifier) {
-                LoginForm(
-                    username = viewModel.username.collectAsState().value,
-                    password = viewModel.password.collectAsState().value,
-                    visibility = viewModel.visibility.collectAsState().value,
-                    credentialsError = viewModel.credentialsError.collectAsState().value,
-                    isLoading = viewModel.isLoading.collectAsState().value,
-                    focusManager = LocalFocusManager.current,
-                    setPassword = viewModel::setPassword,
-                    setUsername = viewModel::setUsername,
-                    setVisibility = viewModel::setVisibility,
-                    authenticate = viewModel::authenticate,
+            is Resource.Success -> {
+                Success(
+                    isAuthenticated = state.data,
+                    paddingValues = paddingValues,
                     navigateToHome = navigateToHome
                 )
             }
+            is Resource.Error -> {}
+        }
+    }
+}
+
+@Composable
+private fun Success(
+    isAuthenticated: Boolean,
+    paddingValues: PaddingValues,
+    navigateToHome: () -> Unit
+) {
+    val modifier = Modifier.padding(top = paddingValues.calculateTopPadding())
+    if (isAuthenticated) {
+        val profileContentViewModel: ProfileContentViewModel = hiltViewModel<ProfileContentViewModel>()
+        Template(image = R.drawable.logo_icon2, modifier = modifier) {
+            when(val state = profileContentViewModel.user.collectAsState().value) {
+                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    ProfileContent(state.data)
+                }
+                is Resource.Error -> {}
+            }
+        }
+    } else {
+        val viewModel: LoginFormViewModel = hiltViewModel<LoginFormViewModel>()
+        Template(image = R.drawable.security_key2, modifier = modifier) {
+            LoginForm(
+                username = viewModel.username.collectAsState().value,
+                password = viewModel.password.collectAsState().value,
+                visibility = viewModel.visibility.collectAsState().value,
+                credentialsError = viewModel.credentialsError.collectAsState().value,
+                isLoading = viewModel.isLoading.collectAsState().value,
+                focusManager = LocalFocusManager.current,
+                setPassword = viewModel::setPassword,
+                setUsername = viewModel::setUsername,
+                setVisibility = viewModel::setVisibility,
+                authenticate = viewModel::authenticate,
+                navigateToHome = navigateToHome
+            )
         }
     }
 }

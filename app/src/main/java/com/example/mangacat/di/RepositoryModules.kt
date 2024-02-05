@@ -1,5 +1,6 @@
 package com.example.mangacat.di
 
+import com.example.mangacat.data.fake.FakeAuthRepositoryImpl
 import com.example.mangacat.data.fake.FakeRepositoryImpl
 import com.example.mangacat.data.repository.AuthRepositoryImpl
 import com.example.mangacat.data.repository.MangaDexRepositoryImpl
@@ -13,12 +14,18 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 interface RepositoryModules {
-    @Binds
-    fun bindMangaDexRepositoryImpl(repository: MangaDexRepositoryImpl): MangaDexRepository
-
 //    @Binds
-//    fun bindFakeMangaDexRepositoryImpl(repository: FakeRepositoryImpl): MangaDexRepository
+//    fun bindMangaDexRepositoryImpl(repository: MangaDexRepositoryImpl): MangaDexRepository
 
     @Binds
     fun bindAuthRepositoryImpl(repository: AuthRepositoryImpl): AuthRepository
+
+
+    //--------------------------------------------------------------------------------------------
+    // FAKE REPOSITORIES
+    @Binds
+    fun bindFakeMangaDexRepositoryImpl(repository: FakeRepositoryImpl): MangaDexRepository
+
+//    @Binds
+//    fun bindAuthRepositoryImpl(repository: FakeAuthRepositoryImpl): AuthRepository
 }

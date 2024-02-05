@@ -11,7 +11,7 @@ data class Chapter(
 )
 
 @Serializable
-data class Read(
+data class ReadResponse(
     val result: String,
     val baseUrl: String,
     val chapter: Chapter
