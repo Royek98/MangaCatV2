@@ -24,10 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileContentViewModel @Inject constructor(
     private val getAuthenticatedUserInformationUseCase: GetAuthenticatedUserInformationUseCase,
-    private val getTokenUseCase: GetTokenUseCase,
-    private val userIsAuthenticatedUseCase: UserIsAuthenticatedUseCase,
-    private val refreshUseCase: RefreshUseCase,
-    private val clearTokenUseCase: GetTokenUseCase
+    private val getTokenUseCase: GetTokenUseCase
 ) : ViewModel() {
 
     private val _user = MutableStateFlow<Resource<User>>(Resource.Loading)
@@ -39,11 +36,8 @@ class ProfileContentViewModel @Inject constructor(
 
     // I have already checked if user is authenticated in AuthViewModel
     // this viemodel is initialized when the state is true, i don't have to check it again
-    fun setUser() {
+    private fun setUser() {
         viewModelScope.launch {
-            var isAuthenticated = false
-//            var accessToken: String? = null
-
             getTokenUseCase.invoke().let { token ->
                 _user.value = try {
                     token?.accessToken?.let {

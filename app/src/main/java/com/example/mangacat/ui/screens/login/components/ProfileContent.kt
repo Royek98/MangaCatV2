@@ -18,7 +18,10 @@ import com.example.mangacat.domain.model.User
 import com.example.mangacat.utils.toTitle
 
 @Composable
-fun ProfileContent(user: User) {
+fun ProfileContent(
+    user: User,
+    logout: () -> Unit
+) {
     Column(
         modifier = Modifier.padding(start = 50.dp, end = 50.dp, top = 20.dp)
     ) {
@@ -62,7 +65,7 @@ fun ProfileContent(user: User) {
 
         Spacer(modifier = Modifier.size(10.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { logout() },
             colors = ButtonDefaults.buttonColors(
                 contentColor = MaterialTheme.colorScheme.onErrorContainer,
                 containerColor = MaterialTheme.colorScheme.errorContainer

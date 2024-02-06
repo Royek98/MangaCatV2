@@ -9,7 +9,7 @@ import java.io.IOException
 import javax.inject.Inject
 import kotlin.jvm.Throws
 
-class GetAuthResponseSaveTokenUseCase @Inject constructor(
+class SignInSaveTokenUseCase @Inject constructor(
     private val repository: AuthRepository
 ) {
     @Throws(IOHttpCustomException::class)

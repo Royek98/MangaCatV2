@@ -1,17 +1,14 @@
 package com.example.mangacat.domain.usecase.authentication
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
-import com.example.mangacat.data.network.Resource
-import com.example.mangacat.domain.model.Token
 import com.example.mangacat.utils.IOHttpCustomException
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class AuthenticationUseCase @Inject constructor(
     private val userIsAuthenticatedUseCase: UserIsAuthenticatedUseCase,
     private val getTokenUseCase: GetTokenUseCase,
-    private val refreshUseCase: RefreshUseCase
+    private val refreshUseCase: RefreshUseCase,
+    private val clearTokenLocalUseCase: ClearTokenLocalUseCase
 ) {
     suspend operator fun invoke(): Boolean {
         val isAuthenticated = mutableStateOf(false)
@@ -37,6 +34,7 @@ class AuthenticationUseCase @Inject constructor(
                 val refreshedResult = userIsAuthenticatedUseCase.invoke(newToken)
                 refreshedResult.isAuthenticated
             } catch (e: IOHttpCustomException) {
+                clearTokenLocalUseCase()
                 false
             }
         }

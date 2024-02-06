@@ -2,7 +2,7 @@ package com.example.mangacat.ui.screens.login.components
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mangacat.domain.usecase.authentication.GetAuthResponseSaveTokenUseCase
+import com.example.mangacat.domain.usecase.authentication.SignInSaveTokenUseCase
 import com.example.mangacat.utils.IOHttpCustomException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginFormViewModel @Inject constructor(
-    private val getAuthResponseSaveTokenUseCase: GetAuthResponseSaveTokenUseCase
+    private val signInSaveTokenUseCase: SignInSaveTokenUseCase
 //    private val getTokenUseCase: GetTokenUseCase
 ) : ViewModel() {
     private val _username = MutableStateFlow("")
@@ -51,7 +51,7 @@ class LoginFormViewModel @Inject constructor(
             _credentialsError.value = emptyList()
             _isLoading.value = true
             try {
-                getAuthResponseSaveTokenUseCase.invoke(_username.value, _password.value)
+                signInSaveTokenUseCase.invoke(_username.value, _password.value)
                 _isLoading.value = false
                 navigateToHome()
             } catch (e: IOHttpCustomException) {

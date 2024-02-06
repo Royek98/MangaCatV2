@@ -53,7 +53,8 @@ fun LoginScreen(
                 Success(
                     isAuthenticated = state.data,
                     paddingValues = paddingValues,
-                    navigateToHome = navigateToHome
+                    navigateToHome = navigateToHome,
+                    logout = authViewModel::logout
                 )
             }
             is Resource.Error -> {}
@@ -65,7 +66,8 @@ fun LoginScreen(
 private fun Success(
     isAuthenticated: Boolean,
     paddingValues: PaddingValues,
-    navigateToHome: () -> Unit
+    navigateToHome: () -> Unit,
+    logout: () -> Unit
 ) {
     val modifier = Modifier.padding(top = paddingValues.calculateTopPadding())
     if (isAuthenticated) {
@@ -74,7 +76,7 @@ private fun Success(
             when(val state = profileContentViewModel.user.collectAsState().value) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
-                    ProfileContent(state.data)
+                    ProfileContent(state.data, logout)
                 }
                 is Resource.Error -> {}
             }
