@@ -3,11 +3,13 @@ package com.example.mangacat.ui.screens.library
 import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.Manga
 import com.example.mangacat.domain.usecase.library.GetLibraryStatusesUseCase
+import com.example.mangacat.domain.usecase.library.GetMangaListByIds
 import com.example.mangacat.ui.screens.home.HomeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -22,7 +24,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LibraryViewModel @Inject constructor(
-    private val getLibraryStatusesUseCase: GetLibraryStatusesUseCase
+    private val getLibraryStatusesUseCase: GetLibraryStatusesUseCase,
+    private val getMangaListByIds: GetMangaListByIds
 ) : ViewModel() {
     private val _statusList =
         MutableStateFlow<Resource<LinkedHashMap<String, List<String>>>>(Resource.Loading)
@@ -64,7 +67,18 @@ class LibraryViewModel @Inject constructor(
             } catch (e: IOException) {
                 Resource.Error()
             }
+        }
+    }
 
+    fun getReading(mangaIds: List<String>) {
+        viewModelScope.launch {
+            _reading.value = Resource.Loading
+            _reading.value = try {
+                val response = getMangaListByIds(mangaIds)
+                Resource.Success(response)
+            } catch (e: IOException) {
+                Resource.Error()
+            }
         }
     }
 

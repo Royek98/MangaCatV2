@@ -1,5 +1,6 @@
 package com.example.mangacat.ui.screens.library
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,14 +31,16 @@ import kotlinx.coroutines.launch
 fun LibraryScreen(vieModel: LibraryViewModel) {
     LibraryContent(
         libraryUiState = vieModel.libraryUiState.collectAsState().value,
-        changeTab = vieModel::changeTab
+        changeTab = vieModel::changeTab,
+        getReading = vieModel::getReading
     )
 }
 
 @Composable
 private fun LibraryContent(
     libraryUiState: LibraryUiState,
-    changeTab: (Int) -> Unit
+    changeTab: (Int) -> Unit,
+    getReading: (List<String>) -> Unit
 ) {
     Scaffold { paddingValues ->
         when (val statusList = libraryUiState.statusList) {
@@ -51,7 +54,8 @@ private fun LibraryContent(
                     uiState = libraryUiState,
                     paddingValues = paddingValues,
                     currentTab = libraryUiState.currentTab,
-                    changeTab = changeTab
+                    changeTab = changeTab,
+                    getReading = getReading
                 )
             }
 
@@ -68,7 +72,8 @@ private fun Success(
     uiState: LibraryUiState,
     paddingValues: PaddingValues,
     currentTab: Int,
-    changeTab: (Int) -> Unit
+    changeTab: (Int) -> Unit,
+    getReading: (List<String>) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -86,6 +91,9 @@ private fun Success(
         LaunchedEffect(pagerState) {
             snapshotFlow { pagerState.currentPage }.collect { page ->
                 changeTab(page)
+                when (keys[page]) {
+                    "reading" -> data[keys[page]]?.let { getReading(it) }
+                }
             }
         }
 
@@ -102,7 +110,23 @@ private fun Success(
             // todo replace this (create fields in viemodel for every status type)
             when (keys[pageIndex]) {
                 "reading" -> {
-                    Text(text = "${data[keys[0]]}")
+                    when (val reading = uiState.reading) {
+                        is Resource.Loading -> {
+                            LoadingScreen()
+                        }
+
+                        is Resource.Success -> {
+                            Column {
+                                reading.data.forEach {
+                                    it.title.en?.let { title ->
+                                        Text(text = title)
+                                    }
+                                }
+                            }
+                        }
+
+                        is Resource.Error -> {}
+                    }
                 }
 
                 "completed" -> {
@@ -110,26 +134,6 @@ private fun Success(
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun SuccessPreview() {
-    MangaCatTheme {
-        Success(
-            data = linkedMapOf(
-                "Reading" to listOf("mangaId1", "id2"),
-                "Completed" to listOf("id3"),
-                "Dropped" to listOf("id4"),
-                "On hold" to listOf("id4"),
-                "Plan to read" to listOf("id4"),
-                "Re-reading" to listOf("id4"),
-            ),
-            paddingValues = PaddingValues(),
-            uiState = LibraryUiState(),
-            currentTab = 0
-        ) {}
     }
 }
 
@@ -156,5 +160,27 @@ private fun Indicator(
                 Text(text = key.toTitle())
             }
         }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun SuccessPreview() {
+    MangaCatTheme {
+        Success(
+            data = linkedMapOf(
+                "Reading" to listOf("mangaId1", "id2"),
+                "Completed" to listOf("id3"),
+                "Dropped" to listOf("id4"),
+                "On hold" to listOf("id4"),
+                "Plan to read" to listOf("id4"),
+                "Re-reading" to listOf("id4"),
+            ),
+            paddingValues = PaddingValues(),
+            uiState = LibraryUiState(),
+            currentTab = 0,
+            changeTab = {},
+            getReading = {}
+        )
     }
 }
