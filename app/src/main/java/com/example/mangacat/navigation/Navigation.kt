@@ -13,7 +13,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import com.example.mangacat.ui.screens.login.AuthViewModel
 import com.example.mangacat.ui.screens.feed.FeedScreen
 import com.example.mangacat.ui.screens.feed.FeedViewModel
 import com.example.mangacat.ui.screens.home.HomeElements
@@ -23,6 +22,7 @@ import com.example.mangacat.ui.screens.library.LibraryScreen
 import com.example.mangacat.ui.screens.library.LibraryViewModel
 import com.example.mangacat.ui.screens.list.ListScreen
 import com.example.mangacat.ui.screens.list.ListViewModel
+import com.example.mangacat.ui.screens.login.AuthViewModel
 import com.example.mangacat.ui.screens.login.LoginScreen
 import com.example.mangacat.ui.screens.manga.MangaScreen
 import com.example.mangacat.ui.screens.manga.MangaViewModel

@@ -16,6 +16,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -31,6 +32,9 @@ class LibraryViewModel @Inject constructor(
         MutableStateFlow<Resource<LinkedHashMap<String, List<String>>>>(Resource.Loading)
 
     private val _reading =
+        MutableStateFlow<List<Resource<List<Manga>>>>(listOf(Resource.Loading))
+
+    private val _completed =
         MutableStateFlow<Resource<List<Manga>>>(Resource.Loading)
 
     private val _currentTab =
@@ -40,13 +44,15 @@ class LibraryViewModel @Inject constructor(
         combine(
             _statusList,
             _reading,
+            _completed,
             _currentTab
         ) {
-            statusList, reading, currentTab ->
+            statusList, reading, completed, currentTab ->
             LibraryUiState(
                 currentTab = currentTab,
                 statusList = statusList,
-                reading = reading
+                reading = reading,
+                completed = completed
             )
         }.stateIn(
             viewModelScope,
@@ -70,10 +76,31 @@ class LibraryViewModel @Inject constructor(
         }
     }
 
-    fun getReading(mangaIds: List<String>) {
+    fun getReading(mangaIds: List<String>, offset: Int = 0) {
         viewModelScope.launch {
-            _reading.value = Resource.Loading
-            _reading.value = try {
+            val currentList = _reading.value.toMutableList()
+            try {
+                // Update the state to Loading
+                if (offset != 0) {
+                    currentList.add(Resource.Loading)
+                }
+
+                val response = getMangaListByIds(mangaIds)
+                currentList.removeAt(currentList.size-1) // remove loading state
+                currentList.add(Resource.Success(response))
+                _reading.value = currentList
+            } catch (e: IOException) {
+                currentList.removeAt(currentList.size-1) // remove loading state
+                currentList.add(Resource.Error())
+                _reading.value = currentList
+            }
+        }
+    }
+
+    fun getCompleted(mangaIds: List<String>) {
+        viewModelScope.launch {
+            delay(2000)
+            _completed.value = try {
                 val response = getMangaListByIds(mangaIds)
                 Resource.Success(response)
             } catch (e: IOException) {
@@ -90,5 +117,6 @@ class LibraryViewModel @Inject constructor(
 data class LibraryUiState(
     val currentTab: Int = 0,
     val statusList: Resource<Map<String, List<String>>> = Resource.Loading,
-    val reading: Resource<List<Manga>> = Resource.Loading
+    val reading: List<Resource<List<Manga>>> = listOf(Resource.Loading),
+    val completed: Resource<List<Manga>> = Resource.Loading
 )

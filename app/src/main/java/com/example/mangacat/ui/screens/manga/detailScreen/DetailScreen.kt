@@ -1,6 +1,5 @@
 package com.example.mangacat.ui.screens.manga.detailScreen
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,15 +24,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +49,6 @@ import com.example.mangacat.data.dto.manga.enums.Status
 import com.example.mangacat.data.network.Resource
 import com.example.mangacat.domain.model.Cover
 import com.example.mangacat.domain.model.Manga
-import com.example.mangacat.ui.screens.home.ErrorScreen
 import com.example.mangacat.ui.screens.home.LoadingScreen
 import com.example.mangacat.ui.screens.manga.MangaViewModel
 import com.example.mangacat.ui.theme.MangaCatTheme
@@ -288,6 +283,62 @@ private fun PagerNavigationButton(
         )
     ) {
         Text(text = navigationTitle) // Details
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ErrorScreen(
+    modifier: Modifier = Modifier,
+    messages: List<String>? = listOf(),
+    retryAction: () -> Unit
+) {
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {  },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+                actions = {
+                    IconButton(
+                        onClick = {},
+                        modifier = Modifier
+                            .clip(
+                                shape = CircleShape
+                            )
+                            .background(MaterialTheme.colorScheme.tertiaryContainer)
+                            .height(40.dp)
+                            .width(40.dp)
+                    ) {
+                        Icon(imageVector = Icons.Default.Close, contentDescription = "Close")
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(paddingValues),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            messages?.forEach {
+                Text(
+                    text = it,
+                    color = MaterialTheme.colorScheme.errorContainer,
+                    modifier = Modifier.padding(5.dp)
+                )
+            }
+            Button(
+                onClick = retryAction,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.onError,
+                    contentColor = MaterialTheme.colorScheme.error
+                )
+            ) {
+                Text(text = "Retry")
+            }
+        }
     }
 }
 

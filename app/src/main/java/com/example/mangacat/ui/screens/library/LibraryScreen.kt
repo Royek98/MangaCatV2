@@ -32,7 +32,8 @@ fun LibraryScreen(vieModel: LibraryViewModel) {
     LibraryContent(
         libraryUiState = vieModel.libraryUiState.collectAsState().value,
         changeTab = vieModel::changeTab,
-        getReading = vieModel::getReading
+        getReading = vieModel::getReading,
+        getCompleted = vieModel::getCompleted
     )
 }
 
@@ -40,7 +41,8 @@ fun LibraryScreen(vieModel: LibraryViewModel) {
 private fun LibraryContent(
     libraryUiState: LibraryUiState,
     changeTab: (Int) -> Unit,
-    getReading: (List<String>) -> Unit
+    getReading: (List<String>) -> Unit,
+    getCompleted: (List<String>) -> Unit
 ) {
     Scaffold { paddingValues ->
         when (val statusList = libraryUiState.statusList) {
@@ -55,7 +57,8 @@ private fun LibraryContent(
                     paddingValues = paddingValues,
                     currentTab = libraryUiState.currentTab,
                     changeTab = changeTab,
-                    getReading = getReading
+                    getReading = getReading,
+                    getCompleted = getCompleted
                 )
             }
 
@@ -73,7 +76,8 @@ private fun Success(
     paddingValues: PaddingValues,
     currentTab: Int,
     changeTab: (Int) -> Unit,
-    getReading: (List<String>) -> Unit
+    getReading: (List<String>) -> Unit,
+    getCompleted: (List<String>) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -92,7 +96,16 @@ private fun Success(
             snapshotFlow { pagerState.currentPage }.collect { page ->
                 changeTab(page)
                 when (keys[page]) {
-                    "reading" -> data[keys[page]]?.let { getReading(it) }
+                    "reading" -> data[keys[page]]?.let {
+                        if (uiState.reading[0].equals(Resource.Loading)) {
+                            getReading(it)
+                        }
+                    }
+                    "completed" -> data[keys[page]]?.let{
+                        if (uiState.completed.equals(Resource.Loading)) {
+                            getCompleted(it)
+                        }
+                    }
                 }
             }
         }
@@ -110,14 +123,36 @@ private fun Success(
             // todo replace this (create fields in viemodel for every status type)
             when (keys[pageIndex]) {
                 "reading" -> {
-                    when (val reading = uiState.reading) {
+                    uiState.reading.forEach {
+                        when (val reading = it) {
+                            is Resource.Loading -> {
+                                LoadingScreen()
+                            }
+
+                            is Resource.Success -> {
+                                Column {
+                                    reading.data.forEach {
+                                        it.title.en?.let { title ->
+                                            Text(text = title)
+                                        }
+                                    }
+                                }
+                            }
+
+                            is Resource.Error -> {}
+                        }
+                    }
+                }
+
+                "completed" -> {
+                    when (val completed = uiState.completed) {
                         is Resource.Loading -> {
                             LoadingScreen()
                         }
 
                         is Resource.Success -> {
                             Column {
-                                reading.data.forEach {
+                                completed.data.forEach {
                                     it.title.en?.let { title ->
                                         Text(text = title)
                                     }
@@ -127,10 +162,6 @@ private fun Success(
 
                         is Resource.Error -> {}
                     }
-                }
-
-                "completed" -> {
-                    Text(text = "${data[keys[1]]}")
                 }
             }
         }
@@ -180,7 +211,8 @@ fun SuccessPreview() {
             uiState = LibraryUiState(),
             currentTab = 0,
             changeTab = {},
-            getReading = {}
+            getReading = {},
+            getCompleted = {}
         )
     }
 }
