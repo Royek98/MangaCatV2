@@ -8,6 +8,7 @@ import com.example.mangacat.data.dto.authentication.IsAuthenticatedResponse
 import com.example.mangacat.data.dto.chapter.ChapterAttributes
 import com.example.mangacat.data.dto.cover.CoverAttributes
 import com.example.mangacat.data.dto.cutomList.CustomListAttributes
+import com.example.mangacat.data.dto.libraryStatus.LibraryResponse
 import com.example.mangacat.data.dto.manga.MangaAttributes
 import com.example.mangacat.data.dto.read.ReadResponse
 import com.example.mangacat.data.dto.response.CollectionResponse
@@ -112,4 +113,9 @@ interface MangaDexApiService {
     suspend fun check(
         @Header("Authorization") bearerToken: String
     ): IsAuthenticatedResponse
+
+    @GET("manga/status")
+    suspend fun getLibraryStatuses(
+        @Header("Authorization") bearerToken: String
+    ): LibraryResponse
 }

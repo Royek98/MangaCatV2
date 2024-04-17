@@ -6,8 +6,8 @@ import javax.inject.Inject
 class GetLibraryStatusesUseCase @Inject constructor(
     private val repository: MangaDexRepository
 ) {
-    suspend operator fun invoke(): LinkedHashMap<String, List<String>> {
-        val response = repository.getLibraryStatus()
+    suspend operator fun invoke(accessToken: String): LinkedHashMap<String, List<String>> {
+        val response = repository.getLibraryStatus(accessToken)
 
         val idsGroupedByStatus = LinkedHashMap<String, MutableList<String>>()
         response.statuses.groupByTo(idsGroupedByStatus, {it.statusType}, {it.mangaId})

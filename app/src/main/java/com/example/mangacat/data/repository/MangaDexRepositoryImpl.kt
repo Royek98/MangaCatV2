@@ -93,9 +93,8 @@ class MangaDexRepositoryImpl @Inject constructor(
     override suspend fun getRecentlyAddedManga():
             CollectionResponse<MangaAttributes> = service.getRecentlyAddedManga()
 
-    override suspend fun getLibraryStatus(): LibraryResponse {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getLibraryStatus(accessToken: String): LibraryResponse =
+        service.getLibraryStatuses(accessToken)
 
     override suspend fun getLatestUpdates(): CollectionResponse<ChapterAttributes> =
         service.getLatestUpdates(limit = 5)

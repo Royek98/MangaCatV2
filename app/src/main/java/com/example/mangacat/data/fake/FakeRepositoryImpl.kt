@@ -85,7 +85,7 @@ class FakeRepositoryImpl(
             CollectionResponse<MangaAttributes> =
         json.decodeFromString(readJSONFromAssets(context, "SeasonalResponse_Limit10_Offset0.json"))
 
-    override suspend fun getLibraryStatus(): LibraryResponse =
+    override suspend fun getLibraryStatus(accessToken: String): LibraryResponse =
         json.decodeFromString(readJSONFromAssets(context, "libraryStatusResponse.json"))
 
     override suspend fun getLatestUpdates(): CollectionResponse<ChapterAttributes> =

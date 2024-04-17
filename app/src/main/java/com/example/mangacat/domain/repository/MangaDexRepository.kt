@@ -58,7 +58,7 @@ interface MangaDexRepository {
 
     suspend fun getRecentlyAddedManga(): CollectionResponse<MangaAttributes>
 
-    suspend fun getLibraryStatus(): LibraryResponse
+    suspend fun getLibraryStatus(accessToken: String): LibraryResponse
 
     suspend fun getLatestUpdates(): CollectionResponse<ChapterAttributes>
 

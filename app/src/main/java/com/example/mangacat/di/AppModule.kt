@@ -12,6 +12,7 @@ import com.example.mangacat.data.local.AuthPreferences
 import com.example.mangacat.data.network.AuthApiService
 import com.example.mangacat.data.network.MangaDexApiService
 import com.example.mangacat.data.repository.AuthRepositoryImpl
+import com.example.mangacat.data.repository.MangaDexRepositoryImpl
 import com.example.mangacat.utils.AppConstants
 import com.example.mangacat.utils.AppConstants.AUTH_PREFERENCES
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -42,13 +43,13 @@ val appJson = Json {
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-//    @Singleton
-//    @Provides
-//    fun provideMangaDexApiService(service: MangaDexApiService) = MangaDexRepositoryImpl(service)
-
     @Singleton
     @Provides
-    fun provideMangaDexFakeRepo(@ApplicationContext appContext: Context) = FakeRepositoryImpl(appContext)
+    fun provideMangaDexApiService(service: MangaDexApiService) = MangaDexRepositoryImpl(service)
+
+//    @Singleton
+//    @Provides
+//    fun provideMangaDexFakeRepo(@ApplicationContext appContext: Context) = FakeRepositoryImpl(appContext)
 
     @Singleton
     @Provides

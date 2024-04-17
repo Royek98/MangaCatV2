@@ -1,5 +1,6 @@
 package com.example.mangacat.ui.screens.library
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
@@ -25,6 +27,8 @@ import com.example.mangacat.data.network.Resource
 import com.example.mangacat.ui.screens.home.LoadingScreen
 import com.example.mangacat.ui.theme.MangaCatTheme
 import com.example.mangacat.utils.toTitle
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Composable
@@ -32,8 +36,9 @@ fun LibraryScreen(vieModel: LibraryViewModel) {
     LibraryContent(
         libraryUiState = vieModel.libraryUiState.collectAsState().value,
         changeTab = vieModel::changeTab,
-        getReading = vieModel::getReading,
-        getCompleted = vieModel::getCompleted
+        getMangaList = vieModel::getMangaList
+//        getReading = vieModel::getReading,
+//        getCompleted = vieModel::getCompleted
     )
 }
 
@@ -41,8 +46,9 @@ fun LibraryScreen(vieModel: LibraryViewModel) {
 private fun LibraryContent(
     libraryUiState: LibraryUiState,
     changeTab: (Int) -> Unit,
-    getReading: (List<String>) -> Unit,
-    getCompleted: (List<String>) -> Unit
+    getMangaList: (String, List<String>) -> Unit,
+//    getReading: (List<String>) -> Unit,
+//    getCompleted: (List<String>) -> Unit
 ) {
     Scaffold { paddingValues ->
         when (val statusList = libraryUiState.statusList) {
@@ -57,8 +63,9 @@ private fun LibraryContent(
                     paddingValues = paddingValues,
                     currentTab = libraryUiState.currentTab,
                     changeTab = changeTab,
-                    getReading = getReading,
-                    getCompleted = getCompleted
+                    getMangaList = getMangaList,
+//                    getReading = getReading,
+//                    getCompleted = getCompleted
                 )
             }
 
@@ -68,6 +75,7 @@ private fun LibraryContent(
 
 }
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Success(
@@ -76,8 +84,9 @@ private fun Success(
     paddingValues: PaddingValues,
     currentTab: Int,
     changeTab: (Int) -> Unit,
-    getReading: (List<String>) -> Unit,
-    getCompleted: (List<String>) -> Unit
+    getMangaList: (String, List<String>) -> Unit
+//    getReading: (List<String>) -> Unit,
+//    getCompleted: (List<String>) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -95,16 +104,9 @@ private fun Success(
         LaunchedEffect(pagerState) {
             snapshotFlow { pagerState.currentPage }.collect { page ->
                 changeTab(page)
-                when (keys[page]) {
-                    "reading" -> data[keys[page]]?.let {
-                        if (uiState.reading[0].equals(Resource.Loading)) {
-                            getReading(it)
-                        }
-                    }
-                    "completed" -> data[keys[page]]?.let{
-                        if (uiState.completed.equals(Resource.Loading)) {
-                            getCompleted(it)
-                        }
+                data[keys[page]]?.let {
+                    if (uiState.mangaList[keys[page]]?.get(0) == Resource.Loading) {
+                        getMangaList(keys[page], it)
                     }
                 }
             }
@@ -121,48 +123,39 @@ private fun Success(
             verticalAlignment = Alignment.Top
         ) { pageIndex ->
             // todo replace this (create fields in viemodel for every status type)
-            when (keys[pageIndex]) {
-                "reading" -> {
-                    uiState.reading.forEach {
-                        when (val reading = it) {
-                            is Resource.Loading -> {
-                                LoadingScreen()
-                            }
+            Column {
+                if (keys[pageIndex] == "reading") {
 
-                            is Resource.Success -> {
-                                Column {
-                                    reading.data.forEach {
-                                        it.title.en?.let { title ->
-                                            Text(text = title)
-                                        }
-                                    }
-                                }
-                            }
-
-                            is Resource.Error -> {}
-                        }
-                    }
                 }
-
-                "completed" -> {
-                    when (val completed = uiState.completed) {
-                        is Resource.Loading -> {
-                            LoadingScreen()
-                        }
-
-                        is Resource.Success -> {
-                            Column {
-                                completed.data.forEach {
-                                    it.title.en?.let { title ->
-                                        Text(text = title)
-                                    }
-                                }
-                            }
-                        }
-
-                        is Resource.Error -> {}
-                    }
-                }
+//            uiState.mangaList.forEach { (key, list) ->
+//
+//                    if (keys[pageIndex] == key) {
+//                        list.forEach {
+//                            when (val manga = it) {
+//                                is Resource.Loading -> {
+////                                    LoadingScreen()
+//                                    Button(onClick = {
+//                                        Log.d("libraryMangaList", "Success: ${uiState.mangaList}")
+//                                    }) {
+//                                        Text(text = "Stupid button")
+//                                    }
+//                                }
+//
+//                                is Resource.Success -> {
+//                                    manga.data.forEach {
+//                                        it.title.en?.let { title ->
+//                                            Text(text = title)
+//                                        }
+//                                    }
+//                                }
+//
+//                                is Resource.Error -> {
+//
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
             }
         }
     }
@@ -197,22 +190,23 @@ private fun Indicator(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun SuccessPreview() {
-    MangaCatTheme {
-        Success(
-            data = linkedMapOf(
-                "Reading" to listOf("mangaId1", "id2"),
-                "Completed" to listOf("id3"),
-                "Dropped" to listOf("id4"),
-                "On hold" to listOf("id4"),
-                "Plan to read" to listOf("id4"),
-                "Re-reading" to listOf("id4"),
-            ),
-            paddingValues = PaddingValues(),
-            uiState = LibraryUiState(),
-            currentTab = 0,
-            changeTab = {},
-            getReading = {},
-            getCompleted = {}
-        )
-    }
+//    MangaCatTheme {
+//        Success(
+//            data = linkedMapOf(
+//                "Reading" to listOf("mangaId1", "id2"),
+//                "Completed" to listOf("id3"),
+//                "Dropped" to listOf("id4"),
+//                "On hold" to listOf("id4"),
+//                "Plan to read" to listOf("id4"),
+//                "Re-reading" to listOf("id4"),
+//            ),
+//            paddingValues = PaddingValues(),
+//            uiState = LibraryUiState(),
+//            currentTab = 0,
+//            changeTab = {},
+//            getMangaList = { _, _ -> },
+////            getReading = {},
+////            getCompleted = {}
+//        )
+//    }
 }
